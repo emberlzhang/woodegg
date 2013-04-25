@@ -1,1 +1,2 @@
+# ImageMagick to add a 1px black border around edge of flag graphic:
 convert $i -shave 1x1 -bordercolor black -border 1 $n
