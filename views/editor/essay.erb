@@ -1,0 +1,28 @@
+<h1><%= @question.question.h %></h1>
+
+<form class="well" action="/ed/essay/<%= @essay.id %>" method="post">
+	<label for="content">Your Edited Answer:</label>
+	<textarea name="content" id="content" cols="100" rows="20"><%= @essay.content %></textarea>
+	<br />
+<% if @essay.finished? %>
+	<input type="submit" class="btn btn-primary" name="submit" value="UPDATE" />
+<% else %>
+	<input type="submit" class="btn btn-primary" name="submit" value="SAVE" />
+	<input type="submit" class="btn btn-primary" name="submit" value="FINISH" />
+<% end %>
+</form>
+
+<h2>Researcher Answers:</h2>
+<ul>
+<% @question.answers.each do |a| %>
+	<li>
+	<%= a.answer.to_html %>
+	<% if a.sources.size > 1 %>
+		<br/><strong>Sources:</strong><br />
+		<%= a.sources.to_html %>
+	<% end %>
+	<br /><hr /><br />
+	</li>
+<% end %>
+</ul>
+

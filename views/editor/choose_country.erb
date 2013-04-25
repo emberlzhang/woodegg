@@ -1,0 +1,7 @@
+<p>Choose which country you will be editing now:</p>
+
+<ul>
+<% @edcc.each do |cc| %>
+	<li><a href="/ed/<%= cc %>"><%= Countries.hsh[cc.upcase] %></a></li>
+<% end %>
+</ul>

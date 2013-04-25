@@ -1,0 +1,23 @@
+<h1><%= @cname %> Question:</h1>
+<p>Topic: <%= @q.template_question.subtopic.subtopic %></p>
+<h2><%= @q.question %></h2>
+
+<h3>Answers:</h3>
+<ul>
+<% @q.answers.each do |a| %>
+	<li>
+	<%= a.answer.to_html %>
+	<% if a.sources.size > 1 %>
+		<p><strong>Sources:</strong></p>
+		<%= a.sources.to_html %>
+	<% end %>
+	<br /><hr /><br />
+	</li>
+<% end %>
+</ul>
+
+<h1>Ready to edit this?</h1>
+<form class="well" action="/ed/essay" method="post">
+	<input type="hidden" name="question_id" value="<%= @q.id %>" />
+	<input type="submit" class="btn btn-primary" name="submit" value="READY" />
+</form>
