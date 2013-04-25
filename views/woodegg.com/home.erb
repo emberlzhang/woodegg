@@ -1,0 +1,29 @@
+<article>
+
+<header>
+	<div class="group">
+		<hgroup id="summaryslogan">
+			<h1>Entrepreneur's Guides to Asia</h1>
+		</hgroup>
+	</div>
+</header>
+
+<section id="information">
+	<div class="group">
+		<h2>16 books with insights and instructions for starting business in 16 countries.</h2>
+	</div>
+</section>
+
+<section id="countries">
+	<div class="group">
+		<h2 id="countryprompt">Pick a country:</h2>
+	</div>
+	<ul id="countrylist">
+<% @countries.each do |k,v| %>
+		<li class="group"><a href="/<%= k.downcase %>" class="<%= k.downcase %>"><span class="countryname"><%= v %></span></a></li>
+<% end %>
+	</ul>
+</section>
+
+</article>
+
