@@ -1,0 +1,7 @@
+<h1><%= @pagetitle %></h1>
+<dl>
+<% @answers.each do |a| %>
+	<dt><a href="/qa/answer/<%= a.id %>"><%= a.question.question %></a></dt>
+	<dd><%= (h a.answer).gsub("\n", '<br />') %></dd>
+<% end %>
+</dl>
