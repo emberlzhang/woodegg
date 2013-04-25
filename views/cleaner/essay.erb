@@ -1,0 +1,30 @@
+<h1><%= @country %> » <%= @topic %> » <%= @subtopic %></h1>
+<h2><%= h @question %></h2>
+
+<div class="row">
+<div id="contentform" class="span6">
+<form action="/clean/essay/<%= @essay.id %>" method="post"><input type="hidden" name="_method" value="put">
+<textarea id="essaycontent" name="content"><%= h @essay.content %></textarea>
+<br>
+<input type="submit" name="submit" value="SAVE" class="btn-large btn-info">
+<input type="submit" name="submit" value="save + mark FINISHED + then STOP" class="btn-large btn-danger">
+<input type="submit" name="submit" value="save + mark FINISHED + then DO NEXT" class="btn-large btn-success">
+</form>
+</div>
+
+<div id="markup" class="span6">
+</div>
+</div>
+
+<script>
+var converter = new Showdown.converter();
+function showPreview(text) {
+	document.getElementById('markup').innerHTML = converter.makeHtml(text);
+}
+document.getElementById('essaycontent').addEventListener('keyup', function(e) {
+	showPreview(this.value);
+}, false);
+window.onload = function() {
+	showPreview(document.getElementById('essaycontent').value);
+};
+</script>
