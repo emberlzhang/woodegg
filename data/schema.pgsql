@@ -6,6 +6,17 @@ BEGIN;
 CREATE SCHEMA woodegg;
 SET search_path = woodegg;
 
+CREATE TABLE researchers (
+	id serial primary key,
+	person_id integer not null UNIQUE,
+	bio text
+);
+CREATE TABLE editors (
+	id serial primary key,
+	person_id integer not null UNIQUE,
+	bio text
+);
+
 CREATE TABLE topics (
 	id serial primary key,
 	topic varchar(32)
@@ -57,22 +68,10 @@ CREATE TABLE books (
 	isbn text
 );
 
-CREATE TABLE editors (
-	id serial primary key,
-	person_id integer not null UNIQUE,
-	bio text
-);
-
 CREATE TABLE books_editors (
 	book_id integer not null REFERENCES books(id),
 	editor_id integer not null REFERENCES editors(id),
 	PRIMARY KEY (book_id, editor_id)
-);
-
-CREATE TABLE researchers (
-	id serial primary key,
-	person_id integer not null UNIQUE,
-	bio text
 );
 
 CREATE TABLE books_researchers (
@@ -84,7 +83,7 @@ CREATE TABLE books_researchers (
 CREATE TABLE essays (
 	id serial primary key,
 	question_id integer not null REFERENCES questions(id),
-	person_id integer not null,
+	editor_id integer not null REFERENCES editors(id),
 	book_id integer not null REFERENCES books(id),
 	started_at timestamp(0) with time zone,
 	finished_at timestamp(0) with time zone,
@@ -95,7 +94,7 @@ CREATE TABLE essays (
 	comment text
 );
 CREATE INDEX esqi ON essays(question_id);
-CREATE INDEX espi ON essays(person_id);
+CREATE INDEX esei ON essays(editor_id);
 CREATE INDEX essa ON essays(started_at);
 CREATE INDEX esfa ON essays(finished_at);
 CREATE INDEX espy ON essays(payable);

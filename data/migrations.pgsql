@@ -53,3 +53,13 @@ UPDATE answers SET researcher_id=50 WHERE researcher_id=334038;
 UPDATE answers SET researcher_id=51 WHERE researcher_id=334039;
 ALTER TABLE answers ADD FOREIGN KEY (researcher_id) REFERENCES researchers(id);
 
+INSERT INTO editors (person_id) VALUES (1);      -- 4
+INSERT INTO editors (person_id) VALUES (338873); -- 5
+ALTER TABLE essays RENAME COLUMN person_id TO editor_id;
+UPDATE essays SET editor_id=4 WHERE editor_id=1;
+UPDATE essays SET editor_id=5 WHERE editor_id=338873;
+UPDATE essays SET editor_id=1 WHERE editor_id=331600;
+UPDATE essays SET editor_id=2 WHERE editor_id=331709;
+UPDATE essays SET editor_id=3 WHERE editor_id=338825;
+ALTER TABLE essays ADD FOREIGN KEY (editor_id) REFERENCES editors(id);
+

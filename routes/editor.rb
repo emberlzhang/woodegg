@@ -9,21 +9,21 @@ class WoodEggEditor < Sinatra::Base
   end
 
   use Rack::Auth::Basic, 'WoodEgg Editor' do |username, password|
-    @@person = Person.find_by_email_pass(username, password)
+    @@editor = Editor.find_by_email_pass(username, password)
   end
 
   before do
-    @person = @@person
-    redirect '/contact' if @@person.nil?    # HACK: should say to contact me for password
-    @edcc = @person.woodegg_ed_countries
+    redirect '/contact' if @@editor.nil?    # HACK: should say to contact me for password
+    @editor = @@editor
+    @edcc = @editor.countries
     redirect '/about' unless @edcc.size > 0 # HACK: should say they are not a Wood Egg editor
   end
 
   get '/' do
     if @edcc.size == 1
-      redirect "/ed/#{@edcc.pop}"
+      redirect "/ed/#{@edcc.pop.downcase}"
     else
-      @pagetitle = @person.name
+      @pagetitle = @editor.name
       erb :choose_country
     end
   end
@@ -51,11 +51,11 @@ class WoodEggEditor < Sinatra::Base
   end
 
   post '/essay' do
-    x = Essay.find(person_id: @person.id, question_id: params[:question_id])
+    x = Essay.find(editor_id: @editor.id, question_id: params[:question_id])
     if x.nil?
       cc = Question[params[:question_id]].country
       b = Book[country: cc]
-      x = Essay.create(person_id: @person.id, question_id: params[:question_id], book_id: b.id, started_at: Time.now)
+      x = Essay.create(editor_id: @editor.id, question_id: params[:question_id], book_id: b.id, started_at: Time.now)
     end
     redirect "/ed/essay/#{x.id}"
   end
@@ -84,13 +84,13 @@ class WoodEggEditor < Sinatra::Base
 
   get '/essays/unfinished' do
     @pagetitle = 'Unfinished'
-    @essays = @person.essays_unfinished
+    @essays = @editor.essays_unfinished
     erb :essays
   end
 
   get '/essays/finished' do
     @pagetitle = 'Finished'
-    @essays = @person.essays_finished
+    @essays = @editor.essays_finished
     erb :essays
   end
 

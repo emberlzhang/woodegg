@@ -2,6 +2,6 @@
 
 <ul>
 <% @edcc.each do |cc| %>
-	<li><a href="/ed/<%= cc %>"><%= Countries.hsh[cc.upcase] %></a></li>
+	<li><a href="/ed/<%= cc.downcase %>"><%= Countries.hsh[cc.upcase] %></a></li>
 <% end %>
 </ul>
