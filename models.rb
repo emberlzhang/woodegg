@@ -65,11 +65,12 @@ class Countries
       hsh.keys
     end
 
-    # TODO : put these somewhere better
+    # helper for routes like /cn or /jp
     def routemap
       '/(' + codes.map(&:downcase).join('|') + ')$'
     end
 
+    # helper for routes like /cn/123 or /tw/321
     def routemap2
       '/(' + codes.map(&:downcase).join('|') + ')/(\d*)$'
     end
