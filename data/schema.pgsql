@@ -37,7 +37,7 @@ CREATE INDEX qtqi ON questions(template_question_id);
 CREATE TABLE answers (
 	id serial primary key,
 	question_id integer not null REFERENCES questions(id),
-	person_id integer not null,
+	researcher_id integer not null REFERENCES researchers(id),
 	started_at timestamp(0) with time zone,
 	finished_at timestamp(0) with time zone,
 	payable boolean,
@@ -45,7 +45,7 @@ CREATE TABLE answers (
 	sources text
 );
 CREATE INDEX anqi ON answers(question_id);
-CREATE INDEX anpi ON answers(person_id);
+CREATE INDEX anri ON answers(researcher_id);
 CREATE INDEX ansa ON answers(started_at);
 CREATE INDEX anfa ON answers(finished_at);
 CREATE INDEX anpy ON answers(payable);
