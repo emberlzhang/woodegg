@@ -1,6 +1,6 @@
 class Answer < Sequel::Model(WoodEgg::DB)
   many_to_one :question
-  many_to_one :person
+  many_to_one :researcher
 
   class << self
     def unjudged

@@ -10,21 +10,20 @@ class WoodEggQA < Sinatra::Base
   end
 
   use Rack::Auth::Basic, 'WoodEgg QA' do |username, password|
-    @@person = Person.find_by_email_pass(username, password)
+    @@researcher = Researcher.find_by_email_pass(username, password)
   end
 
   before do
-    @person = @@person
-    redirect '/contact' if @@person.nil?    # HACK: should say to contact me for password
-    @qacc = @person.woodegg_qa_countries
-    redirect '/about' unless @qacc.size > 0  # HACK: should say they are not a Wood Egg researcher
+    redirect '/contact' if @@researcher.nil?    # HACK: should say to contact me for password
+    @researcher = @@researcher
+    @qacc = @researcher.countries
   end
 
   get '/' do
     if @qacc.size == 1
-      redirect "/qa/#{@qacc.pop}"
+      redirect "/qa/#{@qacc.pop.downcase}"
     else
-      @pagetitle = @person.name
+      @pagetitle = @researcher.name
       erb :choose_country
     end
   end
@@ -34,7 +33,7 @@ class WoodEggQA < Sinatra::Base
     @ccode = cc.upcase
     @cname = Countries.hsh[@ccode]
     @country_name = @cname.gsub(' ', '&nbsp;')
-    @topics = @person.topics_unfinished
+    @topics = @researcher.topics_unfinished
     erb :topics
   end
 
@@ -45,19 +44,19 @@ class WoodEggQA < Sinatra::Base
     @country_name = @cname.gsub(' ', '&nbsp;')
     @topic = Topic[topic_id]
     @subtopics = Subtopic.available_for_country_and_topic(@ccode, topic_id)
-    @questions_i_answered = @person.question_ids_answered
+    @questions_i_answered = @researcher.question_ids_answered
     erb :subtopics
   end
 
   get '/answers/unfinished' do
     @pagetitle = 'Unfinished'
-    @answers = @person.answers_unfinished
+    @answers = @researcher.answers_unfinished
     erb :answers
   end
 
   get '/answers/finished' do
     @pagetitle = 'Finished'
-    @answers = @person.answers_finished
+    @answers = @researcher.answers_finished
     erb :answers
   end
 
@@ -70,9 +69,9 @@ class WoodEggQA < Sinatra::Base
   end
 
   post '/answer' do
-    a = Answer.find(person_id: @person.id, question_id: params[:question_id])
+    a = Answer.find(researcher_id: @researcher.id, question_id: params[:question_id])
     if a.nil?
-      a = Answer.create(person_id: @person.id, question_id: params[:question_id], started_at: Time.now)
+      a = Answer.create(researcher_id: @researcher.id, question_id: params[:question_id], started_at: Time.now)
     end
     redirect "/qa/answer/#{a.id}"
   end
