@@ -77,3 +77,22 @@ get '/book/:id/essays' do
   end
   erb :essays
 end
+
+get '/essay/:id' do
+  @essay = Essay[params[:id]]
+  @pagetitle = 'essay #%d' % @essay.id
+  erb :essay
+end
+
+put '/essay/:id' do
+  e = Essay[params[:id]]
+  e.update(just(%w(started_at finished_at payable cleaned_at cleaned_by content comment)))
+  redirect '/essay/%d' % e.id
+end
+
+get '/question/:id' do
+  @question = Question[params[:id]]
+  @pagetitle = 'question #%d' % @question.id
+  erb :question
+end
+

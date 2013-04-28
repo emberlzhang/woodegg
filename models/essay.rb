@@ -2,7 +2,6 @@
 class Essay < Sequel::Model(WoodEgg::DB)
   many_to_one :editor
   many_to_one :question
-  many_to_one :person
   many_to_one :book
 
   class << self
