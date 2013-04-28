@@ -1,0 +1,41 @@
+TO-DO:
+
+ADMIN:
+	answers
+		list, add, edit
+
+	books
+		list, add
+		list done / undone
+
+	book
+		edit
+		preview HTML
+		table of contents
+
+	cleaners
+		list, add, edit
+
+	editors
+		list, add, edit
+
+	reviewers
+		list, add, edit
+
+	essays
+		list, edit
+
+	template_questions
+		list, edit, add
+
+	questions
+		list, edit
+		create un-created from template_questions
+
+	subtopic
+		list, edit, add
+
+	topic
+		list, edit, add
+
+
