@@ -96,3 +96,29 @@ get '/question/:id' do
   erb :question
 end
 
+get '/answer/:id' do
+  @answer = Answer[params[:id]]
+  @pagetitle = 'answer #%d' % @answer.id
+  @question = @answer.question
+  @researcher = @answer.researcher
+  erb :answer
+end
+
+put '/answer/:id' do
+  a = Answer[params[:id]]
+  a.update(just(%w(started_at finished_at payable answer sources)))
+  redirect '/answer/%d' % a.id
+end
+
+get '/editor/:id' do
+  @editor = Editor[params[:id]]
+  @pagetitle = 'EDITOR: %s' % @editor.name
+  erb :editor
+end
+
+put '/editor/:id' do
+  e = Editor[params[:id]]
+  a.update(just(%w(bio)))
+  redirect '/editor/%d' % e.id
+end
+
