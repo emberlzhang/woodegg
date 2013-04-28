@@ -38,3 +38,22 @@ get '/book/:id' do
   erb :book
 end
 
+get '/book/:id/questions' do
+  @book = Book[params[:id]]
+  @pagetitle = @book.title + ' questions'
+  @questions = @book.questions
+  erb :questions
+end
+
+get '/book/:id/essays' do
+  @book = Book[params[:id]]
+  @pagetitle = @book.title + ' essays'
+  @essays = @book.essays
+  # pre-load question for each essay into hash
+  questions = @book.questions
+  @question_for_essay = {}
+  @essays.each do |e|
+    @question_for_essay[e.id] = questions.select {|q| q[:id] == e.question_id}.pop
+  end
+  erb :essays
+end
