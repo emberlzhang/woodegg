@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Wood Egg QA: <%= @pagetitle %></title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico"/>
+<link rel="stylesheet" href="/css/bootstrap.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="/css/login.css" type="text/css" media="screen" />
+</head>
+<body id="a">
+
+<div class="navbar"><div class="navbar-inner"><div class="container">
+<a class="brand" href="/">Wood Egg login</a>
+<ul class="nav">
+	<li><a href="/researchers">researchers</a></li>
+	<li><a href="/editors">editors</a></li>
+</ul>
+</div></div></div>
+
+<div class="container">
+
+<%= yield %>
+
+</div>
+</body>
+</html>
