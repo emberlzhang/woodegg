@@ -25,8 +25,12 @@ class Book < Sequel::Model(WoodEgg::DB)
     Question.filter(id: questions_missing_essays_dataset.map(:id)).all
   end
 
+  def essays_uncleaned
+    essays_dataset.filter(cleaned_at: nil)
+  end
+
   def done?
-    questions_missing_essays_count == 0
+    questions_missing_essays_count == 0 && essays_uncleaned.count == 0
   end
 
   private

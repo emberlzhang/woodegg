@@ -30,6 +30,7 @@ get '/book/:id' do
   @done = @book.done?
   unless @done
     @questions_missing_essays = @book.questions_missing_essays
+    @essays_uncleaned = @book.essays_uncleaned.all
   end
   @questions = @book.questions
   @essays = @book.essays

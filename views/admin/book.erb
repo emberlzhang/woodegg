@@ -3,12 +3,19 @@
 <% if @done %>
 	<h2>All essays done!</h2>
 <% else %>
-	<h2>Questions missing essays:</h2>
-	<ul>
-	<% @questions_missing_essays.each do |q| %>
-		<li><a href="/question/<%= q.id %>"><%= q.question %></a></li>
+	<% if @questions_missing_essays.size > 0 %>
+		<h2>Questions missing essays:</h2>
+		<ul>
+		<% @questions_missing_essays.each do |q| %>
+			<li><a href="/question/<%= q.id %>"><%= q.question %></a></li>
+		<% end %>
+		</ul>
 	<% end %>
-	</ul>
+	<% if @essays_uncleaned.size < 10 %>
+		<h2>Clean these essays: <%= @essays_uncleaned.map {|e| '<a href="/essay/%d">%d</a>' % [e.id, e.id]}.join(',') %></h2>
+	<% else %>
+		<h2># essays uncleaned: <%= @essays_uncleaned.size %></h2>
+	<% end %>
 <% end %>
 
 <h2>Editor:</h2>
