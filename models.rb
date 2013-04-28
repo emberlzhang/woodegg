@@ -35,6 +35,12 @@ class Person
   one_to_one :editor
   one_to_one :researcher
 
+  # hardcoded to just me and MR for now. some day could make admins table.
+  def admin?
+    [1, 59196].include?(id)
+  end
+
+  # in people.userstats for now. some day could make cleaners table.
   def cleaner?
     (userstats_dataset.filter(:statkey => 'woodegg', :statvalue => 'cleaner').first).nil? ? false : true
   end
