@@ -1,2 +1,15 @@
-<h1>Home</h1>
+<h1>Wood Egg Admin</h1>
 
+<h2>Books done</h2>
+<ul>
+<% @books_done.each do |b| %>
+	<li><a href="/book/<%= b.id %>"><%= b.title %></a></li>
+<% end %>
+</ul>
+
+<h2>Books not done</h2>
+<ul>
+<% @books_not_done.each do |b| %>
+	<li><a href="/book/<%= b.id %>"><%= b.title %></a></li>
+<% end %>
+</ul>

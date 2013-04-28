@@ -19,6 +19,13 @@ end
 
 get '/' do
   @pagetitle = 'admin home'
+  @books_done = Book.done
+  @books_not_done = Book.not_done
   erb :home
 end
 
+get '/book/:id' do
+  @book = Book[params[:id]]
+  @pagetitle = @book.title
+  erb :book
+end
