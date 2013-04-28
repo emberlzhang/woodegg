@@ -27,5 +27,14 @@ end
 get '/book/:id' do
   @book = Book[params[:id]]
   @pagetitle = @book.title
+  @done = @book.done?
+  unless @done
+    @questions_missing_essays = @book.questions_missing_essays
+  end
+  @questions = @book.questions
+  @essays = @book.essays
+  @editors = @book.editors
+  @researchers = @book.researchers
   erb :book
 end
+

@@ -1,2 +1,30 @@
 <h1><%= @pagetitle %></h1>
 
+<% if @done %>
+	<h2>All essays done!</h2>
+<% else %>
+	<h2>Questions missing essays:</h2>
+	<ul>
+	<% @questions_missing_essays.each do |q| %>
+		<li><a href="/question/<%= q.id %>"><%= q.question %></a></li>
+	<% end %>
+	</ul>
+<% end %>
+
+<h2>Editor:</h2>
+<ul>
+<% @editors.each do |e| %>
+	<li><a href="/editor/<%= e.id %>"><%= e.name %></a></li>
+<% end %>
+</ul>
+
+<h2>Researchers:</h2>
+<ul>
+<% @researchers.each do |r| %>
+	<li><a href="/researcher/<%= r.id %>"><%= r.name %></a></li>
+<% end %>
+</ul>
+
+<h3><a href="/book/<%= @book.id %>/questions">all questions</a></h3>
+<h3><a href="/book/<%= @book.id %>/essays">all essays</a></h3>
+
