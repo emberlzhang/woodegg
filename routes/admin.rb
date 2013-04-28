@@ -3,18 +3,31 @@ root = File.dirname(File.dirname(File.realpath(__FILE__)))
 require "#{root}/models.rb"
 
 configure do
-  # set root one level up, since this routes file is inside subdirectory
   set :root, root
   set :views, Proc.new { File.join(root, 'views/admin') }
 end
 
+class HTTPAuth
+  @person = nil
+  class << self
+    attr_accessor :person
+  end
+end
+
 use Rack::Auth::Basic, 'WoodEgg Admin' do |username, password|
-  @@person = Person.find_by_email_pass(username, password)
+  HTTPAuth.person = Person.find_by_email_pass(username, password)
 end
 
 before do
-  redirect '/' unless @@person.admin?
-  @person = @@person
+  redirect '/' unless HTTPAuth.person.admin?
+  @person = HTTPAuth.person
+end
+
+# of submitted params, get only the ones with these keys
+# USAGE:
+#   Thought.update(just(%w(author_id contributor_id created_at source_url)))
+def just(keyz)
+  params.select {|k, v| keyz.include? k}
 end
 
 get '/' do
@@ -37,6 +50,12 @@ get '/book/:id' do
   @editors = @book.editors
   @researchers = @book.researchers
   erb :book
+end
+
+put '/book/:id' do
+  b = Book[params[:id]]
+  b.update(just(%w(country title isbn)))
+  redirect '/book/%d' % b.id
 end
 
 get '/book/:id/questions' do
