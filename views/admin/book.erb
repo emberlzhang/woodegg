@@ -21,14 +21,18 @@
 <h2>Editor:</h2>
 <ul>
 <% @editors.each do |e| %>
-	<li><a href="/editor/<%= e.id %>"><%= e.name %></a></li>
+	<li><a href="/editor/<%= e.id %>">
+	<img src="/images/300/editor-<%= e.id %>.jpg" width="300" height="300" alt="<%= e.name %>">
+	<%= e.name %></a></li>
 <% end %>
 </ul>
 
 <h2>Researchers:</h2>
 <ul>
 <% @researchers.each do |r| %>
-	<li><a href="/researcher/<%= r.id %>"><%= r.name %></a></li>
+	<li><a href="/researcher/<%= r.id %>">
+	<img src="/images/300/researcher-<%= r.id %>.jpg" width="300" height="300" alt="<%= r.name %>">
+	<%= r.name %></a></li>
 <% end %>
 </ul>
 

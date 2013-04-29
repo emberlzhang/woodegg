@@ -1,6 +1,9 @@
 <h1><%= @pagetitle %></h1>
 
-<p><a href="<%= @person_url %>">Person page for <%= @researcher.name %></a></p>
+<p>
+<img src="/images/300/researcher-<%= @researcher.id %>.jpg" width="300" height="300" alt="<%= @researcher.name %>">
+<a href="<%= @person_url %>">Person page for <%= @researcher.name %></a>
+</p>
 
 <form action="/researcher/<%= @researcher.id %>" method="post"><input type="hidden" name="_method" value="put">
 	<label for="bio">bio:</label>
