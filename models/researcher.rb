@@ -1,6 +1,6 @@
 class Researcher < Sequel::Model(WoodEgg::DB)
-  one_to_many :answers
   many_to_one :person
+  one_to_many :answers
   many_to_many :books
   include Persony
 

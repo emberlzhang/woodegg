@@ -1,0 +1,11 @@
+<h1><%= @pagetitle %></h1>
+
+<% @books_researchers.each do |book, researchers| %>
+	<h2><a href="/book/<%= book.id %>"><%= book.title %></a></h2>
+	<ul>
+	<% researchers.each do |researcher| %>
+		<li><a href="/researcher/<%= researcher.id %>"><%= researcher.name %></a></li>
+	<% end %>
+	</ul>
+<% end %>
+

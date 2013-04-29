@@ -129,3 +129,22 @@ put '/researcher/:id' do
   redirect '/researcher/%d' % r.id
 end
 
+get '/researchers' do
+  @pagetitle = 'researchers'
+  @books_researchers = {}
+  Book.each do |b|
+    @books_researchers[b] = b.researchers
+  end
+  erb :researchers
+end
+
+get '/editors' do
+  @pagetitle = 'editors'
+  @books_editors = {}
+  Book.each do |b|
+    @books_editors[b] = b.editors
+  end
+  erb :editors
+end
+
+
