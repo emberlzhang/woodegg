@@ -1,10 +1,18 @@
-# encoding: utf-8
 require 'peeps'
+require 'yaml'
 
 class WoodEgg
   @dbase = 'woodegg'
   @fbase = __FILE__
+  @config = nil
   extend DatabaseInfo
+
+  def self.config
+    if @config.nil?
+      @config = YAML.load_file(File.dirname(@fbase) + '/config.yml')
+    end
+    @config
+  end
 end
 
 class NilClass
@@ -43,6 +51,14 @@ class Person
   # in people.userstats for now. some day could make cleaners table.
   def cleaner?
     (userstats_dataset.filter(:statkey => 'woodegg', :statvalue => 'cleaner').first).nil? ? false : true
+  end
+end
+
+# for Rack::Auth::Basic to share info with Sinatra routes (instead of @@person)
+class HTTPAuth
+  @person = nil
+  class << self
+    attr_accessor :person
   end
 end
 

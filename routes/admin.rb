@@ -7,13 +7,6 @@ configure do
   set :views, Proc.new { File.join(root, 'views/admin') }
 end
 
-class HTTPAuth
-  @person = nil
-  class << self
-    attr_accessor :person
-  end
-end
-
 use Rack::Auth::Basic, 'WoodEgg Admin' do |username, password|
   HTTPAuth.person = Person.find_by_email_pass(username, password)
 end
@@ -113,12 +106,26 @@ end
 get '/editor/:id' do
   @editor = Editor[params[:id]]
   @pagetitle = 'EDITOR: %s' % @editor.name
+  @person_url = WoodEgg.config['person_url'] % @editor.person_id
   erb :editor
 end
 
 put '/editor/:id' do
   e = Editor[params[:id]]
-  a.update(just(%w(bio)))
+  e.update(just(%w(bio)))
   redirect '/editor/%d' % e.id
+end
+
+get '/researcher/:id' do
+  @researcher = Researcher[params[:id]]
+  @pagetitle = 'RESEARCHER: %s' % @researcher.name
+  @person_url = WoodEgg.config['person_url'] % @researcher.person_id
+  erb :researcher
+end
+
+put '/researcher/:id' do
+  r = Researcher[params[:id]]
+  r.update(just(%w(bio)))
+  redirect '/researcher/%d' % r.id
 end
 
