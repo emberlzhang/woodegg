@@ -18,4 +18,23 @@
 <% end %>
 </ul>
 
+<h2>Answers:</h2>
+<table>
+<tr>
+	<td>Finished:</td>
+	<td><a href="/researcher/<%= @researcher.id %>/answers/finished"><%= @researcher.answers_finished_count %></a></td>
+</tr>
+<tr>
+	<td>Unfinished:</td>
+	<td><a href="/researcher/<%= @researcher.id %>/answers/unfinished"><%= @researcher.answers_unfinished_count %></a></td>
+</tr>
+<tr>
+	<td>Unpaid:</td>
+	<td><a href="/researcher/<%= @researcher.id %>/answers/unpaid"><%= @researcher.answers_unpaid_count %></a></td>
+</tr>
+<tr>
+	<td>Unjudged:</td>
+	<td><a href="/researcher/<%= @researcher.id %>/answers/unjudged"><%= @researcher.answers_unjudged_count %></a></td>
+</tr>
+</table>
 

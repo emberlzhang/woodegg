@@ -53,5 +53,23 @@ class Question < Sequel::Model(WoodEgg::DB)
       end
       h
     end
+
+    # hash with answer_id as key, question object as value
+    # USAGE:
+    # @answers = @researcher.answers_unfinished
+    # @questions_for_answers = Question.for_answers(@answers)
+    # IN VIEW:
+    # @answers.each do |a|
+    #   <h2>@questions_for_answers[a.id]</h2>
+    #   <p>a.answer</p>
+    def for_answers(array_of_answers)
+      ret = {}
+      questions = filter(id: array_of_answers.map(&:question_id)).all
+      array_of_answers.each do |a|
+	ret[a.id] = questions.select {|q| q[:id] == a.question_id}.pop
+      end
+      ret
+    end
+
   end
 end
