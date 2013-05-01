@@ -54,19 +54,20 @@ class Question < Sequel::Model(WoodEgg::DB)
       h
     end
 
-    # hash with answer_id as key, question object as value
+    # hash with id as key, question object as value
+    # Works for answers or essays.
     # USAGE:
     # @answers = @researcher.answers_unfinished
-    # @questions_for_answers = Question.for_answers(@answers)
+    # @questions_for_answers = Question.for_these(@answers)
     # IN VIEW:
     # @answers.each do |a|
     #   <h2>@questions_for_answers[a.id]</h2>
     #   <p>a.answer</p>
-    def for_answers(array_of_answers)
+    def for_these(ary)
       ret = {}
-      questions = filter(id: array_of_answers.map(&:question_id)).all
-      array_of_answers.each do |a|
-	ret[a.id] = questions.select {|q| q[:id] == a.question_id}.pop
+      questions = filter(id: ary.map(&:question_id)).all
+      ary.each do |x|
+	ret[x.id] = questions.select {|q| q[:id] == x.question_id}.pop
       end
       ret
     end

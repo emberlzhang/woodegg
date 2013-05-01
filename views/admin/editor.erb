@@ -18,3 +18,23 @@
 <% end %>
 </ul>
 
+<h2>Essays:</h2>
+<table>
+<tr>
+	<td>Finished:</td>
+	<td><a href="/editor/<%= @editor.id %>/essays/finished"><%= @editor.essays_finished_count %></a></td>
+</tr>
+<tr>
+	<td>Unfinished:</td>
+	<td><a href="/editor/<%= @editor.id %>/essays/unfinished"><%= @editor.essays_unfinished_count %></a></td>
+</tr>
+<tr>
+	<td>Unpaid:</td>
+	<td><a href="/editor/<%= @editor.id %>/essays/unpaid"><%= @editor.essays_unpaid_count %></a></td>
+</tr>
+<tr>
+	<td>Unjudged:</td>
+	<td><a href="/editor/<%= @editor.id %>/essays/unjudged"><%= @editor.essays_unjudged_count %></a></td>
+</tr>
+</table>
+

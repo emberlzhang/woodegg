@@ -8,16 +8,32 @@ class Editor < Sequel::Model(WoodEgg::DB)
     books.map(&:country)
   end
 
+  def essays_finished_count
+    essays_dataset.exclude(finished_at: nil).count
+  end
+
   def essays_finished
     essays_dataset.exclude(finished_at: nil).order(:finished_at.desc).all
+  end
+
+  def essays_unfinished_count
+    essays_dataset.filter(finished_at: nil).count
   end
 
   def essays_unfinished
     essays_dataset.filter(finished_at: nil).order(:id).all
   end
 
+  def essays_unjudged_count
+    essays_dataset.exclude(finished_at: nil).filter(payable: nil).count
+  end
+
   def essays_unjudged
     essays_dataset.exclude(finished_at: nil).filter(payable: nil).order(:id).all
+  end
+
+  def essays_unpaid_count
+    essays_dataset.exclude(finished_at: nil).filter(payable: true).count
   end
 
   def essays_unpaid

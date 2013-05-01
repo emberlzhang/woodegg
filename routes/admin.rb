@@ -62,12 +62,7 @@ get '/book/:id/essays' do
   @book = Book[params[:id]]
   @pagetitle = @book.title + ' essays'
   @essays = @book.essays
-  # pre-load question for each essay into hash
-  questions = @book.questions
-  @question_for_essay = {}
-  @essays.each do |e|
-    @question_for_essay[e.id] = questions.select {|q| q[:id] == e.question_id}.pop
-  end
+  @question_for_essay = Question.for_these(@essays)
   erb :essays
 end
 
@@ -110,6 +105,14 @@ get '/editor/:id' do
   erb :editor
 end
 
+get %r{/editor/(\d+)/essays/(finished|unfinished|unpaid|unjudged)} do |id,filtr|
+  @editor = Editor[id]
+  @pagetitle = "#{filtr} essays for #{@editor.name}"
+  @essays = @editor.send("essays_#{filtr}")
+  @question_for_essays = Question.for_these(@essays)
+  erb :editor_essays
+end
+
 put '/editor/:id' do
   e = Editor[params[:id]]
   e.update(just(%w(bio)))
@@ -121,6 +124,14 @@ get '/researcher/:id' do
   @pagetitle = 'RESEARCHER: %s' % @researcher.name
   @person_url = WoodEgg.config['person_url'] % @researcher.person_id
   erb :researcher
+end
+
+get %r{/researcher/(\d+)/answers/(finished|unfinished|unpaid|unjudged)} do |id,filtr|
+  @researcher = Researcher[id]
+  @pagetitle = "#{filtr} answers for #{@researcher.name}"
+  @answers = @researcher.send("answers_#{filtr}")
+  @question_for_answers = Question.for_these(@answers)
+  erb :researcher_answers
 end
 
 put '/researcher/:id' do
@@ -146,12 +157,3 @@ get '/editors' do
   end
   erb :editors
 end
-
-get %r{/researcher/(\d+)/answers/(finished|unfinished|unpaid|unjudged)} do |id,filtr|
-  @researcher = Researcher[id]
-  @pagetitle = "#{filtr} answers for #{@researcher.name}"
-  @answers = @researcher.send("answers_#{filtr}")
-  @question_for_answers = Question.for_answers(@answers)
-  erb :researcher_answers
-end
-
