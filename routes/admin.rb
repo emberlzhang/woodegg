@@ -147,34 +147,10 @@ get '/editors' do
   erb :editors
 end
 
-get '/researcher/:id/answers/finished' do
-  @researcher = Researcher[params[:id]]
-  @pagetitle = 'finished answers for ' + @researcher.name
-  @answers = @researcher.answers_finished
-  @question_for_answers = Question.for_answers(@answers)
-  erb :researcher_answers
-end
-
-get '/researcher/:id/answers/unfinished' do
-  @researcher = Researcher[params[:id]]
-  @pagetitle = 'unfinished answers for ' + @researcher.name
-  @answers = @researcher.answers_unfinished
-  @question_for_answers = Question.for_answers(@answers)
-  erb :researcher_answers
-end
-
-get '/researcher/:id/answers/unpaid' do
-  @researcher = Researcher[params[:id]]
-  @pagetitle = 'unpaid answers for ' + @researcher.name
-  @answers = @researcher.answers_unpaid
-  @question_for_answers = Question.for_answers(@answers)
-  erb :researcher_answers
-end
-
-get '/researcher/:id/answers/unjudged' do
-  @researcher = Researcher[params[:id]]
-  @pagetitle = 'unjudged answers for ' + @researcher.name
-  @answers = @researcher.answers_unjudged
+get %r{/researcher/(\d+)/answers/(finished|unfinished|unpaid|unjudged)} do |id,filtr|
+  @researcher = Researcher[id]
+  @pagetitle = "#{filtr} answers for #{@researcher.name}"
+  @answers = @researcher.send("answers_#{filtr}")
   @question_for_answers = Question.for_answers(@answers)
   erb :researcher_answers
 end
