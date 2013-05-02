@@ -157,9 +157,6 @@ end
 
 get '/editors' do
   @pagetitle = 'editors'
-  @books_editors = {}
-  Book.each do |b|
-    @books_editors[b] = b.editors
-  end
+  @editors = Editor.all
   erb :editors
 end
