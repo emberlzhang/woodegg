@@ -119,6 +119,12 @@ put '/editor/:id' do
   redirect '/editor/%d' % e.id
 end
 
+post '/editor/:id/approval' do
+  e = Editor[params[:id]]
+  e.approve_finished_unjudged_essays
+  redirect '/editor/%d' % e.id
+end
+
 get '/researcher/:id' do
   @researcher = Researcher[params[:id]]
   @pagetitle = 'RESEARCHER: %s' % @researcher.name

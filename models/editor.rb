@@ -32,6 +32,10 @@ class Editor < Sequel::Model(WoodEgg::DB)
     essays_dataset.exclude(finished_at: nil).filter(payable: nil).order(:id).all
   end
 
+  def approve_finished_unjudged_essays
+    essays_dataset.exclude(finished_at: nil).filter(payable: nil).update(payable: true)
+  end
+
   def essays_unpaid_count
     essays_dataset.exclude(finished_at: nil).filter(payable: true).count
   end

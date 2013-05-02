@@ -34,7 +34,13 @@
 </tr>
 <tr>
 	<td>Unjudged:</td>
-	<td><a href="/editor/<%= @editor.id %>/essays/unjudged"><%= @editor.essays_unjudged_count %></a></td>
+	<td><a href="/editor/<%= @editor.id %>/essays/unjudged"><%= @editor.essays_unjudged_count %></a>
+<% if @editor.essays_unjudged_count > 0 %>
+<form action="/editor/<%= @editor.id %>/approval" method="post">
+<input type="submit" name="submit" value="approve all finished essays">
+</form>
+<% end %>	
+	</td>
 </tr>
 </table>
 
