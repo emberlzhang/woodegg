@@ -33,7 +33,7 @@ class Essay < Sequel::Model(WoodEgg::DB)
     end
 
     def next_uncleaned
-      filter(cleaned_at: nil, cleaned_by: nil).order(:question_id).first
+      filter(cleaned_at: nil, cleaned_by: nil).exclude(finished_at: nil).order(:question_id).first
     end
 
     # hash of: book['Topic1']['SubTopic1']['Question8'] => 'EssayAnswer'
