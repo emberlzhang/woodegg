@@ -1,3 +1,6 @@
+-- 2013-05-21
+ALTER TABLE books ADD COLUMN salescopy text;
+
 -- 2013-04-26
 ALTER TABLE answers RENAME COLUMN person_id TO researcher_id;
 UPDATE answers SET researcher_id=1 WHERE researcher_id=327768;

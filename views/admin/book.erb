@@ -52,5 +52,9 @@
 <input type="text" name="title" id="title" value="<%= @book.title %>"><br>
 <label for="isbn">isbn:</label>
 <input type="text" name="isbn" id="isbn" value="<%= @book.isbn %>"><br>
+<label for="intro">intro:</label>
+<textarea name="intro" id="intro"><%= @book.intro %></textarea><br>
+<label for="salescopy">salescopy:</label>
+<textarea name="salescopy" id="salescopy"><%= @book.salescopy %></textarea><br>
 <input type="submit" name="submit" value="update">
 </form>
