@@ -94,7 +94,7 @@ class Countries
 
     # helper for routes like /cn/123 or /tw/321
     def routemap2
-      '/(' + codes.map(&:downcase).join('|') + ')/(\d*)$'
+      '/(' + codes.map(&:downcase).join('|') + ')/([0-9]+)$'
     end
   end
 end

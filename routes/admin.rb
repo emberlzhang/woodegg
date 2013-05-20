@@ -105,7 +105,7 @@ get '/editor/:id' do
   erb :editor
 end
 
-get %r{/editor/(\d+)/essays/(finished|unfinished|unpaid|unjudged)} do |id,filtr|
+get %r{/editor/([0-9]+)/essays/(finished|unfinished|unpaid|unjudged)} do |id,filtr|
   @editor = Editor[id]
   @pagetitle = "#{filtr} essays for #{@editor.name}"
   @essays = @editor.send("essays_#{filtr}")
@@ -132,7 +132,7 @@ get '/researcher/:id' do
   erb :researcher
 end
 
-get %r{/researcher/(\d+)/answers/(finished|unfinished|unpaid|unjudged)} do |id,filtr|
+get %r{/researcher/([0-9]+)/answers/(finished|unfinished|unpaid|unjudged)} do |id,filtr|
   @researcher = Researcher[id]
   @pagetitle = "#{filtr} answers for #{@researcher.name}"
   @answers = @researcher.send("answers_#{filtr}")
