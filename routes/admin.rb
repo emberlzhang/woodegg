@@ -54,7 +54,7 @@ end
 get '/book/:id/questions' do
   @book = Book[params[:id]]
   @pagetitle = @book.title + ' questions'
-  @topicnest = Question.topicnest(@book.questions, Question.topichash('KH'))
+  @topicnest = Question.topicnest(@book.questions, Question.topichash(@book.country))
   erb :questions
 end
 
