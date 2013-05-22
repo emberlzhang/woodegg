@@ -60,7 +60,7 @@ File.open(outdir + '/' + outfile, 'w') do |f|
     f.puts '## ' + r.name + "\n\n"
     f.puts r.bio + "\n\n"
     photo = 'researcher-%d.jpg' % r.id
-    f.puts "(images/%s)\n\n" % photo
+    f.puts "![](images/%s)\n\n" % photo
     FileUtils.cp('/srv/public/woodegg/public/images/300/' + photo, imgdir + '/' + photo)
   end
   f.puts '# EDITOR:' + "\n\n"
@@ -68,7 +68,7 @@ File.open(outdir + '/' + outfile, 'w') do |f|
     f.puts '## ' + r.name + "\n\n"
     f.puts r.bio + "\n\n"
     photo = 'editor-%d.jpg' % r.id
-    f.puts "(images/%s)\n\n" % photo
+    f.puts "![](images/%s)\n\n" % photo
     FileUtils.cp('/srv/public/woodegg/public/images/300/' + photo, imgdir + '/' + photo)
   end
 
