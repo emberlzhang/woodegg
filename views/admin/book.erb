@@ -18,6 +18,22 @@
 	<% end %>
 <% end %>
 
+<h3><a href="/book/<%= @book.id %>/questions">all questions</a></h3>
+<h3><a href="/book/<%= @book.id %>/essays">all essays</a></h3>
+
+<h2>Edit Book Info:</h2>
+<form action="/book/<%= @book.id %>" method="post"><input type="hidden" name="_method" value="put">
+<label for="title">title:</label>
+<input type="text" name="title" id="title" value="<%= @book.title %>"><br>
+<label for="isbn">isbn:</label>
+<input type="text" name="isbn" id="isbn" value="<%= @book.isbn %>"><br>
+<label for="intro">intro:</label>
+<textarea name="intro" id="intro"><%= @book.intro %></textarea><br>
+<label for="salescopy">salescopy:</label>
+<textarea name="salescopy" id="salescopy"><%= @book.salescopy %></textarea><br>
+<input type="submit" name="submit" value="update">
+</form>
+
 <h2>Editor:</h2>
 <ul>
 <% @editors.each do |e| %>
@@ -36,25 +52,3 @@
 <% end %>
 </ul>
 
-<h3><a href="/book/<%= @book.id %>/questions">all questions</a></h3>
-<h3><a href="/book/<%= @book.id %>/essays">all essays</a></h3>
-
-<h2>Edit Book Info:</h2>
-<form action="/book/<%= @book.id %>" method="post"><input type="hidden" name="_method" value="put">
-<label for="country">country:</label>
-<select name="country" id="country">
-<% Countries.hsh.each do |cc,cn| %>
-	<% checked = (cc == @book.country) ? ' checked' : '' %>
-	<option value="<%= cc %>"<%= checked %>><%= cn %></option>
-<% end %>
-</select><br>
-<label for="title">title:</label>
-<input type="text" name="title" id="title" value="<%= @book.title %>"><br>
-<label for="isbn">isbn:</label>
-<input type="text" name="isbn" id="isbn" value="<%= @book.isbn %>"><br>
-<label for="intro">intro:</label>
-<textarea name="intro" id="intro"><%= @book.intro %></textarea><br>
-<label for="salescopy">salescopy:</label>
-<textarea name="salescopy" id="salescopy"><%= @book.salescopy %></textarea><br>
-<input type="submit" name="submit" value="update">
-</form>

@@ -47,7 +47,7 @@ end
 
 put '/book/:id' do
   b = Book[params[:id]]
-  b.update(just(%w(country title isbn intro salescopy)))
+  b.update(just(%w(title isbn intro salescopy)))
   redirect '/book/%d' % b.id
 end
 
