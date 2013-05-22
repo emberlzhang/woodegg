@@ -29,7 +29,6 @@ chapter = 0
 outfile = 'chapter%02d.txt' % chapter
 filenames << outfile
 File.open(outdir + '/' + outfile, 'w') do |f|
-  f.puts '# ' + book.title + "\n\n"
   f.puts book.intro.gsub("\r", '')
 end
 
@@ -56,25 +55,24 @@ chapter += 1
 outfile = 'chapter%02d.txt' % chapter
 filenames << outfile
 File.open(outdir + '/' + outfile, 'w') do |f|
-  f.puts '# ' + book.title + "\n\n"
-  f.puts '## RESEARCHERS:' + "\n\n"
+  f.puts '# RESEARCHERS:' + "\n\n"
   book.researchers.each do |r|
-    f.puts '### ' + r.name + "\n\n"
+    f.puts '## ' + r.name + "\n\n"
     f.puts r.bio + "\n\n"
     photo = 'researcher-%d.jpg' % r.id
     f.puts "(images/%s)\n\n" % photo
     FileUtils.cp('/srv/public/woodegg/public/images/300/' + photo, imgdir + '/' + photo)
   end
-  f.puts '## EDITOR:' + "\n\n"
+  f.puts '# EDITOR:' + "\n\n"
   book.editors.each do |r|
-    f.puts '### ' + r.name + "\n\n"
+    f.puts '## ' + r.name + "\n\n"
     f.puts r.bio + "\n\n"
     photo = 'editor-%d.jpg' % r.id
     f.puts "(images/%s)\n\n" % photo
     FileUtils.cp('/srv/public/woodegg/public/images/300/' + photo, imgdir + '/' + photo)
   end
 
-  f.puts "\n\nAnd lastly, I'm going to include the intro one more time, because it’s that important.\n\n"
+  f.puts "\n\nAnd lastly, I’m going to use the intro as the outro, to make sure you didn’t miss it:\n\n"
   f.puts book.intro.gsub("\r", '')
 end
 
