@@ -5,16 +5,16 @@ class Book < Sequel::Model(WoodEgg::DB)
 
   class << self
     def done
-      Book.all.select {|b| b.done?}
+      Book.order(:title).all.select {|b| b.done?}
     end
 
     def not_done
-      Book.all.reject {|b| b.done?}
+      Book.order(:title).all.reject {|b| b.done?}
     end
   end
 
   def questions
-    Question.filter(country: country).all
+    Question.filter(country: country).order(:id).all
   end
 
   def questions_missing_essays_count
@@ -22,11 +22,11 @@ class Book < Sequel::Model(WoodEgg::DB)
   end
 
   def questions_missing_essays
-    Question.filter(id: questions_missing_essays_dataset.map(:id)).all
+    Question.filter(id: questions_missing_essays_dataset.map(:id)).order(:id).all
   end
 
   def essays_uncleaned
-    essays_dataset.filter(cleaned_at: nil)
+    essays_dataset.filter(cleaned_at: nil).order(:id)
   end
 
   def done?
