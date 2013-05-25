@@ -58,7 +58,7 @@ File.open(outdir + '/' + outfile, 'w') do |f|
   f.puts '# CREDITS' + "\n\n"
   f.puts '## Researchers:' + "\n\n"
   book.researchers.each do |r|
-    f.puts '### ' + r.name + "\n\n"
+    f.puts '## ' + r.name + "\n\n"
     f.puts r.bio + "\n\n"
     photo = 'researcher-%d.jpg' % r.id
     f.puts "![](images/%s)\n\n" % photo
@@ -66,7 +66,7 @@ File.open(outdir + '/' + outfile, 'w') do |f|
   end
   f.puts '## Editor:' + "\n\n"
   book.editors.each do |r|
-    f.puts '### ' + r.name + "\n\n"
+    f.puts '## ' + r.name + "\n\n"
     f.puts r.bio + "\n\n"
     photo = 'editor-%d.jpg' % r.id
     f.puts "![](images/%s)\n\n" % photo
@@ -75,7 +75,6 @@ File.open(outdir + '/' + outfile, 'w') do |f|
   f.puts '## Artwork:' + "\n\n"
   f.puts 'Cover design by Charlie Pabst of CharfishDesign.com'
 
-  f.puts "\n\nAnd lastly, here’s that intro again, to make sure you didn’t miss it:\n\n"
   f.puts book.intro.gsub("\r", '')
   f.puts "\n\n![](images/derek.jpg)\n\n"
   FileUtils.cp('/srv/public/woodegg/public/images/300/derek.jpg', imgdir + '/derek.jpg')
