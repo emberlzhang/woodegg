@@ -77,6 +77,8 @@ File.open(outdir + '/' + outfile, 'w') do |f|
 
   f.puts "\n\nAnd lastly, here’s that intro again, to make sure you didn’t miss it:\n\n"
   f.puts book.intro.gsub("\r", '')
+  f.puts "\n\n![](images/derek.jpg)\n\n"
+  FileUtils.cp('/srv/public/woodegg/public/images/300/derek.jpg', imgdir + '/derek.jpg')
 end
 
 # index of files, for ebook making:
