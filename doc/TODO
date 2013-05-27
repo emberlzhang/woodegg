@@ -1,41 +1,34 @@
 TO-DO:
 
-ADMIN:
-	answers
-		list, add, edit
+WOODEGG.COM:
 
-	books
-		list, add
-		list done / undone
+	update images
 
-	book
-		edit
-		preview HTML
-		table of contents
+	a hiring page?
 
-	cleaners
-		list, add, edit
+	make it all static?
 
-	editors
-		list, add, edit
 
-	reviewers
-		list, add, edit
+USER LOGIN AREA:
 
-	essays
-		list, edit
+	register
+		email confirmation link
 
-	template_questions
-		list, edit, add
+	confirmation link
+	
+	note which books bought
 
-	questions
-		list, edit
-		create un-created from template_questions
+	access to research for those
 
-	subtopic
-		list, edit, add
+	user_questions
+	answers_to_user_questions
 
-	topic
-		list, edit, add
 
+ADMIN AREA:
+
+	customers
+	customer_books_bought
+	customer_questions
+
+	system for sending queries out to researchers
 

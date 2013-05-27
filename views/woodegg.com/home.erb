@@ -3,7 +3,7 @@
 <header>
 	<div class="group">
 		<hgroup id="summaryslogan">
-			<h1>Entrepreneur's Guides to Asia</h1>
+			<h1>Entrepreneur’s Guides to Asia</h1>
 		</hgroup>
 	</div>
 </header>
@@ -20,7 +20,7 @@
 	</div>
 	<ul id="countrylist">
 <% @countries.each do |k,v| %>
-		<li class="group"><a href="/<%= k.downcase %>" class="<%= k.downcase %>"><span class="countryname"><%= v %></span></a></li>
+	<li class="group"><a href="/<%= k.downcase %>" class="<%= k.downcase %>" title="<%= @cc_title[k] %>"><span class="countryname"><%= @cc_title[k] %></span></a></li>
 <% end %>
 	</ul>
 </section>

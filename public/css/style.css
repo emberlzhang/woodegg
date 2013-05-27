@@ -407,7 +407,7 @@ body#bookpage #information {
   min-height: 360px;
 }
 body#bookpage #information li {
-  margin-bottom: 1em;
+  margin-bottom: 0.25em;
 }
 #information h2, #toc h2 {
   color: rgb(119, 31, 0);
@@ -428,7 +428,7 @@ body#bookpage #information li {
   line-height: 1.2em;
   margin-bottom: 1em;
 }
-#information ul {
+#information ul, body#bookpage #information p {
   margin-left: 12.5%;
 }
 div.feedback {
@@ -620,10 +620,11 @@ footer[role=contentinfo] {
   .book .cover {
     display: block;
     position: absolute;
-    top: 4.5em; left: 4%;
+    top: 6.5em; left: 4%;
     width: 17%;
   }
   #information ul,
+  body#bookpage #information p,
   .questions,
   .action,
   footer[role=contentinfo] .group {
@@ -659,6 +660,7 @@ footer[role=contentinfo] {
     width: 26%;
   }
   #information ul,
+  body#bookpage #information p,
   .questions,
   .action,
   footer[role=contentinfo] .group {
@@ -701,6 +703,7 @@ footer[role=contentinfo] {
   }
   .book > header > div,
   #information ul,
+  body#bookpage #information p,
   .questions,
   .action,
   footer[role=contentinfo] .group {

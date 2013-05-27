@@ -4,34 +4,28 @@
       <img class="bookcover" src="/images/flags/<%= @ccode %>-flag-160-blackborder.png" alt="<%= @booktitle %>" />
     </figure>
     <div class="group">
-      <h1><%= @booktitle %></h1>
-      <p class="status">(In production. Available in 2013.)</p>
+    <h1><%= @title.gsub('Start', '<br>Start') %></h1>
     </div>
   </header>
 
 <section id="information">
 
 <header class="group">
-<h2>What the book will contain:</h2>
+<h2><%= @subtitle %></h2>
 </header>
 
 <figure class="cover">
   <img src="/images/blackbook-<%= @ccode %>-155x300.png" alt="<%= @booktitle %>" />
 </figure>
 
-<ul class="group">
-<li>Explanation of <strong>culture, context, and business practices</strong> in <%= @country_name %>.</li>
-<li>Interviews with <strong>local entrepreneurs</strong> in <%= @country_name %>.</li>
-<li>Interviews with <strong>foreign entrepreneurs</strong> in <%= @country_name %>.</li>
-<li>Current state of things in 2013, identifying <strong>opportunities and gaps in the market</strong>.</li>
-<li><strong>Specific “do this” steps</strong> for setting up a business in <%= @country_name %>.</li>
-<li>Book available in <strong>audiobook, Kindle, PDF, iPad, and paper format</strong>. Includes <strong>video and audio</strong> for all research and interviews.</li>
-</ul>
+<div class="group">
+<%= @salescopy %>
+</div>
 
 </section>
 
 <section id="toc">
-<h1>Book Outline</h1>
+<h1>Contents</h1>
 
 <%= @questions %>
 

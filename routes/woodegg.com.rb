@@ -1,4 +1,5 @@
 #encoding: utf-8
+require 'kramdown'
 
 class WoodEggDotCom < Sinatra::Base
 
@@ -25,6 +26,8 @@ class WoodEggDotCom < Sinatra::Base
     @bodyid = 'homepage'
     pagetitle 'Entrepreneur’s Guides to Asia'
     @countries = Countries.hsh
+    @cc_title = {}
+    Book.select(:country, :title).all.each {|b| @cc_title[b.country] = b.title}
     erb :home
   end
 
@@ -46,9 +49,14 @@ class WoodEggDotCom < Sinatra::Base
     @ccode = cc.upcase
     @cname = Countries.hsh[@ccode]
     @country_name = @cname.gsub(' ', '&nbsp;')
-    pagetitle "Entrepreneur’s Guide to #{@cname} 2013"
-    @booktitle = "Entrepreneur’s Guide to #{@country_name} 2013"
+    @country_name = 'the&nbsp;Philippines' if @country_name == 'Philippines'
+    @book = Book.filter(country: @ccode).first
+    @booktitle = @book.title
+    @isbn = @book.isbn
+    pagetitle @booktitle
+    @title, @subtitle = @booktitle.split(': ')
     @questions = File.open("./views/woodegg.com/q-#{cc}.html", 'r:utf-8').read
+    @salescopy = Kramdown::Document.new(@book.salescopy).to_html
     erb :bookpage
   end
 end
