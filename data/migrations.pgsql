@@ -1,3 +1,7 @@
+-- 2013-05-29
+ALTER TABLE books ADD COLUMN asin char(10);
+ALTER TABLE books ADD COLUMN leanpub varchar(30);
+
 -- 2013-05-21
 ALTER TABLE books ADD COLUMN salescopy text;
 
