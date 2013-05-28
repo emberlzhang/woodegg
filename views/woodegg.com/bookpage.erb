@@ -22,6 +22,12 @@
 <%= @salescopy %>
 </div>
 
+<div class="group" id="buyit">
+	<a href="http://www.amazon.com/dp/<%= @book.asin %>" class="button success">Buy it for your Amazon Kindle</a>
+	<br>
+	<a href="https://leanpub.com/<%= @book.leanpub %>" class="button success">Buy it as PDF, epub, or mobi</a>
+</div>
+
 </section>
 
 <section id="toc">
