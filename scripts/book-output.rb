@@ -22,7 +22,7 @@ book = Book.filter(country: country_code).first
 filenames = []
 
 # cover = title_page.jpg = 1650 pixels wide and 2400 pixels high at 300 PPI
-
+FileUtils.cp('/srv/public/woodegg/public/images/we13/we13cover-%s.jpg' % country_code, imgdir + '/title_page.jpg')
 
 # start with chapter00.txt - the intro
 chapter = 0
