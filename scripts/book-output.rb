@@ -2,6 +2,9 @@
 require '../models.rb'
 require 'fileutils'
 
+# HINT: probably want to do them all,like this:
+# for i in KH CN HK IN ID JP KR MY MN MM PH SG LK TW TH VN ; do ruby book-output.rb $i ; done
+
 # get country code
 unless ARGV[0] && Countries.hsh.keys.include?(ARGV[0].upcase)
   raise "\nUSAGE: ./book-output.rb {country_code}"
@@ -73,8 +76,9 @@ File.open(outdir + '/' + outfile, 'w') do |f|
     FileUtils.cp('/srv/public/woodegg/public/images/300/' + photo, imgdir + '/' + photo)
   end
   f.puts '## Artwork:' + "\n\n"
-  f.puts 'Cover design by Charlie Pabst of CharfishDesign.com'
+  f.puts "Cover design by Charlie Pabst of CharfishDesign.com"
 
+  f.puts "\n\n\n"
   f.puts book.intro.gsub("\r", '')
   f.puts "\n\n![](images/derek.jpg)\n\n"
   FileUtils.cp('/srv/public/woodegg/public/images/300/derek.jpg', imgdir + '/derek.jpg')

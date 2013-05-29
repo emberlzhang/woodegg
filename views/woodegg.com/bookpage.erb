@@ -22,9 +22,8 @@
 <%= @salescopy %>
 </div>
 
-<div class="group" id="buyit">
-	<a href="http://www.amazon.com/dp/<%= @book.asin %>" class="button success">Buy it for your Amazon Kindle</a>
-	<br>
+<div class="group">
+	<a href="http://www.amazon.com/dp/<%= @book.asin %>?tag=cdbaby" class="button success">Buy it for your Amazon Kindle</a>
 	<a href="https://leanpub.com/<%= @book.leanpub %>" class="button success">Buy it as PDF, epub, or mobi</a>
 </div>
 
@@ -35,5 +34,8 @@
 
 <%= @questions %>
 
+<div class="group">
+	<a href="http://www.amazon.com/dp/<%= @book.asin %>?tag=cdbaby" class="button success">Buy it for your Amazon Kindle</a>
+	<a href="https://leanpub.com/<%= @book.leanpub %>" class="button success">Buy it as PDF, epub, or mobi</a>
+</div>
 </section>
-
