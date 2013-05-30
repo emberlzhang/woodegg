@@ -65,7 +65,10 @@ CREATE TABLE books (
 	id serial primary key,
 	country char(2) not null,
 	title text,
-	isbn text
+	isbn text,
+	salescopy text,
+	asin char(10),
+	leanpub varchar(30)
 );
 
 CREATE TABLE books_editors (
