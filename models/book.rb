@@ -2,6 +2,7 @@ class Book < Sequel::Model(WoodEgg::DB)
   one_to_many :essays
   many_to_many :editors
   many_to_many :researchers
+  many_to_many :customers
 
   class << self
     def done
@@ -11,6 +12,14 @@ class Book < Sequel::Model(WoodEgg::DB)
     def not_done
       Book.order(:title).all.reject {|b| b.done?}
     end
+  end
+
+  def short_title
+    title.split(': ')[0]
+  end
+
+  def sub_title
+    title.split(': ')[1]
   end
 
   def questions

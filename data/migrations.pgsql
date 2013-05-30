@@ -1,3 +1,14 @@
+-- 2013-05-30
+CREATE TABLE customers (
+	id serial primary key,
+	person_id integer not null UNIQUE
+);
+CREATE TABLE books_customers (
+	book_id integer not null references books(id),
+	customer_id integer not null references customers(id),
+	primary key (book_id, customer_id)
+);
+
 -- 2013-05-29
 ALTER TABLE books ADD COLUMN asin char(10);
 ALTER TABLE books ADD COLUMN leanpub varchar(30);

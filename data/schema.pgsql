@@ -16,6 +16,10 @@ CREATE TABLE editors (
 	person_id integer not null UNIQUE,
 	bio text
 );
+CREATE TABLE customers (
+	id serial primary key,
+	person_id integer not null UNIQUE
+);
 
 CREATE TABLE topics (
 	id serial primary key,
@@ -78,9 +82,15 @@ CREATE TABLE books_editors (
 );
 
 CREATE TABLE books_researchers (
-	book_id integer not null REFERENCES books(id),
-	researcher_id integer not null REFERENCES researchers(id),
-	PRIMARY KEY (book_id, researcher_id)
+	book_id integer not null references books(id),
+	researcher_id integer not null references researchers(id),
+	primary key (book_id, researcher_id)
+);
+
+CREATE TABLE books_customers (
+	book_id integer not null references books(id),
+	customer_id integer not null references customers(id),
+	primary key (book_id, customer_id)
 );
 
 CREATE TABLE essays (
