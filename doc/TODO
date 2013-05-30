@@ -1,15 +1,17 @@
 TO-DO:
 
 WOODEGG.COM:
-
-	update images
-
 	a hiring page?
 
-	make it all static?
-
-
 USER LOGIN AREA:
+	before do Customer.find_by_email_pass ; unless login|forgot|register
+	log in
+	forgot password
+	register
+	allow download of PDF, epub, mobi to anyone listed as a customer
+	make it easy to make someone a woodegg customer from sivers.inbox - even if it's a jump to woodegg admin pre-filling their person_id
+
+	link (for me) back to their person page 
 
 	register
 		email confirmation link
@@ -27,7 +29,7 @@ USER LOGIN AREA:
 ADMIN AREA:
 
 	customers
-	customer_books_bought
+	books_customers
 	customer_questions
 
 	system for sending queries out to researchers
