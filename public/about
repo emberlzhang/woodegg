@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+<meta charset="utf-8" />
+<title>About | Wood Egg</title>
+<meta name="description" content="Entrepreneur's Guides to Asia: Cambodia, China, Hong Kong, India, Indonesia, Japan, Korea, Malaysia, Mongolia, Myanmar, Philippines, Singapore, Sri Lanka, Taiwan, Thailand, Vietnam"/>
+<meta name="keywords" content="Entrepeneur, Guide, Book, Asia, Cambodia, China, Hong Kong, India, Indonesia, Japan, Korea, Malaysia, Mongolia, Myanmar, Philippines, Singapore, Sri Lanka, Taiwan, Thailand, Vietnam"/>
+<meta name="author" content="Wood Egg Pte Ltd"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico"/>
+<link rel="stylesheet" href="/css/style.css" type="text/css" media="screen" />
+<script src="/js/libs/modernizr-2.0.6.custom.min.js"></script>
+</head>
+<body id="aboutpage">
+<header role="banner" class="group">
+<a href="/" title="Wood Egg Entrepreneur’s Guides to Asia" class="coname">
+Wood Egg
+</a>
+<nav role="navigation" id="navigation">
+<ul>
+  <li><a href="/" title="Wood Egg Entrepreneur’s Guides to Asia">Home</a></li>
+  <li><a href="/about" title="About Wood Egg">About</a></li>
+  <li><a href="/contact" title="Contact Wood Egg">Contact</a></li>
+</ul>
+</nav>
+</header>
+
+<div role="main">
+
+<article>
+<header>
+<div class="group">
+<h1>About Wood Egg:</h1>
+</div>
+</header>
+
+<section id="information">
+<p>
+These are more than just books. This is really <strong>an ongoing research project that will be repeating and improving every year</strong>.  This 2013 edition is the very start.
+</p><p>
+<strong>If you buy any of these books</strong>, you have full access to all of our research, and the ability to <a href="/contact">ask us any question</a>, and <strong>we will find the answer for you.</strong>
+</p><p>
+<strong>If you have insights or information about any of these countries</strong>, things that were missing or wrong in this guide, <a href="/contact">email me anything</a>, and I’ll be happy to include it in the next edition, and give you credit.
+</p><p>
+<strong>If you want to get paid to improve next year’s guide</strong>, just <a href="/contact">email</a> to let me know.
+</p>
+
+<h2>How these books were made</h2>
+<ol>
+<li>I <strong>wrote 200 questions</strong> to be asked of each country.</li>
+<li>I <strong>hired multiple researchers</strong> in each country to answer each question.  One local, one foreigner, one other.  I wanted the book to be <strong>more than one person’s point of view.</strong></li>
+<li>I hired a writer/editor to turn the <strong>multiple different answers into one combined answer.</strong></li>
+<li>I went through the final answer to proofread and improve.</li>
+</ol>
+
+<div class="bio">
+<figure><img alt="Derek Sivers" width="200" height="200" src="/images/DerekSivers-200x200-headshot-brownchair.jpg" /></figure>
+<h2>Founder: Derek Sivers</h2>
+<p>
+Derek Sivers created CD Baby in 1998, which became the largest seller of independent music online, with $100M in sales for 150,000 musicians. 
+</p><p>
+In 2008, Derek sold CD Baby for $22M, and moved to Singapore to start his new company.
+</p><p>
+He is “Entrepreneur In Residence” at <a href="http://www.insead.edu/">INSEAD Business School</a>.
+</p><p>
+In 2011, he published <a href="http://sivers.org/a">a book</a> which shot to #1 on all of its Amazon categories. 
+</p><p>
+He is a frequent <a href="http://www.ted.com/speakers/derek_sivers.html">speaker at the TED Conference</a>, with over 5 million views of his talks, and <a href="https://twitter.com/sivers">275,000 Twitter followers</a>.
+</p><p>
+More about Derek at <a href="http://sivers.org/">sivers.org</a>
+</p>
+</div>
+
+</section>
+
+</article>
+
+
+
+</div>
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-40785106-2', 'woodegg.com');
+ga('send', 'pageview');
+</script>
+</body>
+</html>
+
