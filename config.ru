@@ -1,6 +1,8 @@
 require 'sinatra/base'
+require './mailconfig.rb'
 require './models.rb'
 
+require 'oth'
 require './routes/qa.rb'
 require './routes/editor.rb'
 require './routes/cleaner.rb'

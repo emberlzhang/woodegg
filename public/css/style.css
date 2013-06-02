@@ -786,3 +786,9 @@ body#qa form, body#qa textarea {
 
 .right { text-align: right; }
 
+/* OTH */
+
+div#oth input, div#oth label {
+	display: block;
+}
+
