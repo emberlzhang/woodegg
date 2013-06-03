@@ -1,7 +1,7 @@
 #encoding: utf-8
 require 'kramdown'
 
-class WoodEggDotCom < Oth
+class WoodEggDotCom < Sinatra::Base
 
   def pagetitle(title)
     @pagetitle = title
