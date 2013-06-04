@@ -629,7 +629,7 @@ footer[role=contentinfo] {
   .action,
   footer[role=contentinfo] .group {
     margin-left: 25%;
-    width: 75%;
+    width: 70%;
   }
 }
 /* @media screen and (min-width: 888px) */
@@ -665,7 +665,7 @@ footer[role=contentinfo] {
   .action,
   footer[role=contentinfo] .group {
     margin-left: 33.333333333%;
-    width: 66.6666666667%;
+    width: 60%;
   }
   #countries li {
     width: 33.3333333333%;
@@ -708,7 +708,7 @@ footer[role=contentinfo] {
   .action,
   footer[role=contentinfo] .group {
     margin-left: 25%;
-    width: 75%;
+    width: 70%;
   }
 }
 /* @media screen and (min-width: 1680px) */
