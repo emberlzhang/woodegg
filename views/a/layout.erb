@@ -4,10 +4,12 @@
 	<meta charset="utf-8">
 	<title><%= @pagetitle %></title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<link rel="stylesheet" href="/css/a.css" type="text/css" media="screen" />
+	<link href="/css/_normalize.css" rel="stylesheet" type="text/css" />
+	<link href="/css/a.css" media="screen, projector, print" rel="stylesheet" type="text/css" />
+	<script src="/js/vendor/custom.modernizr.js"></script>
 </head>
 <body>
-<div id="content" class="row">
+<div id="content">
 
 <%= yield %>
 
