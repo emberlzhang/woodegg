@@ -21,6 +21,7 @@ Wood Egg
 <ul>
   <li><a href="/" title="Wood Egg Entrepreneur’s Guides to Asia">Home</a></li>
   <li><a href="/about" title="About Wood Egg">About</a></li>
+  <li><a href="/help">Want to Help?</a></li>
   <li><a href="/contact" title="Contact Wood Egg">Contact</a></li>
 </ul>
 </nav>
@@ -75,7 +76,7 @@ Wood Egg
 </div>
 
 <div class="group">
-	<a href="http://www.amazon.com/dp/B00D1VW06M?tag=cdbaby" class="button success">Buy it for your Amazon Kindle</a>
+	<a href="http://www.amazon.com/dp/B00D1VW06M?tag=sivers-20" class="button success">Buy it for your Amazon Kindle</a>
 	<a href="https://leanpub.com/PhilippinesStartupGuide2013" class="button success">Buy it as PDF, epub, or mobi</a>
 </div>
 
@@ -610,7 +611,7 @@ Wood Egg
 		</ul>
 
 <div class="group">
-	<a href="http://www.amazon.com/dp/B00D1VW06M?tag=cdbaby" class="button success">Buy it for your Amazon Kindle</a>
+	<a href="http://www.amazon.com/dp/B00D1VW06M?tag=sivers-20" class="button success">Buy it for your Amazon Kindle</a>
 	<a href="https://leanpub.com/PhilippinesStartupGuide2013" class="button success">Buy it as PDF, epub, or mobi</a>
 </div>
 </section>
