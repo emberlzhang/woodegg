@@ -2,7 +2,7 @@
 <html class="no-js" lang="en">
 <head>
 <meta charset="utf-8" />
-<title><%= @pagetitle %></title>
+<title>Wood Egg <%= @pagetitle %></title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <link rel="stylesheet" href="/css/style.css" type="text/css" media="screen" />
 <script src="/js/libs/custom.modernizr.js"></script>
@@ -13,7 +13,9 @@
 <nav role="navigation" id="navigation">
 <ul>
   <li><a href="/about" title="About Wood Egg">About</a></li>
+<% unless @person %>
   <li><a href="/a/signup">Register Your Book</a></li>
+<% end %>
   <li><a href="/help">Want to Help?</a></li>
   <li><a href="/contact" title="Contact Wood Egg">Contact</a></li>
 </ul>
@@ -25,12 +27,17 @@
 <article>
 <header>
 <div class="group">
+<% if @person %>
+<form id="logoutbutton" action="/a/logout" method="post"><input type="submit" name="logout" value="logout"></form>
+<% end %>
 <h1>Your Wood Egg account</h1>
 </div>
 </header>
 
 <section id="information">
+
 <%= yield %>
+
 </section>
 
 </article>
