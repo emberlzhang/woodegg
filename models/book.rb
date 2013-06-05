@@ -22,6 +22,15 @@ class Book < Sequel::Model(WoodEgg::DB)
     title.split(': ')[1]
   end
 
+  # {'pdf' => 'MongoliaStartupGuide2013.pdf', 'epub' => 'MongoliaStartupGuide2013.epub', 'mobi' => 'MongoliaStartupGuide2013.mobi'}
+  def filename_hash
+    h = {}
+    %w(pdf epub mobi).each do |f|
+      h[f] = '%s.%s' % [short_title.gsub(' ', ''), f]
+    end
+    h
+  end
+
   def questions
     Question.filter(country: country).order(:id).all
   end
