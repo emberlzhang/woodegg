@@ -815,3 +815,6 @@ form#logoutbutton input {
 	display: relative;
 	right: 0;
 }
+img#abookpagecover {
+	float: right;
+}

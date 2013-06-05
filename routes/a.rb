@@ -37,4 +37,20 @@ class WoodEggA < Oth
     erb :thanks
   end
 
+  get '/book/:code' do
+    redirect "#{OTH_MAP}/proof" if @customer.nil?
+    @book = Book[code: params[:code]]
+    redirect "#{OTH_MAP}/" unless @customer.books.include? @book
+    @pagetitle = @book.short_title
+    erb :book
+  end
+
+  get '/book/:code/questions' do
+    redirect "#{OTH_MAP}/proof" if @customer.nil?
+    @book = Book[code: params[:code]]
+    redirect "#{OTH_MAP}/" unless @customer.books.include? @book
+    @pagetitle = @book.short_title + ' QUESTIONS'
+    erb :book_questions
+  end
+
 end

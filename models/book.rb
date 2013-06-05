@@ -42,6 +42,15 @@ class Book < Sequel::Model(WoodEgg::DB)
     questions_missing_essays_count == 0 && essays_uncleaned.count == 0
   end
 
+  # TODO: a nested list of questions for this book
+  # {"Topic Here" => [
+  #   {"Subtopic Here" => [{123 => "Question here"}, {124 => "Another question"}], 
+  #    "Another Subtopic" => [{125 => "Yet Another"}, {126 => "And Another"}]},
+  #   {"Subtopic Four" => [{127 => "Question here"}, {128 => "Another question"}], 
+  #    "Another Subtopic" => [{129 => "Yet Another"}, {130 => "And Another"}]}
+  # ], "Topic Two" => [etc]}
+  #
+
   private
 
     def questions_missing_essays_dataset
