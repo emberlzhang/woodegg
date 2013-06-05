@@ -1,3 +1,7 @@
+-- 2013-06-05
+ALTER TABLE books ADD COLUMN code char(6) UNIQUE;
+UPDATE books SET code = CONCAT('we13' || LOWER(country));   
+
 -- 2013-05-30
 CREATE TABLE customers (
 	id serial primary key,
