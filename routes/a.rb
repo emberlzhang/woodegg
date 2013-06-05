@@ -7,9 +7,13 @@ class WoodEggA < Oth
     set :root, File.dirname(File.dirname(File.realpath(__FILE__)))
     set :views, Proc.new { File.join(root, 'views/a') }
   end
+
+  before Oth::ROUTEREG do
+    oth!
+  end
   
   get '/' do
-    oth!
+    @pagetitle = 'Wood Egg account'
     erb :home
   end
 
