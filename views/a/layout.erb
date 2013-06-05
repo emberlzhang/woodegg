@@ -1,18 +1,40 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html class="no-js" lang="en">
 <head>
-	<meta charset="utf-8">
-	<title><%= @pagetitle %></title>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<link href="/css/_normalize.css" rel="stylesheet" type="text/css" />
-	<link href="/css/a.css" media="screen, projector, print" rel="stylesheet" type="text/css" />
-	<script src="/js/vendor/custom.modernizr.js"></script>
+<meta charset="utf-8" />
+<title><%= @pagetitle %></title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" href="/css/style.css" type="text/css" media="screen" />
+<script src="/js/libs/custom.modernizr.js"></script>
 </head>
-<body>
-<div id="content">
+<body id="a">
+<header role="banner" class="group">
+<a href="/" title="Wood Egg Entrepreneur’s Guides to Asia" class="coname">Wood Egg</a>
+<nav role="navigation" id="navigation">
+<ul>
+  <li><a href="/about" title="About Wood Egg">About</a></li>
+  <li><a href="/a/signup">Register Your Book</a></li>
+  <li><a href="/help">Want to Help?</a></li>
+  <li><a href="/contact" title="Contact Wood Egg">Contact</a></li>
+</ul>
+</nav>
+</header>
 
+<div role="main">
+
+<article>
+<header>
+<div class="group">
+<h1>Your Wood Egg account</h1>
+</div>
+</header>
+
+<section id="information">
 <%= yield %>
+</section>
 
+</article>
 </div>
 </body>
 </html>
+

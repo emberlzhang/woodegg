@@ -400,7 +400,7 @@ article > header p {
   padding: 0.75em 0;
   overflow: hidden;
 }
-body#contactpage #information, body#aboutpage #information, body#interestedpage #information, body#thankspage #information, body#hiringpage #information {
+body#contactpage #information, body#aboutpage #information, body#interestedpage #information, body#thankspage #information, body#hiringpage #information, body#a #information {
   padding: 1em;
 }
 body#bookpage #information {
@@ -467,10 +467,8 @@ label {
   font-weight: bold;
   margin-top: 2em;
 }
-input[type=text],
-input[type=email],
-textarea {
-  width: 80%;
+input[type=text], input[type=email], input[type=password], textarea {
+  width: 15em;
   padding: 4px;
 }
 input[type=submit],
@@ -791,4 +789,8 @@ body#qa form, body#qa textarea {
 div#oth input, div#oth label {
 	display: block;
 }
-
+div#oth h1 {
+	margin: 0;
+	padding: 0;
+	font-size: 2em;
+}
