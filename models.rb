@@ -42,6 +42,7 @@ end
 class Person
   one_to_one :editor
   one_to_one :researcher
+  one_to_one :customer
 
   # hardcoded to just me and MR for now. some day could make admins table.
   def admin?
