@@ -400,7 +400,7 @@ article > header p {
   padding: 0.75em 0;
   overflow: hidden;
 }
-body#contactpage #information, body#aboutpage #information, body#interestedpage #information, body#thankspage #information, body#hiringpage #information, body#a #information {
+body#contactpage #information, body#aboutpage #information, body#interestedpage #information, body#thankspage #information, body#hiringpage #information, body#a #information, body#help #information {
   padding: 1em;
 }
 body#bookpage #information {
@@ -431,7 +431,7 @@ body#bookpage #information li {
 #information ul, body#bookpage #information p {
   margin-left: 12.5%;
 }
-body#a #information ul, body#a #information p {
+body#a #information ul, body#a #information p, body#help #information ul, body#help #information p {
   margin-left: 0em;
   width: 95%;
 }
@@ -633,7 +633,7 @@ footer[role=contentinfo] {
     margin-left: 25%;
     width: 70%;
   }
-  body#a #information ul, body#a #information p {
+  body#a #information ul, body#a #information p, body#help #information ul, body#help #information p  {
     margin-left: 0em;
     width: 95%;
   }
@@ -673,7 +673,7 @@ footer[role=contentinfo] {
     margin-left: 33.333333333%;
     width: 60%;
   }
-  body#a #information ul, body#a #information p {
+  body#a #information ul, body#a #information p, body#help #information ul, body#help #information p  {
     margin-left: 0em;
     width: 95%;
   }
@@ -720,7 +720,7 @@ footer[role=contentinfo] {
     margin-left: 25%;
     width: 70%;
   }
-  body#a #information ul, body#a #information p {
+  body#a #information ul, body#a #information p, body#help #information ul, body#help #information p  {
     margin-left: 0em;
     width: 95%;
   }
