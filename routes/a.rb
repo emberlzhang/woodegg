@@ -46,7 +46,6 @@ class WoodEggA < Oth
     erb :book
   end
 
-  #get '/book/:code/questions/:id' do
   get %r{\A/book/(we1[3-9][a-z]{2})/questions/([0-9]+)\Z} do |code, id|
     redirect "#{OTH_MAP}/proof" if @customer.nil?
     @book = Book[code: code]
@@ -58,12 +57,12 @@ class WoodEggA < Oth
     erb :book_question
   end
 
-  get '/book/:code/:fmt/:filename' do
+  get %r{\A/book/(we1[3-9][a-z]{2})/(pdf|epub|mobi)/\S+\Z} do |code, fmt|
     redirect "#{OTH_MAP}/proof" if @customer.nil?
-    book = Book[code: params[:code]]
+    book = Book[code: code]
     redirect "#{OTH_MAP}/" unless @customer.books.include? book
-    download_url = book.download_url(params[:fmt])
-    redirect "#{OTH_MAP}/book/#{params[:code]}" unless download_url
+    download_url = book.download_url(fmt)
+    redirect "#{OTH_MAP}/book/#{code}" unless download_url
     redirect download_url
   end
 
