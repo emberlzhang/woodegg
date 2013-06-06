@@ -1,2 +1,6 @@
 person_url:
         http://someurl.io/person/%d
+aws_key:
+        ABCDEFG
+aws_secret:
+        abcdefg1234567
