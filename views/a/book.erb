@@ -1,15 +1,16 @@
 <img src="/images/we13/we13cover-<%= @book.country %>-155.png" width="155" id="abookpagecover">
 <h2><%= @book.short_title %></h2>
 
-<p>
-Book page coming soon.
+<h3>Download the book:</h3>
+<ul>
+<% @book.filename_hash.each do |fmt, filename| %>
+	<li><a href="/a/book/<%= '%s/%s/%s' % [@book.code, fmt, filename] %>"><%= fmt %></a></li>
+<% end %>
+</ul>
 
-TODO:
-secure links to PDF, epub, mobi in WoodEgg S3
-
-list of questions
-
-/book/:code/question/1234
-	raw research
-	final essay
-</p>
+<h3>Click question for all its answers:</h3>
+<ul>
+<% @book.questions.each do |q| %>
+	<li><a href="/a/book/<%= @book.code %>/questions/<%= q.id %>"><%=h q.question %></a></li>
+<% end %>
+</ul>

@@ -22,13 +22,26 @@ class Book < Sequel::Model(WoodEgg::DB)
     title.split(': ')[1]
   end
 
-  # {'pdf' => 'MongoliaStartupGuide2013.pdf', 'epub' => 'MongoliaStartupGuide2013.epub', 'mobi' => 'MongoliaStartupGuide2013.mobi'}
+  # {'pdf' => 'MongoliaStartupGuide2013.pdf',
+  #  'epub' => 'MongoliaStartupGuide2013.epub',
+  #  'mobi' => 'MongoliaStartupGuide2013.mobi'}
   def filename_hash
     h = {}
     %w(pdf epub mobi).each do |f|
       h[f] = '%s.%s' % [short_title.gsub(' ', ''), f]
     end
     h
+  end
+
+  def download_url(fmt)
+    filename = filename_hash[fmt]
+    return false if filename.nil?
+    require 'aws/s3'
+    AWS::S3::DEFAULT_HOST.replace 's3-ap-southeast-1.amazonaws.com'
+    AWS::S3::Base.establish_connection!(
+      access_key_id: WoodEgg.config['aws_key'],
+      secret_access_key: WoodEgg.config['aws_secret'])
+    AWS::S3::S3Object.url_for(filename, 'woodegg', :use_ssl => true)
   end
 
   def questions

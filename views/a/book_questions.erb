@@ -1,7 +1,0 @@
-<h2><%= @book.short_title %></h2>
-
-<ul>
-<% @book.questions.each do |q| %>
-	<li><a href="/a/book/<%= @book.code %>/questions/<%= q.id %>"><%=h q.question %></a></li>
-<% end %>
-</ul>

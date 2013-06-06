@@ -1,4 +1,5 @@
 include ERB::Util
+require 'kramdown'
 
 class WoodEggA < Oth
 
@@ -37,20 +38,33 @@ class WoodEggA < Oth
     erb :thanks
   end
 
-  get '/book/:code' do
+  get %r{\A/book/(we1[3-9][a-z]{2})\Z} do |code|
     redirect "#{OTH_MAP}/proof" if @customer.nil?
-    @book = Book[code: params[:code]]
+    @book = Book[code: code]
     redirect "#{OTH_MAP}/" unless @customer.books.include? @book
     @pagetitle = @book.short_title
     erb :book
   end
 
-  get '/book/:code/questions' do
+  #get '/book/:code/questions/:id' do
+  get %r{\A/book/(we1[3-9][a-z]{2})/questions/([0-9]+)\Z} do |code, id|
     redirect "#{OTH_MAP}/proof" if @customer.nil?
-    @book = Book[code: params[:code]]
+    @book = Book[code: code]
     redirect "#{OTH_MAP}/" unless @customer.books.include? @book
-    @pagetitle = @book.short_title + ' QUESTIONS'
-    erb :book_questions
+    @question = @book.questions.find {|b| b[:id] == id.to_i}
+    redirect "#{OTH_MAP}/book/#{code}" unless @question
+    @pagetitle = @book.short_title + ' QUESTION: ' + @question.question
+    @essay = Kramdown::Document.new(@question.essays[0].content).to_html
+    erb :book_question
+  end
+
+  get '/book/:code/:fmt/:filename' do
+    redirect "#{OTH_MAP}/proof" if @customer.nil?
+    book = Book[code: params[:code]]
+    redirect "#{OTH_MAP}/" unless @customer.books.include? book
+    download_url = book.download_url(params[:fmt])
+    redirect "#{OTH_MAP}/book/#{params[:code]}" unless download_url
+    redirect download_url
   end
 
 end
