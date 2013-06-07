@@ -39,13 +39,12 @@
 
 #content {
 	@extend .row;
-	div {
-		@extend .columns;
-	}
 	#bookinfo {
+		@extend .columns;
 		@extend .small-3;
 	}
 	#bookedit {
+		@extend .columns;
 		@extend .small-9;
 	}
 }
@@ -53,4 +52,7 @@ input[type=submit] {
 	@extend .button;
 	@extend .success;
 	@extend .small;
+}
+textarea {
+	height: 8em;
 }
