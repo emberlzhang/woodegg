@@ -1,4 +1,7 @@
+require 'erb'
+include ERB::Util
 require 'sinatra'
+require 'kramdown'
 root = File.dirname(File.dirname(File.realpath(__FILE__)))
 require "#{root}/models.rb"
 
@@ -165,3 +168,25 @@ get '/editors' do
   @editors = Editor.order(:id).all
   erb :editors
 end
+
+get '/customers' do
+  @pagetitle = 'all customers'
+  @customers = Customer.order(:id).all
+  erb :customers
+end
+
+get '/book/:id/customers' do
+  @book = Book[params[:id]]
+  @pagetitle = 'customers of ' + @book.short_title
+  @customers = @book.customers
+  erb :customers
+end
+
+get '/customer/:id' do
+  @customer = Customer[params[:id]]
+  @pagetitle = 'customer: ' + @customer.name
+  @books = @customer.books
+  @person_url = WoodEgg.config['person_url'] % @customer.person_id
+  erb :customer
+end
+

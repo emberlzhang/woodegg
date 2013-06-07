@@ -1,0 +1,11 @@
+<h2>customer #<%= @customer.id %>: <%=h @customer.name %></h2>
+
+<p><a href="<%= @person_url %>">person page</a></p>
+
+<h3>books</h3>
+<ul>
+<% @books.each do |b| %>
+	<li><a href="/book/<%= b.id %>"><%= b.short_title %></a></li>
+<% end %>
+</ul>
+
