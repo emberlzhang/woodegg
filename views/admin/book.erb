@@ -1,8 +1,9 @@
-<h1><%= @pagetitle %></h1>
+<div id="content">
+<h2><%= @pagetitle %></h2>
 
-<% if @done %>
-	<h2>All essays done!</h2>
-<% else %>
+
+<div id="bookprogress">
+<% unless @done %>
 	<% if @questions_missing_essays.size > 0 %>
 		<h2>Questions missing essays:</h2>
 		<ul>
@@ -17,11 +18,34 @@
 		<h2># essays uncleaned: <%= @essays_uncleaned.size %></h2>
 	<% end %>
 <% end %>
+</div>
 
-<h3><a href="/book/<%= @book.id %>/questions">all questions</a></h3>
-<h3><a href="/book/<%= @book.id %>/essays">all essays</a></h3>
+<div id="bookinfo">
 
-<h2>Edit Book Info:</h2>
+<h4>Related:</h4>
+<ul id="booknav">
+<li><a href="/book/<%= @book.id %>/customers">customers</a></li>
+<li><a href="/book/<%= @book.id %>/questions">questions</a></li>
+<li><a href="/book/<%= @book.id %>/essays">essays</a></li>
+</ul>
+
+<h4>Editor:</h4>
+<ul>
+<% @editors.each do |e| %>
+	<li><a href="/editor/<%= e.id %>"><%= e.name %></a></li>
+<% end %>
+</ul>
+
+<h4>Researchers:</h4>
+<ul>
+<% @researchers.each do |r| %>
+	<li><a href="/researcher/<%= r.id %>"><%= r.name %></a></li>
+<% end %>
+</ul>
+</div>
+
+<div id="bookedit">
+<h4>Edit Book Info:</h4>
 <form action="/book/<%= @book.id %>" method="post"><input type="hidden" name="_method" value="put">
 <label for="title">title:</label>
 <input type="text" name="title" id="title" value="<%= @book.title %>"><br>
@@ -37,22 +61,5 @@
 <textarea name="salescopy" id="salescopy"><%= @book.salescopy %></textarea><br>
 <input type="submit" name="submit" value="update">
 </form>
-
-<h2>Editor:</h2>
-<ul>
-<% @editors.each do |e| %>
-	<li><a href="/editor/<%= e.id %>">
-	<img src="/images/300/editor-<%= e.id %>.jpg" width="300" height="300" alt="<%= e.name %>">
-	<%= e.name %></a></li>
-<% end %>
-</ul>
-
-<h2>Researchers:</h2>
-<ul>
-<% @researchers.each do |r| %>
-	<li><a href="/researcher/<%= r.id %>">
-	<img src="/images/300/researcher-<%= r.id %>.jpg" width="300" height="300" alt="<%= r.name %>">
-	<%= r.name %></a></li>
-<% end %>
-</ul>
-
+</div>
+</div>

@@ -24,15 +24,20 @@ def just(keyz)
 end
 
 get '/' do
-  @pagetitle = 'admin home'
-  @books_done = Book.done
-  @books_not_done = Book.not_done
+  @pagetitle = 'home'
   erb :home
+end
+
+get '/books' do
+  @pagetitle = 'books'
+  @books_done = Book.done
+  # @books_not_done = Book.not_done
+  erb :books
 end
 
 get '/book/:id' do
   @book = Book[params[:id]]
-  @pagetitle = @book.title
+  @pagetitle = @book.short_title
   @done = @book.done?
   unless @done
     @questions_missing_essays = @book.questions_missing_essays
