@@ -58,14 +58,14 @@ end
 
 get '/book/:id/questions' do
   @book = Book[params[:id]]
-  @pagetitle = @book.title + ' questions'
+  @pagetitle = @book.short_title + ' questions'
   @topicnest = Question.topicnest(@book.questions, Question.topichash(@book.country))
   erb :questions
 end
 
 get '/book/:id/essays' do
   @book = Book[params[:id]]
-  @pagetitle = @book.title + ' essays'
+  @pagetitle = @book.short_title + ' essays'
   @essays = @book.essays
   @question_for_essay = Question.for_these(@essays)
   erb :essays
@@ -154,7 +154,7 @@ end
 get '/researchers' do
   @pagetitle = 'researchers'
   @books_researchers = {}
-  Book.each do |b|
+  Book.order(:id).each do |b|
     @books_researchers[b] = b.researchers
   end
   erb :researchers
@@ -162,6 +162,6 @@ end
 
 get '/editors' do
   @pagetitle = 'editors'
-  @editors = Editor.all
+  @editors = Editor.order(:id).all
   erb :editors
 end

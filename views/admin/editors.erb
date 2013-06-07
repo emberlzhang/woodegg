@@ -1,11 +1,7 @@
-<h1>editors</h1>
+<h2>editors</h2>
 
 <ul>
 <% @editors.each do |editor| %>
-	<li>
-	<a href="/editor/<%= editor.id %>">
-	<img src="/images/300/editor-<%= editor.id %>.jpg" width="300" height="300" alt="<%= editor.name %>">
-	<%= editor.name %></a>
-	</li>
+	<li><a href="/editor/<%= editor.id %>"><%= editor.name %></a></li>
 <% end %>
 </ul>

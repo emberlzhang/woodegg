@@ -1,29 +1,38 @@
 <p>Book: <a href="/book/<%= @essay.book.id %>"><%= @essay.book.title %></a></p>
 <p>Editor: <a href="/editor/<%= @essay.editor.id %>"><%= @essay.editor.name %></a></p>
-<h2><a href="/question/<%= @essay.question.id %>"><%= @essay.question.question %></a></h2>
+<h3><a href="/question/<%= @essay.question.id %>"><%= @essay.question.question %></a></h3>
 
 <form action="/essay/<%= @essay.id %>" method="post"><input type="hidden" name="_method" value="put">
 
-<label for="started_at">started_at:</label>
-<input type="text" name="started_at" id="started_at" value="<%= @essay.started_at %>"><br>
-
-<label for="finished_at">finished_at:</label>
-<input type="text" name="finished_at" id="finished_at" value="<%= @essay.finished_at %>"><br>
-
-<label for="payable">payable:</label>
-<input type="text" name="payable" id="payable" value="<%= @essay.payable %>"><br>
-
-<label for="cleaned_at">cleaned_at:</label>
-<input type="text" name="cleaned_at" id="cleaned_at" value="<%= @essay.cleaned_at %>"><br>
-
-<label for="cleaned_by">cleaned_by:</label>
-<input type="text" name="cleaned_by" id="cleaned_by" value="<%= @essay.cleaned_by %>"><br>
-
 <label for="content">content:</label>
-<textarea name="content" id="content"><%= @essay.content %></textarea><br>
+<textarea name="content" id="content"><%= @essay.content %></textarea>
+
+<div class="row">
+	<div class="small-3 columns">
+<label for="started_at">started_at:</label>
+<input type="text" name="started_at" id="started_at" value="<%= @essay.started_at %>">
+	</div>
+	<div class="small-3 columns">
+<label for="finished_at">finished_at:</label>
+<input type="text" name="finished_at" id="finished_at" value="<%= @essay.finished_at %>">
+	</div>
+	<div class="small-1 columns">
+<label for="payable">payable:</label>
+<input type="text" name="payable" id="payable" value="<%= @essay.payable %>">
+	</div>
+	<div class="small-3 columns">
+<label for="cleaned_at">cleaned_at:</label>
+<input type="text" name="cleaned_at" id="cleaned_at" value="<%= @essay.cleaned_at %>">
+	</div>
+	<div class="small-2 columns">
+<label for="cleaned_by">cleaned_by:</label>
+<input type="text" name="cleaned_by" id="cleaned_by" value="<%= @essay.cleaned_by %>">
+	</div>
+</div>
 
 <label for="comment">comment:</label>
-<textarea name="comment" id="comment"><%= @essay.comment %></textarea><br>
+<textarea name="comment" id="comment"><%= @essay.comment %></textarea>
 
 <input type="submit" name="submit" value="update">
+
 </form>

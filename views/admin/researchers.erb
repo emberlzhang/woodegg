@@ -1,14 +1,10 @@
-<h1><%= @pagetitle %></h1>
+<h2><%= @pagetitle %></h2>
 
 <% @books_researchers.each do |book, researchers| %>
-	<h2><a href="/book/<%= book.id %>"><%= book.title %></a></h2>
+	<h3><a href="/book/<%= book.id %>"><%= book.short_title %></a></h3>
 	<ul>
 	<% researchers.each do |researcher| %>
-		<li>
-		<a href="/researcher/<%= researcher.id %>">
-		<img src="/images/300/researcher-<%= researcher.id %>.jpg" width="300" height="300" alt="<%= researcher.name %>">
-		<%= researcher.name %></a>
-		</li>
+		<li><a href="/researcher/<%= researcher.id %>"><%= researcher.name %></a></li>
 	<% end %>
 	</ul>
 <% end %>
