@@ -46,9 +46,15 @@ post '/proof' do
     p = u.person
     raise('no Person for u %d with person_id %d' % [u.id, u.person_id]) if p.nil?
     c = p.customer
-    raise('no Customer for p %d' % p.id) if c.nil?
-    has_books = c.books
+    # if they weren't a customer before, they are now!
+    if c.nil?
+      c = Customer.create(person_id: p.id)
+      has_books = []
+    else
+      has_books = c.books
+    end
     c.add_book(b) unless has_books.include? b
+    # TODO: email them here?
     u.update(statkey: u.statkey.gsub('proof', 'bought'))
     redirect '/'
   end
