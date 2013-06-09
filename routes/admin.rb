@@ -29,7 +29,29 @@ end
 
 get '/' do
   @pagetitle = 'home'
+  @userstats = Userstat.filter(:statkey.like 'proof%').all
   erb :home
+end
+
+post '/proof' do
+  u = Userstat[params[:uid]]
+  raise('no Userstat for %d' % params[:uid]) if u.nil?
+  if params[:submit] == 'no'
+    u.update(statkey: u.statkey.gsub('proof', 'nope'))
+    redirect '/'
+  else
+    /proof-we13([a-z]{2})/.match u.statkey
+    b = Book[country: $1.upcase]
+    raise('no Book for %s' % $1.upcase) if b.nil?
+    p = u.person
+    raise('no Person for u %d with person_id %d' % [u.id, u.person_id]) if p.nil?
+    c = p.customer
+    raise('no Customer for p %d' % p.id) if c.nil?
+    has_books = c.books
+    c.add_book(b) unless has_books.include? b
+    u.update(statkey: u.statkey.gsub('proof', 'bought'))
+    redirect '/'
+  end
 end
 
 get '/books' do
