@@ -88,15 +88,22 @@ I’ve got a nice online system built to manage everything efficiently, but stil
 <h3>This role is ideal if you’d like to be president of Wood Egg some day.</h3>
 
 <h1>Schedule</h1>
-<table>
-	<tr><td>June 2013</td><td>choose researchers</td></tr>
-	<tr><td>July-September</td><td>research</td></tr>
-	<tr><td>September</td><td>choose writers</td></tr>
-	<tr><td>October-November</td><td>writers writing</td></tr>
-	<tr><td>October</td><td>choose editors</td></tr>
-	<tr><td>November-December</td><td>editors editing</td></tr>
-	<tr><td>January 2014</td><td>2014 guides published</td></tr>
-</table>
+<dl>
+<dt>June 2013</dt>
+	<dd>choose researchers</dd>
+<dt>July-September</dt>
+	<dd>research</dd>
+<dt>September</dt>
+	<dd>choose writers</dd>
+<dt>October-November</dt>
+	<dd>writers writing</dd>
+<dt>October</dt>
+	<dd>choose editors</dd>
+<dt>November-December</dt>
+	<dd>editors editing</dd>
+<dt>January 2014</dt>
+	<dd>2014 guides published</dd>
+</dl>
 
 <h1>How to Apply?</h1>
 <p>
