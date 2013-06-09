@@ -4,6 +4,7 @@ require 'sinatra'
 require 'kramdown'
 root = File.dirname(File.dirname(File.realpath(__FILE__)))
 require "#{root}/models.rb"
+require "#{root}/mailconfig.rb"
 
 configure do
   set :root, root
@@ -172,7 +173,13 @@ end
 get '/customers' do
   @pagetitle = 'all customers'
   @customers = Customer.order(:id).all
+  @person_id = params[:person_id]
   erb :customers
+end
+
+post '/customers' do
+  c = Customer.create(person_id: params[:person_id])
+  redirect '/customer/%d' % c.id
 end
 
 get '/book/:id/customers' do
@@ -186,7 +193,38 @@ get '/customer/:id' do
   @customer = Customer[params[:id]]
   @pagetitle = 'customer: ' + @customer.name
   @books = @customer.books
+  @books_to_add = Book.order(:title).all - @books
   @person_url = WoodEgg.config['person_url'] % @customer.person_id
+  @sent = params[:sent]
   erb :customer
+end
+
+post '/customer/:id/books' do
+  c = Customer[params[:id]]
+  has_books = c.books
+  if params[:book_id] == 'all'
+    Book.all.each do |b|
+      c.add_book(b) unless has_books.include? b
+    end
+  else
+    b = Book[params[:book_id]]
+    unless b.nil?
+      c.add_book(b) unless has_books.include? b
+    end
+  end
+  redirect '/customer/%d' % c.id
+end
+
+post '/customer/:id/email' do
+  c = Customer[params[:id]]
+  opts = {}
+  unless params[:subject].empty?
+    opts[:subject] = params[:subject]
+  end
+  unless params[:message].empty?
+    opts[:message] = params[:message]
+  end
+  c.email_first(opts)
+  redirect '/customer/%d?sent=sent' % c.id
 end
 
