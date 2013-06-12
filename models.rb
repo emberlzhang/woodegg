@@ -44,9 +44,9 @@ class Person
   one_to_one :researcher
   one_to_one :customer
 
-  # hardcoded to just me and MR for now. some day could make admins table.
+  # hardcoded to just me, Karol,and MR for now.
   def admin?
-    [1, 59196].include?(id)
+    [1, 10471, 59196].include?(id)
   end
 
   # in people.userstats for now. some day could make cleaners table.
