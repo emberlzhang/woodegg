@@ -68,11 +68,12 @@ CREATE INDEX anpy ON answers(payable);
 CREATE TABLE books (
 	id serial primary key,
 	country char(2) not null,
+	code char(6) not null UNIQUE,
 	title text,
 	isbn text,
-	salescopy text,
 	asin char(10),
-	leanpub varchar(30)
+	leanpub varchar(30),
+	salescopy text
 );
 
 CREATE TABLE books_editors (

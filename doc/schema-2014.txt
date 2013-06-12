@@ -1,0 +1,62 @@
+THOUGHTS ABOUT DATABASE SCHEMA FOR 2014+:
+
+editors     -->  rename to writers
+--- change all editor_id to writer_id
+
+
+CREATE TABLE books_essays (
+	book_id integer not null REFERENCES books(id),
+	essay_id integer not null REFERENCES essays(id),
+	position integer,
+	PRIMARY KEY (book_id, essay_id)
+);
+-- For new book, insert all essays-to-come as empty. That's the TO-DO list.
+CREATE TABLE editors (
+	id
+	person_id
+	bio
+);
+
+
+essays
+	editor_id integer not null REFERENCES editors(id),   -- change to writer_id and allow NULL
+	book_id integer not null REFERENCES books(id),   -- remove
+
+
+------------ ACCOUNTING:
+-- customers buying history
+-- researchers payment history
+-- writers payment history
+-- editors payment history
+
+receipts
+	customer_id
+	book_id
+	content text
+
+payments
+	researcher_id
+	writer_id
+	editor_id
+
+------------ RESEARCH.  Name:  findings
+findings
+	url text,
+	content text,
+	intro text,
+	created_at date
+	created_by varchar(24),
+
+findings_tags
+	finding_id,
+	tag_id
+
+tags
+	id
+	label
+
+findings_questions
+	finding_id
+	question_id
+	answer_id -- default NULL unless used in an answer
+
