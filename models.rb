@@ -44,6 +44,13 @@ class Person
   one_to_one :researcher
   one_to_one :customer
 
+  class << self
+    def country_role(country_code, statvalue)
+      statkey = (country_code == 'ANY') ? 'woodegg' : "woodegg-#{country_code.downcase}"
+      filter(id: Userstat.select(:person_id).filter(statkey: statkey, statvalue: statvalue)).all
+    end
+  end
+
   # hardcoded to just me, Karol,and MR for now.
   def admin?
     [1, 10471, 59196].include?(id)

@@ -262,3 +262,14 @@ get '/hiring' do
   erb :hiring
 end
 
+get '/hiring/:country/:role' do
+  @country_code = params[:country]
+  @country_name = Countries.hsh[@country_code] || 'Any Country'
+  @role = params[:role]
+  @pagetitle = @country_name + ' ' + @role
+  @people = Person.country_role(@country_code, @role)
+  @person_url_d = WoodEgg.config['woodegg_person_url']
+  erb :hiring_country_role
+end
+
+
