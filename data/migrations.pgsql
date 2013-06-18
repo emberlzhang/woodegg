@@ -1,3 +1,14 @@
+-- 2013-06-18
+UPDATE userstats SET statvalue='editor' WHERE statvalue IN ('2014editor', 'editing');
+UPDATE userstats SET statvalue='writer' WHERE statvalue IN ('2014writer', 'writer?');
+UPDATE userstats SET statvalue='researcher' WHERE statvalue IN ('2014researcher', 'journalist');
+UPDATE userstats SET statvalue='connector' WHERE statvalue IN ('conatacts', 'connect', 'contact' ,'contacts', 'liason', 'liaison');
+UPDATE userstats SET statvalue='accountant' WHERE statvalue = 'cpa';
+UPDATE userstats SET statvalue='interview' WHERE statvalue IN ('Interview', 'interviewee', 'inteview');
+UPDATE userstats SET statvalue='design' WHERE statvalue = 'artwork';
+UPDATE userstats SET statvalue='interest' WHERE statvalue = 'intererest';
+
+
 -- 2013-06-05
 ALTER TABLE books ADD COLUMN code char(6) UNIQUE;
 UPDATE books SET code = CONCAT('we13' || LOWER(country));   
