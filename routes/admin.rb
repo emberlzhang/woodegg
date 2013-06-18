@@ -54,7 +54,7 @@ post '/proof' do
       has_books = c.books
     end
     c.add_book(b) unless has_books.include? b
-    # TODO: email them here?
+    c.email_post_proof(b)
     u.update(statkey: u.statkey.gsub('proof', 'bought'))
     redirect '/'
   end
@@ -63,7 +63,6 @@ end
 get '/books' do
   @pagetitle = 'books'
   @books_done = Book.done
-  # @books_not_done = Book.not_done
   erb :books
 end
 
