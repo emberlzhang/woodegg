@@ -255,3 +255,10 @@ post '/customer/:id/email' do
   redirect '/customer/%d?sent=sent' % c.id
 end
 
+get '/hiring' do
+  @pagetitle = 'hiring'
+  @grid = Countries.hiring_count
+  @roles = %w(researcher writer editor)
+  erb :hiring
+end
+

@@ -109,8 +109,8 @@ class Countries
 	" GROUP BY statkey, statvalue ORDER BY statkey, statvalue"
       # init the empty grid
       hh = {} ; roles.each {|x| hh[x] = 0}
-      grid = {'ANY' => hh}
-      hsh.keys.each {|c| grid[c] = hh}
+      grid = {'ANY' => hh.dup}
+      hsh.keys.each {|c| grid[c] = hh.dup}
       Sequel.postgres('peeps', user: 'peeps').fetch(query) do |row|
 	if row[:statkey] == 'woodegg'
 	  c = 'ANY'

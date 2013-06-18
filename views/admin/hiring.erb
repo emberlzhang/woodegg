@@ -1,0 +1,11 @@
+<table>
+	<tr><td>country</td><td><%= @roles.join('</td><td>') %></td></tr>
+<% @grid.each do |code, s| %>
+	<tr>
+		<td><%= (code == 'ANY') ? code : Countries.hsh[code] %></td>
+		<% @roles.each do |role| %>
+			<td><a href="/hiring/<%= code %>/<%= role %>"><%= s[role] %></a></td>
+		<% end %>
+	</tr>
+<% end %>
+</table>
