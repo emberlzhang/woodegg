@@ -45,7 +45,7 @@ class Person
   one_to_one :customer
 
   class << self
-    def country_role(country_code, statvalue)
+    def country_val(country_code, statvalue)
       statkey = (country_code == 'ANY') ? 'woodegg' : "woodegg-#{country_code.downcase}"
       filter(id: Userstat.select(:person_id).filter(statkey: statkey, statvalue: statvalue)).all
     end
@@ -105,27 +105,33 @@ class Countries
       '/(' + codes.map(&:downcase).join('|') + ')/([0-9]+)$'
     end
 
-    # how many of each roles for each country 
-    # {'ANY' => {'writer' => 19, 'researcher' => 32'}, 'KH' => {'writer' => 3}}
-    def hiring_count
-      roles = %w(editor writer researcher)
+    # all WoodEgg userstats, per country
+    def userstats
       statkeys = "'woodegg','" + Countries.hsh.keys.map {|x| "woodegg-#{x.downcase}"}.join("','") + "'"
-      statvalues = "'" + roles.join("','") + "'"
       query = "SELECT statkey, statvalue, COUNT(*) FROM userstats" +
-	" WHERE statkey IN (#{statkeys}) AND statvalue IN (#{statvalues})" +
+	" WHERE statkey IN (#{statkeys})" +
+        " AND statvalue NOT IN ('clicked')" +
+        " AND LENGTH(statvalue) > 2 AND LENGTH(statvalue) < 50" +
 	" GROUP BY statkey, statvalue ORDER BY statkey, statvalue"
-      # init the empty grid
-      hh = {} ; roles.each {|x| hh[x] = 0}
-      grid = {'ANY' => hh.dup}
-      hsh.keys.each {|c| grid[c] = hh.dup}
-      Sequel.postgres('peeps', user: 'peeps').fetch(query) do |row|
-	if row[:statkey] == 'woodegg'
-	  c = 'ANY'
-	else
-	  /woodegg-(\w{2})/ =~ row[:statkey]
-	  c = $1.upcase
-	end
-	grid[c][row[:statvalue]] = row[:count]
+      Sequel.postgres('peeps', user: 'peeps').fetch(query).all
+    end
+
+    # make a grid out of an array of {:statkey=>"x", :statvalue=>"y", :count=>9}
+    def userstats_grid
+      usrsts = self.userstats
+      # get all unique keys and values
+      require 'set'
+      k = Set.new
+      v = Set.new
+      usrsts.each {|u| k << u[:statkey] ; v << u[:statvalue]}
+      # init a nil-filled grid
+      row = {}
+      v.each {|x| row[x] = nil}
+      grid = {}
+      k.each {|x| grid[x] = row.dup}
+      # replace nil with usrsts count
+      usrsts.each do |u|
+        grid[u[:statkey]][u[:statvalue]] = u[:count]
       end
       grid
     end

@@ -1,22 +1,14 @@
 TO-DO:
 
-WOODEGG.COM:
-	a hiring page?
+QUIZ?
+	for hiring
 
 USER LOGIN AREA:
-	make it easy to make someone a woodegg customer from sivers.inbox - even if it's a jump to woodegg admin pre-filling their person_id
-
-	link (for me) back to their person page 
-
 	user_questions
 	answers_to_user_questions
 
-
 ADMIN AREA:
-
-	customers
-	books_customers
 	customer_questions
-
 	system for sending queries out to researchers
+	woodegg userstats: researchers for India (#), writers for China (#), editors for Any (#)
 

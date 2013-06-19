@@ -255,21 +255,19 @@ post '/customer/:id/email' do
   redirect '/customer/%d?sent=sent' % c.id
 end
 
-get '/hiring' do
-  @pagetitle = 'hiring'
-  @grid = Countries.hiring_count
-  @roles = %w(researcher writer editor)
-  erb :hiring
+get '/stats' do
+  @pagetitle = 'stats'
+  @grid = Countries.userstats_grid
+  erb :stats
 end
 
-get '/hiring/:country/:role' do
+get '/stats/:country/:val' do
   @country_code = params[:country]
   @country_name = Countries.hsh[@country_code] || 'Any Country'
-  @role = params[:role]
-  @pagetitle = @country_name + ' ' + @role
-  @people = Person.country_role(@country_code, @role)
+  @val = params[:val]
+  @pagetitle = @country_name + ' ' + @val
+  @people = Person.country_val(@country_code, @val)
   @person_url_d = WoodEgg.config['woodegg_person_url']
-  erb :hiring_country_role
+  erb :stats2
 end
-
 
