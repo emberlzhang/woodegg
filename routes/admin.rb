@@ -258,6 +258,8 @@ end
 get '/stats' do
   @pagetitle = 'stats'
   @grid = Countries.userstats_grid
+  @person_url_d = WoodEgg.config['woodegg_person_url']
+  @newest = Userstat.newest_woodegg
   erb :stats
 end
 

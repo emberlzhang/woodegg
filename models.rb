@@ -70,6 +70,17 @@ class HTTPAuth
   end
 end
 
+class Userstat
+  # array of hashes with symbol keys created_at, person_id, statkey, statvalue, name
+  # TODO: probably a more elegant solution to this. put this + Countries.userstats* together?
+  def self.newest_woodegg
+    query = "SELECT userstats.created_at, person_id, statkey, statvalue, name" +
+    " FROM userstats LEFT JOIN people ON userstats.person_id=people.id" +
+    " WHERE statkey LIKE 'woodegg%' ORDER BY userstats.id DESC LIMIT 100"
+    Sequel.postgres('peeps', user: 'peeps').fetch(query).all
+  end
+end
+
 class Countries
   class << self
     def hsh
@@ -134,6 +145,16 @@ class Countries
         grid[u[:statkey]][u[:statvalue]] = u[:count]
       end
       grid
+    end
+
+    # input 'woodegg' = output 'ANY'
+    # input 'woodegg-lk' = output 'Sri Lanka'
+    # input 'woodegg-qa' = output 'woodegg-qa'
+    def from_userstat(statkey)
+      return 'ANY' if statkey == 'woodegg'
+      code = statkey.gsub('woodegg-', '').upcase
+      return self.hsh[code] if self.hsh[code]
+      statkey
     end
   end
 end
