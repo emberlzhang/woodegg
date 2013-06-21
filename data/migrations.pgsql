@@ -1,3 +1,47 @@
+-- 2013-06-21
+CREATE TABLE tags (
+	id serial primary key,
+	name varchar(16) UNIQUE
+);
+INSERT INTO tags(name) VALUES ('Cambodia');
+INSERT INTO tags(name) VALUES ('China');
+INSERT INTO tags(name) VALUES ('Hong Kong');
+INSERT INTO tags(name) VALUES ('India');
+INSERT INTO tags(name) VALUES ('Indonesia');
+INSERT INTO tags(name) VALUES ('Japan');
+INSERT INTO tags(name) VALUES ('Korea');
+INSERT INTO tags(name) VALUES ('Malaysia');
+INSERT INTO tags(name) VALUES ('Mongolia');
+INSERT INTO tags(name) VALUES ('Myanmar');
+INSERT INTO tags(name) VALUES ('Philippines');
+INSERT INTO tags(name) VALUES ('Singapore');
+INSERT INTO tags(name) VALUES ('Sri Lanka');
+INSERT INTO tags(name) VALUES ('Taiwan');
+INSERT INTO tags(name) VALUES ('Thailand');
+INSERT INTO tags(name) VALUES ('Vietnam');
+
+CREATE TABLE tidbits (
+	id serial primary key,
+	created_at date,
+	created_by varchar(16),
+	url text,
+	intro text,
+	content text
+);
+
+CREATE TABLE tags_tidbits (
+	tag_id integer not null REFERENCES tags(id),
+	tidbit_id integer not null REFERENCES tidbits(id),
+	primary key (tag_id, tidbit_id)
+);
+
+CREATE TABLE questions_tidbits (
+	question_id integer not null REFERENCES questions(id),
+	tidbit_id integer not null REFERENCES tidbits(id),
+	primary key (question_id, tidbit_id)
+);
+
+
 -- 2013-06-18
 UPDATE userstats SET statvalue='editor' WHERE statvalue IN ('2014editor', 'editing');
 UPDATE userstats SET statvalue='writer' WHERE statvalue IN ('2014writer', 'writer?');

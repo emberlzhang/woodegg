@@ -2,6 +2,7 @@ class Question < Sequel::Model(WoodEgg::DB)
   many_to_one :template_question
   one_to_many :answers
   one_to_many :essays
+  many_to_many :tidbits
 
   class << self
     def total_for_country(country)

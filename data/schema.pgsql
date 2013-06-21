@@ -114,4 +114,30 @@ CREATE INDEX esfa ON essays(finished_at);
 CREATE INDEX espy ON essays(payable);
 CREATE INDEX esca ON essays(cleaned_at);
 
+CREATE TABLE tags (
+	id serial primary key,
+	name varchar(16) UNIQUE
+);
+
+CREATE TABLE tidbits (
+	id serial primary key,
+	created_at date,
+	created_by varchar(16),
+	url text,
+	intro text,
+	content text
+);
+
+CREATE TABLE tags_tidbits (
+	tag_id integer not null REFERENCES tags(id),
+	tidbit_id integer not null REFERENCES tidbits(id),
+	primary key (tag_id, tidbit_id)
+);
+
+CREATE TABLE questions_tidbits (
+	question_id integer not null REFERENCES questions(id),
+	tidbit_id integer not null REFERENCES tidbits(id),
+	primary key (question_id, tidbit_id)
+);
+
 COMMIT;
