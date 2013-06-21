@@ -184,10 +184,7 @@ end
 
 get '/researchers' do
   @pagetitle = 'researchers'
-  @books_researchers = {}
-  Book.order(:id).each do |b|
-    @books_researchers[b] = b.researchers
-  end
+  @researchers = Researcher.all_people.sort_by(&:name)
   erb :researchers
 end
 
