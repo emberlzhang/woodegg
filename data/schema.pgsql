@@ -123,6 +123,7 @@ CREATE TABLE tidbits (
 	id serial primary key,
 	created_at date,
 	created_by varchar(16),
+	headline varchar(127),
 	url text,
 	intro text,
 	content text
