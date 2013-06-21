@@ -335,19 +335,19 @@ end
 
 post '/tidbit/:id/questions' do
   t = Tidbit[params[:id]]
-  t.add_question(Tag[params[:question_id])
+  t.add_question(Tag[params[:question_id]])
   redirect '/tidbit/%d' % t.id
 end
 
-delete '/tidbit/:id/tag/:tag_id'
+delete '/tidbit/:id/tag/:tag_id' do
   t = Tidbit[params[:id]]
-  t.remove_tag(Tag[params[:tag_id])
+  t.remove_tag(Tag[params[:tag_id]])
   redirect '/tidbit/%d' % t.id
 end
 
-delete '/tidbit/:id/question/:question_id'
+delete '/tidbit/:id/question/:question_id' do
   t = Tidbit[params[:id]]
-  t.remove_question(Question[params[:question_id])
+  t.remove_question(Question[params[:question_id]])
   redirect '/tidbit/%d' % t.id
 end
 
