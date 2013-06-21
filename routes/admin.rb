@@ -137,7 +137,7 @@ end
 get '/editor/:id' do
   @editor = Editor[params[:id]]
   @pagetitle = 'EDITOR: %s' % @editor.name
-  @person_url = WoodEgg.config['person_url'] % @editor.person_id
+  @person_url = WoodEgg.config['woodegg_person_url'] % @editor.person_id
   erb :editor
 end
 
@@ -164,7 +164,8 @@ end
 get '/researcher/:id' do
   @researcher = Researcher[params[:id]]
   @pagetitle = 'RESEARCHER: %s' % @researcher.name
-  @person_url = WoodEgg.config['person_url'] % @researcher.person_id
+  @person_url = WoodEgg.config['woodegg_person_url'] % @researcher.person_id
+  @ok_to_delete = (@researcher.answers_dataset.count == 0) ? true : false
   erb :researcher
 end
 
@@ -182,16 +183,32 @@ put '/researcher/:id' do
   redirect '/researcher/%d' % r.id
 end
 
+delete '/researcher/:id' do
+  r = Researcher[params[:id]]
+  r.destroy
+  redirect '/researchers'
+end
+
 get '/researchers' do
   @pagetitle = 'researchers'
   @researchers = Researcher.all_people.sort_by(&:name)
   erb :researchers
 end
 
+post '/researchers' do
+  x = Researcher.create(person_id: params[:person_id].to_i)
+  redirect '/researcher/%d' % x.id
+end
+
 get '/editors' do
   @pagetitle = 'editors'
   @editors = Editor.order(:id).all
   erb :editors
+end
+
+post '/editors' do
+  x = Editor.create(person_id: params[:person_id].to_i)
+  redirect '/editor/%d' % x.id
 end
 
 get '/customers' do
@@ -218,7 +235,7 @@ get '/customer/:id' do
   @pagetitle = 'customer: ' + @customer.name
   @books = @customer.books
   @books_to_add = Book.order(:title).all - @books
-  @person_url = WoodEgg.config['person_url'] % @customer.person_id
+  @person_url = WoodEgg.config['woodegg_person_url'] % @customer.person_id
   @sent = params[:sent]
   erb :customer
 end
