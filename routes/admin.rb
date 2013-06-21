@@ -287,3 +287,67 @@ get '/stats/:country/:val' do
   erb :stats2
 end
 
+get '/tidbits' do
+  if params[:tag_id]
+    @tidbits = Tag[params[:tag_id]].tidbits
+  else
+    @tidbits = Tidbit.order(:id.desc).all
+  end
+  @all_tags = Tag.order(:name).all
+  erb :tidbits
+end
+
+post '/tidbits' do
+  t = Tidbit.create(created_at: Time.now())
+  redirect '/tidbit/%d' % t.id
+end
+
+get '/tidbit/:id' do
+  @tidbit = Tidbit[params[:id]]
+  @all_tags = Tag.order(:name).all
+  erb :tidbit
+end
+
+put '/tidbit/:id' do
+  t = Tidbit[params[:id]]
+  t.update(just(%w(created_at created_by url intro content)))
+  redirect '/tidbit/%d' % t.id
+end
+
+delete '/tidbit/:id' do
+  t = Tidbit[params[:id]]
+  t.destroy
+  redirect '/tidbits'
+end
+
+post '/tidbit/:id/tags' do
+  t = Tidbit[params[:id]]
+  # can post either tag_name, to make new, or tag_id, to use existing
+  tag = nil
+  if params[:tag_name].empty? == false
+    tag = Tag.create(name: params[:tag_name])
+  elsif params[:tag_id].to_i > 0
+    tag = Tag[params[:tag_id]]
+  end
+  t.add_tag(tag) if tag
+  redirect '/tidbit/%d' % t.id
+end
+
+post '/tidbit/:id/questions' do
+  t = Tidbit[params[:id]]
+  t.add_question(Tag[params[:question_id])
+  redirect '/tidbit/%d' % t.id
+end
+
+delete '/tidbit/:id/tag/:tag_id'
+  t = Tidbit[params[:id]]
+  t.remove_tag(Tag[params[:tag_id])
+  redirect '/tidbit/%d' % t.id
+end
+
+delete '/tidbit/:id/question/:question_id'
+  t = Tidbit[params[:id]]
+  t.remove_question(Question[params[:question_id])
+  redirect '/tidbit/%d' % t.id
+end
+
