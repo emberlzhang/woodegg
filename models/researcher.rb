@@ -4,6 +4,23 @@ class Researcher < Sequel::Model(WoodEgg::DB)
   many_to_many :books
   include Persony
 
+  class << self
+    # experiment to save SQL queries. maybe load this into Persony some day, if useful.
+    # returns same as Researcher.all but with name & email pre-loaded
+    def all_people
+      ol = self.all
+      pp = Person.select(:id, :email, :name).filter(id: ol.map(&:person_id)).all
+      ol.each do |o|
+	p = pp.find {|x| x[:id] == o.person_id}
+	o.define_singleton_method(:name) { p.name }
+	o.define_singleton_method(:email) { p.email }
+	o.values[:name] = p.name
+	o.values[:email] = p.email
+      end
+      ol
+    end
+  end
+
   def countries
     books.map(&:country)
   end
