@@ -30,14 +30,14 @@ CREATE TABLE tidbits (
 );
 
 CREATE TABLE tags_tidbits (
-	tag_id integer not null REFERENCES tags(id),
-	tidbit_id integer not null REFERENCES tidbits(id),
+	tag_id integer not null REFERENCES tags(id) ON DELETE CASCADE,
+	tidbit_id integer not null REFERENCES tidbits(id) ON DELETE CASCADE,
 	primary key (tag_id, tidbit_id)
 );
 
 CREATE TABLE questions_tidbits (
-	question_id integer not null REFERENCES questions(id),
-	tidbit_id integer not null REFERENCES tidbits(id),
+	question_id integer not null REFERENCES questions(id) ON DELETE CASCADE,
+	tidbit_id integer not null REFERENCES tidbits(id) ON DELETE CASCADE,
 	primary key (question_id, tidbit_id)
 );
 
