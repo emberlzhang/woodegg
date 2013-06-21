@@ -288,12 +288,14 @@ get '/stats/:country/:val' do
 end
 
 get '/tidbits' do
+  @pagetitle = 'tidbits'
   if params[:tag_id]
-    @tidbits = Tag[params[:tag_id]].tidbits
+    @tag = Tag[params[:tag_id]]
+    @tidbits = @tag.tidbits
   else
     @tidbits = Tidbit.order(:id.desc).all
   end
-  @all_tags = Tag.order(:name).all
+  @all_tags = Tag.order(:id).all
   erb :tidbits
 end
 
@@ -304,13 +306,14 @@ end
 
 get '/tidbit/:id' do
   @tidbit = Tidbit[params[:id]]
-  @all_tags = Tag.order(:name).all
+  @pagetitle = 'tidbit # %d' % @tidbit.id
+  @all_tags = Tag.order(:id).all - @tidbit.tags
   erb :tidbit
 end
 
 put '/tidbit/:id' do
   t = Tidbit[params[:id]]
-  t.update(just(%w(created_at created_by url intro content)))
+  t.update(just(%w(created_at created_by headline url intro content)))
   redirect '/tidbit/%d' % t.id
 end
 
@@ -335,7 +338,7 @@ end
 
 post '/tidbit/:id/questions' do
   t = Tidbit[params[:id]]
-  t.add_question(Tag[params[:question_id]])
+  t.add_question(Question[params[:question_id]])
   redirect '/tidbit/%d' % t.id
 end
 
