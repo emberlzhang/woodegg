@@ -11,7 +11,7 @@ CREATE TABLE researchers (
 	person_id integer not null UNIQUE,
 	bio text
 );
-CREATE TABLE editors (
+CREATE TABLE writers (
 	id serial primary key,
 	person_id integer not null UNIQUE,
 	bio text
@@ -76,10 +76,10 @@ CREATE TABLE books (
 	salescopy text
 );
 
-CREATE TABLE books_editors (
+CREATE TABLE books_writers (
 	book_id integer not null REFERENCES books(id),
-	editor_id integer not null REFERENCES editors(id),
-	PRIMARY KEY (book_id, editor_id)
+	writer_id integer not null REFERENCES writers(id),
+	PRIMARY KEY (book_id, writer_id)
 );
 
 CREATE TABLE books_researchers (
@@ -97,7 +97,7 @@ CREATE TABLE books_customers (
 CREATE TABLE essays (
 	id serial primary key,
 	question_id integer not null REFERENCES questions(id),
-	editor_id integer not null REFERENCES editors(id),
+	writer_id integer not null REFERENCES writers(id),
 	book_id integer not null REFERENCES books(id),
 	started_at timestamp(0) with time zone,
 	finished_at timestamp(0) with time zone,
@@ -108,7 +108,7 @@ CREATE TABLE essays (
 	comment text
 );
 CREATE INDEX esqi ON essays(question_id);
-CREATE INDEX esei ON essays(editor_id);
+CREATE INDEX eswi ON essays(writer_id);
 CREATE INDEX essa ON essays(started_at);
 CREATE INDEX esfa ON essays(finished_at);
 CREATE INDEX espy ON essays(payable);
