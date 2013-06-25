@@ -1,29 +1,29 @@
 #encoding: utf-8
 
-class WoodEggEditor < Sinatra::Base
+class WoodEggWriter < Sinatra::Base
 
   configure do
     # set root one level up, since this routes file is inside subdirectory
     set :root, File.dirname(File.dirname(File.realpath(__FILE__)))
-    set :views, Proc.new { File.join(root, 'views/editor') }
+    set :views, Proc.new { File.join(root, 'views/writer') }
   end
 
-  use Rack::Auth::Basic, 'WoodEgg Editor' do |username, password|
-    @@editor = Editor.find_by_email_pass(username, password)
+  use Rack::Auth::Basic, 'WoodEgg Writer' do |username, password|
+    @@writer = Writer.find_by_email_pass(username, password)
   end
 
   before do
-    redirect '/contact' if @@editor.nil?    # HACK: should say to contact me for password
-    @editor = @@editor
-    @edcc = @editor.countries
-    redirect '/about' unless @edcc.size > 0 # HACK: should say they are not a Wood Egg editor
+    redirect '/contact' if @@writer.nil?    # HACK: should say to contact me for password
+    @writer = @@writer
+    @edcc = @writer.countries
+    redirect '/about' unless @edcc.size > 0 # HACK: should say they are not a Wood Egg writer
   end
 
   get '/' do
     if @edcc.size == 1
       redirect "/ed/#{@edcc.pop.downcase}"
     else
-      @pagetitle = @editor.name
+      @pagetitle = @writer.name
       erb :choose_country
     end
   end
@@ -51,11 +51,11 @@ class WoodEggEditor < Sinatra::Base
   end
 
   post '/essay' do
-    x = Essay.find(editor_id: @editor.id, question_id: params[:question_id])
+    x = Essay.find(writer_id: @writer.id, question_id: params[:question_id])
     if x.nil?
       cc = Question[params[:question_id]].country
       b = Book[country: cc]
-      x = Essay.create(editor_id: @editor.id, question_id: params[:question_id], book_id: b.id, started_at: Time.now)
+      x = Essay.create(writer_id: @writer.id, question_id: params[:question_id], book_id: b.id, started_at: Time.now)
     end
     redirect "/ed/essay/#{x.id}"
   end
@@ -84,13 +84,13 @@ class WoodEggEditor < Sinatra::Base
 
   get '/essays/unfinished' do
     @pagetitle = 'Unfinished'
-    @essays = @editor.essays_unfinished
+    @essays = @writer.essays_unfinished
     erb :essays
   end
 
   get '/essays/finished' do
     @pagetitle = 'Finished'
-    @essays = @editor.essays_finished
+    @essays = @writer.essays_finished
     erb :essays
   end
 

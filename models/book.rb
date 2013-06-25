@@ -1,6 +1,6 @@
 class Book < Sequel::Model(WoodEgg::DB)
   one_to_many :essays
-  many_to_many :editors
+  many_to_many :writers
   many_to_many :researchers
   many_to_many :customers
 

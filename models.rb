@@ -40,7 +40,7 @@ class String
 end
 
 class Person
-  one_to_one :editor
+  one_to_one :writer
   one_to_one :researcher
   one_to_one :customer
 

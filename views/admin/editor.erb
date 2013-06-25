@@ -2,13 +2,13 @@
 
 <div class="row">
 <div class="small-4 columns">
-<img src="/images/300/editor-<%= @editor.id %>.jpg" width="300" height="300" alt="<%= @editor.name %>">
+<img src="/images/300/writer-<%= @writer.id %>.jpg" width="300" height="300" alt="<%= @writer.name %>">
 </div>
 <div class="small-8 columns">
-<a href="<%= @person_url %>">Person page for <%= @editor.name %></a>
-<form action="/editor/<%= @editor.id %>" method="post"><input type="hidden" name="_method" value="put">
+<a href="<%= @person_url %>">Person page for <%= @writer.name %></a>
+<form action="/writer/<%= @writer.id %>" method="post"><input type="hidden" name="_method" value="put">
 	<label for="bio">bio:</label>
-	<textarea name="bio" id="bio"><%= @editor.bio %></textarea><br>
+	<textarea name="bio" id="bio"><%= @writer.bio %></textarea><br>
 <input type="submit" name="submit" value="update">
 </form>
 </div>
@@ -20,21 +20,21 @@
 <table>
 <tr>
 	<td>Finished:</td>
-	<td><a href="/editor/<%= @editor.id %>/essays/finished"><%= @editor.essays_finished_count %></a></td>
+	<td><a href="/writer/<%= @writer.id %>/essays/finished"><%= @writer.essays_finished_count %></a></td>
 </tr>
 <tr>
 	<td>Unfinished:</td>
-	<td><a href="/editor/<%= @editor.id %>/essays/unfinished"><%= @editor.essays_unfinished_count %></a></td>
+	<td><a href="/writer/<%= @writer.id %>/essays/unfinished"><%= @writer.essays_unfinished_count %></a></td>
 </tr>
 <tr>
 	<td>Unpaid:</td>
-	<td><a href="/editor/<%= @editor.id %>/essays/unpaid"><%= @editor.essays_unpaid_count %></a></td>
+	<td><a href="/writer/<%= @writer.id %>/essays/unpaid"><%= @writer.essays_unpaid_count %></a></td>
 </tr>
 <tr>
 	<td>Unjudged:</td>
-	<td><a href="/editor/<%= @editor.id %>/essays/unjudged"><%= @editor.essays_unjudged_count %></a>
-<% if @editor.essays_unjudged_count > 0 %>
-<form action="/editor/<%= @editor.id %>/approval" method="post">
+	<td><a href="/writer/<%= @writer.id %>/essays/unjudged"><%= @writer.essays_unjudged_count %></a>
+<% if @writer.essays_unjudged_count > 0 %>
+<form action="/writer/<%= @writer.id %>/approval" method="post">
 <input type="submit" name="submit" value="approve all finished essays">
 </form>
 <% end %>	
@@ -45,7 +45,7 @@
 <div class="small-8 columns">
 <h2>Books:</h2>
 <ul>
-<% @editor.books.each do |b| %>
+<% @writer.books.each do |b| %>
 	<li><a href="/book/<%= b.id %>"><%= b.short_title %></a></li>
 <% end %>
 </ul>

@@ -13,9 +13,9 @@
 <div class="navbar"><div class="navbar-inner"><div class="container">
 <a class="brand" href="/ed/">Wood Egg login</a>
 <ul class="nav">
-	<li><a href="/ed/"><%= @editor.name %>: (<%= @editor.howmany_unessayed %>)</a></li>
-	<li><a href="/ed/essays/unfinished">UNFINISHED: <%= @editor.essays_unfinished.count %></a></li>
-	<li><a href="/ed/essays/finished">Finished: <%= @editor.essays_finished.count %></a></li>
+	<li><a href="/ed/"><%= @writer.name %>: (<%= @writer.howmany_unessayed %>)</a></li>
+	<li><a href="/ed/essays/unfinished">UNFINISHED: <%= @writer.essays_unfinished.count %></a></li>
+	<li><a href="/ed/essays/finished">Finished: <%= @writer.essays_finished.count %></a></li>
 	<li><a href="/ed/help">HELP</a></li>
 </ul>   
 </div></div></div>

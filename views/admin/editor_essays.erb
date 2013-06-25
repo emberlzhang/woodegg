@@ -1,6 +1,6 @@
 <h1><%= @pagetitle %></h1>
 
-<p><a href="/editor/<%= @editor.id %>">editor page</a></p>
+<p><a href="/writer/<%= @writer.id %>">writer page</a></p>
 
 <% @essays.each do |x| %>
 	<% q = @question_for_essays[x.id] %>

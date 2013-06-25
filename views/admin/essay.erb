@@ -1,5 +1,5 @@
 <p>Book: <a href="/book/<%= @essay.book.id %>"><%= @essay.book.title %></a></p>
-<p>Editor: <a href="/editor/<%= @essay.editor.id %>"><%= @essay.editor.name %></a></p>
+<p>Editor: <a href="/writer/<%= @essay.writer.id %>"><%= @essay.writer.name %></a></p>
 <h3><a href="/question/<%= @essay.question.id %>"><%= @essay.question.question %></a></h3>
 
 <form action="/essay/<%= @essay.id %>" method="post"><input type="hidden" name="_method" value="put">

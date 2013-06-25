@@ -76,7 +76,7 @@ get '/book/:id' do
   end
   @questions = @book.questions
   @essays = @book.essays
-  @editors = @book.editors
+  @writers = @book.writers
   @researchers = @book.researchers
   erb :book
 end
@@ -134,31 +134,31 @@ put '/answer/:id' do
   redirect '/answer/%d' % a.id
 end
 
-get '/editor/:id' do
-  @editor = Editor[params[:id]]
-  @pagetitle = 'EDITOR: %s' % @editor.name
-  @person_url = WoodEgg.config['woodegg_person_url'] % @editor.person_id
-  erb :editor
+get '/writer/:id' do
+  @writer = Writer[params[:id]]
+  @pagetitle = 'EDITOR: %s' % @writer.name
+  @person_url = WoodEgg.config['woodegg_person_url'] % @writer.person_id
+  erb :writer
 end
 
-get %r{/editor/([0-9]+)/essays/(finished|unfinished|unpaid|unjudged)} do |id,filtr|
-  @editor = Editor[id]
-  @pagetitle = "#{filtr} essays for #{@editor.name}"
-  @essays = @editor.send("essays_#{filtr}")
+get %r{/writer/([0-9]+)/essays/(finished|unfinished|unpaid|unjudged)} do |id,filtr|
+  @writer = Writer[id]
+  @pagetitle = "#{filtr} essays for #{@writer.name}"
+  @essays = @writer.send("essays_#{filtr}")
   @question_for_essays = Question.for_these(@essays)
-  erb :editor_essays
+  erb :writer_essays
 end
 
-put '/editor/:id' do
-  e = Editor[params[:id]]
+put '/writer/:id' do
+  e = Writer[params[:id]]
   e.update(just(%w(bio)))
-  redirect '/editor/%d' % e.id
+  redirect '/writer/%d' % e.id
 end
 
-post '/editor/:id/approval' do
-  e = Editor[params[:id]]
+post '/writer/:id/approval' do
+  e = Writer[params[:id]]
   e.approve_finished_unjudged_essays
-  redirect '/editor/%d' % e.id
+  redirect '/writer/%d' % e.id
 end
 
 get '/researcher/:id' do
@@ -200,15 +200,15 @@ post '/researchers' do
   redirect '/researcher/%d' % x.id
 end
 
-get '/editors' do
-  @pagetitle = 'editors'
-  @editors = Editor.order(:id).all
-  erb :editors
+get '/writers' do
+  @pagetitle = 'writers'
+  @writers = Writer.order(:id).all
+  erb :writers
 end
 
-post '/editors' do
-  x = Editor.create(person_id: params[:person_id].to_i)
-  redirect '/editor/%d' % x.id
+post '/writers' do
+  x = Writer.create(person_id: params[:person_id].to_i)
+  redirect '/writer/%d' % x.id
 end
 
 get '/customers' do

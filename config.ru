@@ -14,7 +14,7 @@ map('/') { run WoodEggDotCom }
 
 # NOT NEEDED UNTIL NEXT RESEARCH BEGINS:
 #require './routes/qa.rb'
-#require './routes/editor.rb'
+#require './routes/writer.rb'
 #require './routes/cleaner.rb'
 #map('/qa') { run WoodEggQA }
 #map('/ed') { run WoodEggEditor }
