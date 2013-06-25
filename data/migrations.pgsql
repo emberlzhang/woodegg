@@ -1,3 +1,29 @@
+-- 2013-06-25
+BEGIN;
+CREATE TABLE writers (
+	id serial primary key,
+	person_id integer not null UNIQUE,
+	bio text
+);
+INSERT INTO writers (SELECT * FROM editors);
+CREATE TABLE books_writers (
+	book_id integer not null REFERENCES books(id),
+	writer_id integer not null REFERENCES writers(id),
+	PRIMARY KEY (book_id, writer_id)
+);
+INSERT INTO books_writers (SELECT book_id, editor_id AS writer_id FROM books_editors);
+
+ALTER TABLE essays DROP CONSTRAINT essays_editor_id_fkey;
+DROP INDEX espi;
+ALTER TABLE essays RENAME COLUMN editor_id TO writer_id;
+ALTER TABLE essays ADD CONSTRAINT essays_writer_id_fkey FOREIGN KEY (writer_id) REFERENCES writers(id);
+CREATE INDEX eswi ON essays(writer_id);
+
+DROP TABLE books_editors;
+DROP TABLE editors;
+COMMIT;
+
+
 -- 2013-06-21
 CREATE TABLE tags (
 	id serial primary key,
