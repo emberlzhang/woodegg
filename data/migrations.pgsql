@@ -1,3 +1,32 @@
+-- 2013-06-26
+CREATE TABLE editors (
+	id serial primary key,
+	person_id integer not null UNIQUE
+);
+INSERT INTO editors (person_id) VALUES (1);
+CREATE TABLE books_editors (
+	book_id integer not null REFERENCES books(id),
+	editor_id integer not null REFERENCES editors(id),
+	PRIMARY KEY (book_id, editor_id)
+);
+INSERT INTO books_editors (book_id, editor_id) VALUES (1, 1);
+INSERT INTO books_editors (book_id, editor_id) VALUES (2, 1);
+INSERT INTO books_editors (book_id, editor_id) VALUES (3, 1);
+INSERT INTO books_editors (book_id, editor_id) VALUES (4, 1);
+INSERT INTO books_editors (book_id, editor_id) VALUES (5, 1);
+INSERT INTO books_editors (book_id, editor_id) VALUES (6, 1);
+INSERT INTO books_editors (book_id, editor_id) VALUES (7, 1);
+INSERT INTO books_editors (book_id, editor_id) VALUES (8, 1);
+INSERT INTO books_editors (book_id, editor_id) VALUES (9, 1);
+INSERT INTO books_editors (book_id, editor_id) VALUES (10, 1);
+INSERT INTO books_editors (book_id, editor_id) VALUES (11, 1);
+INSERT INTO books_editors (book_id, editor_id) VALUES (12, 1);
+INSERT INTO books_editors (book_id, editor_id) VALUES (13, 1);
+INSERT INTO books_editors (book_id, editor_id) VALUES (14, 1);
+INSERT INTO books_editors (book_id, editor_id) VALUES (15, 1);
+INSERT INTO books_editors (book_id, editor_id) VALUES (16, 1);
+
+
 -- 2013-06-25
 BEGIN;
 CREATE TABLE writers (

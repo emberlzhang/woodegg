@@ -20,6 +20,11 @@ CREATE TABLE customers (
 	id serial primary key,
 	person_id integer not null UNIQUE
 );
+CREATE TABLE editors (
+	id serial primary key,
+	person_id integer not null UNIQUE
+);
+
 
 CREATE TABLE topics (
 	id serial primary key,
@@ -92,6 +97,12 @@ CREATE TABLE books_customers (
 	book_id integer not null references books(id),
 	customer_id integer not null references customers(id),
 	primary key (book_id, customer_id)
+);
+
+CREATE TABLE books_editors (
+	book_id integer not null REFERENCES books(id),
+	editor_id integer not null REFERENCES editors(id),
+	PRIMARY KEY (book_id, editor_id)
 );
 
 CREATE TABLE essays (
