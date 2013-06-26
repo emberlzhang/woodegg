@@ -1,9 +1,9 @@
 -- For new book, insert all essays-to-come as empty. That's the TO-DO list.
-CREATE TABLE editors (
-	id
-	person_id
-	bio
-);
+
+-- RESEARCH:
+
+-- EDITING:
+
 
 
 ------------ ACCOUNTING:
