@@ -7,32 +7,32 @@ CREATE SCHEMA woodegg;
 SET search_path = woodegg;
 
 CREATE TABLE researchers (
-	id serial primary key,
+	id serial PRIMARY KEY,
 	person_id integer not null UNIQUE,
 	bio text
 );
 CREATE TABLE writers (
-	id serial primary key,
+	id serial PRIMARY KEY,
 	person_id integer not null UNIQUE,
 	bio text
 );
 CREATE TABLE customers (
-	id serial primary key,
+	id serial PRIMARY KEY,
 	person_id integer not null UNIQUE
 );
 CREATE TABLE editors (
-	id serial primary key,
+	id serial PRIMARY KEY,
 	person_id integer not null UNIQUE
 );
 
 
 CREATE TABLE topics (
-	id serial primary key,
+	id serial PRIMARY KEY,
 	topic varchar(32)
 );
 
 CREATE TABLE subtopics (
-	id serial primary key,
+	id serial PRIMARY KEY,
 	topic_id integer not null REFERENCES topics(id),
 	subtopic varchar(64)
 );
@@ -40,14 +40,14 @@ CREATE TABLE subtopics (
 -- {COUNTRY} instead of country name.
 -- to normalize, to see same question across many countries
 CREATE TABLE template_questions (
-	id serial primary key,
+	id serial PRIMARY KEY,
 	subtopic_id integer not null REFERENCES subtopics(id),
 	question text
 );
 CREATE INDEX tqti ON template_questions(subtopic_id);
 
 CREATE TABLE questions (
-	id serial primary key,
+	id serial PRIMARY KEY,
 	template_question_id integer not null REFERENCES template_questions(id),
 	country char(2) not null,
 	question text
@@ -55,7 +55,7 @@ CREATE TABLE questions (
 CREATE INDEX qtqi ON questions(template_question_id);
 
 CREATE TABLE answers (
-	id serial primary key,
+	id serial PRIMARY KEY,
 	question_id integer not null REFERENCES questions(id),
 	researcher_id integer not null REFERENCES researchers(id),
 	started_at timestamp(0) with time zone,
@@ -71,7 +71,7 @@ CREATE INDEX anfa ON answers(finished_at);
 CREATE INDEX anpy ON answers(payable);
 
 CREATE TABLE books (
-	id serial primary key,
+	id serial PRIMARY KEY,
 	country char(2) not null,
 	code char(6) not null UNIQUE,
 	title text,
@@ -90,13 +90,13 @@ CREATE TABLE books_writers (
 CREATE TABLE books_researchers (
 	book_id integer not null references books(id),
 	researcher_id integer not null references researchers(id),
-	primary key (book_id, researcher_id)
+	PRIMARY KEY (book_id, researcher_id)
 );
 
 CREATE TABLE books_customers (
 	book_id integer not null references books(id),
 	customer_id integer not null references customers(id),
-	primary key (book_id, customer_id)
+	PRIMARY KEY (book_id, customer_id)
 );
 
 CREATE TABLE books_editors (
@@ -106,7 +106,7 @@ CREATE TABLE books_editors (
 );
 
 CREATE TABLE essays (
-	id serial primary key,
+	id serial PRIMARY KEY,
 	question_id integer not null REFERENCES questions(id),
 	writer_id integer not null REFERENCES writers(id),
 	book_id integer not null REFERENCES books(id),
@@ -126,12 +126,12 @@ CREATE INDEX espy ON essays(payable);
 CREATE INDEX esca ON essays(cleaned_at);
 
 CREATE TABLE tags (
-	id serial primary key,
+	id serial PRIMARY KEY,
 	name varchar(16) UNIQUE
 );
 
 CREATE TABLE tidbits (
-	id serial primary key,
+	id serial PRIMARY KEY,
 	created_at date,
 	created_by varchar(16),
 	headline varchar(127),
@@ -143,13 +143,13 @@ CREATE TABLE tidbits (
 CREATE TABLE tags_tidbits (
 	tag_id integer not null REFERENCES tags(id) ON DELETE CASCADE,
 	tidbit_id integer not null REFERENCES tidbits(id) ON DELETE CASCADE,
-	primary key (tag_id, tidbit_id)
+	PRIMARY KEY (tag_id, tidbit_id)
 );
 
 CREATE TABLE questions_tidbits (
 	question_id integer not null REFERENCES questions(id) ON DELETE CASCADE,
 	tidbit_id integer not null REFERENCES tidbits(id) ON DELETE CASCADE,
-	primary key (question_id, tidbit_id)
+	PRIMARY KEY (question_id, tidbit_id)
 );
 
 COMMIT;
