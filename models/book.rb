@@ -5,12 +5,18 @@ class Book < Sequel::Model(WoodEgg::DB)
   many_to_many :customers
 
   class << self
+    def buyable
+      Book.where('id <= 16').order(:id).all
+    end
+
     def done
-      Book.order(:title).all.select {|b| b.done?}
+      #Book.order(:title).all.select {|b| b.done?}
+      Book.where('id <= 16').order(:id).all
     end
 
     def not_done
-      Book.order(:title).all.reject {|b| b.done?}
+      #Book.order(:title).all.reject {|b| b.done?}
+      Book.where('id > 16').order(:id).all
     end
   end
 

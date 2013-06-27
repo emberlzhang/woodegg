@@ -244,7 +244,7 @@ post '/customer/:id/books' do
   c = Customer[params[:id]]
   has_books = c.books
   if params[:book_id] == 'all'
-    Book.all.each do |b|
+    Book.available.each do |b|
       c.add_book(b) unless has_books.include? b
     end
   else
