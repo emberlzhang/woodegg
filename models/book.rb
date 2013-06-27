@@ -5,7 +5,7 @@ class Book < Sequel::Model(WoodEgg::DB)
   many_to_many :customers
 
   class << self
-    def buyable
+    def available
       Book.where('id <= 16').order(:id).all
     end
 
