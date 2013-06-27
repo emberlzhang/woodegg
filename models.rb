@@ -35,7 +35,7 @@ class String
   end
 
   def to_html
-    self.h.nl2br.autolink
+    self.h.autolink.nl2br
   end
 end
 
