@@ -1,21 +1,570 @@
+Researcher:
+  gongli:
+    person_id: 7
+  yoko:
+    person_id: 8
+
+Writer:
+  veruca:
+    person_id: 3
+  charlie:
+    person_id: 4
+
+Customer:
+  oompa:
+    person_id: 5
+  augustus:
+    person_id: 6
+
+Editor:
+  derek:
+    person_id: 1
+  wonka:
+    person_id: 2
+
 Topic:
   id1:
     topic: Country
   id2:
     topic: Culture
+
+Subtopic:
+  id1:
+    topic_id: 1
+    subtopic: how big
+  id2:
+    topic_id: 1
+    subtopic: how old
   id3:
-    topic: Life
+    topic_id: 2
+    subtopic: is it fun?
   id4:
-    topic: Business Culture
+    topic_id: 2
+    subtopic: what language?
+
+TemplateQuestion:
+  id1:
+    subtopic_id: 1
+    question: how big is {COUNTRY}?
+  id2:
+    subtopic_id: 2
+    question: how old is {COUNTRY}?
+  id3:
+    subtopic_id: 3
+    question: what is fun in {COUNTRY}?
+  id4:
+    subtopic_id: 3
+    question: do they laugh in {COUNTRY}?
   id5:
-    topic: Government
+    subtopic_id: 4
+    question: what language in {COUNTRY}?
+
+Question:
+  id1:
+    template_question_id: 1
+    country: KH
+    question: how big is Cambodia?
+  id2:
+    template_question_id: 2
+    country: KH
+    question: how old is Cambodia?
+  id3:
+    template_question_id: 3
+    country: KH
+    question: what is fun in Cambodia?
+  id4:
+    template_question_id: 4
+    country: KH
+    question: do they laugh in Cambodia?
+  id5:
+    template_question_id: 5
+    country: KH
+    question: what language in Cambodia?
   id6:
-    topic: Business Setup
+    template_question_id: 1
+    country: CN
+    question: how big is China?
   id7:
-    topic: Hiring
+    template_question_id: 2
+    country: CN
+    question: how old is China?
   id8:
-    topic: Money
+    template_question_id: 3
+    country: CN
+    question: what is fun in China?
   id9:
-    topic: Industry sectors
+    template_question_id: 4
+    country: CN
+    question: do they laugh in China?
   id10:
-    topic: Growing the Business
+    template_question_id: 5
+    country: CN
+    question: what language in China?
+  id11:
+    template_question_id: 1
+    country: HK
+    question: how big is Hong Kong?
+  id12:
+    template_question_id: 2
+    country: HK
+    question: how old is Hong Kong?
+  id13:
+    template_question_id: 3
+    country: HK
+    question: what is fun in Hong Kong?
+  id14:
+    template_question_id: 4
+    country: HK
+    question: do they laugh in Hong Kong?
+  id15:
+    template_question_id: 5
+    country: HK
+    question: what language in Hong Kong?
+  id16:
+    template_question_id: 1
+    country: IN
+    question: how big is India?
+  id17:
+    template_question_id: 2
+    country: IN
+    question: how old is India?
+  id18:
+    template_question_id: 3
+    country: IN
+    question: what is fun in India?
+  id19:
+    template_question_id: 4
+    country: IN
+    question: do they laugh in India?
+  id20:
+    template_question_id: 5
+    country: IN
+    question: what language in India?
+  id21:
+    template_question_id: 1
+    country: ID
+    question: how big is Indonesia?
+  id22:
+    template_question_id: 2
+    country: ID
+    question: how old is Indonesia?
+  id23:
+    template_question_id: 3
+    country: ID
+    question: what is fun in Indonesia?
+  id24:
+    template_question_id: 4
+    country: ID
+    question: do they laugh in Indonesia?
+  id25:
+    template_question_id: 5
+    country: ID
+    question: what language in Indonesia?
+  id26:
+    template_question_id: 1
+    country: JP
+    question: how big is Japan?
+  id27:
+    template_question_id: 2
+    country: JP
+    question: how old is Japan?
+  id28:
+    template_question_id: 3
+    country: JP
+    question: what is fun in Japan?
+  id29:
+    template_question_id: 4
+    country: JP
+    question: do they laugh in Japan?
+  id30:
+    template_question_id: 5
+    country: JP
+    question: what language in Japan?
+  id31:
+    template_question_id: 1
+    country: KR
+    question: how big is Korea?
+  id32:
+    template_question_id: 2
+    country: KR
+    question: how old is Korea?
+  id33:
+    template_question_id: 3
+    country: KR
+    question: what is fun in Korea?
+  id34:
+    template_question_id: 4
+    country: KR
+    question: do they laugh in Korea?
+  id35:
+    template_question_id: 5
+    country: KR
+    question: what language in Korea?
+  id36:
+    template_question_id: 1
+    country: MY
+    question: how big is Malaysia?
+  id37:
+    template_question_id: 2
+    country: MY
+    question: how old is Malaysia?
+  id38:
+    template_question_id: 3
+    country: MY
+    question: what is fun in Malaysia?
+  id39:
+    template_question_id: 4
+    country: MY
+    question: do they laugh in Malaysia?
+  id40:
+    template_question_id: 5
+    country: MY
+    question: what language in Malaysia?
+  id41:
+    template_question_id: 1
+    country: MN
+    question: how big is Mongolia?
+  id42:
+    template_question_id: 2
+    country: MN
+    question: how old is Mongolia?
+  id43:
+    template_question_id: 3
+    country: MN
+    question: what is fun in Mongolia?
+  id44:
+    template_question_id: 4
+    country: MN
+    question: do they laugh in Mongolia?
+  id45:
+    template_question_id: 5
+    country: MN
+    question: what language in Mongolia?
+  id46:
+    template_question_id: 1
+    country: MM
+    question: how big is Myanmar?
+  id47:
+    template_question_id: 2
+    country: MM
+    question: how old is Myanmar?
+  id48:
+    template_question_id: 3
+    country: MM
+    question: what is fun in Myanmar?
+  id49:
+    template_question_id: 4
+    country: MM
+    question: do they laugh in Myanmar?
+  id50:
+    template_question_id: 5
+    country: MM
+    question: what language in Myanmar?
+  id51:
+    template_question_id: 1
+    country: PH
+    question: how big is the Philippines?
+  id52:
+    template_question_id: 2
+    country: PH
+    question: how old is the Philippines?
+  id53:
+    template_question_id: 3
+    country: PH
+    question: what is fun in the Philippines?
+  id54:
+    template_question_id: 4
+    country: PH
+    question: do they laugh in the Philippines?
+  id55:
+    template_question_id: 5
+    country: PH
+    question: what language in Philippines?
+  id56:
+    template_question_id: 1
+    country: SG
+    question: how big is Singapore?
+  id57:
+    template_question_id: 2
+    country: SG
+    question: how old is Singapore?
+  id58:
+    template_question_id: 3
+    country: SG
+    question: what is fun in Singapore?
+  id59:
+    template_question_id: 4
+    country: SG
+    question: do they laugh in Singapore?
+  id60:
+    template_question_id: 5
+    country: SG
+    question: what language in Singapore?
+  id61:
+    template_question_id: 1
+    country: LK
+    question: how big is Sri Lanka?
+  id62:
+    template_question_id: 2
+    country: LK
+    question: how old is Sri Lanka?
+  id63:
+    template_question_id: 3
+    country: LK
+    question: what is fun in Sri Lanka?
+  id64:
+    template_question_id: 4
+    country: LK
+    question: do they laugh in Sri Lanka?
+  id65:
+    template_question_id: 5
+    country: LK
+    question: what language in Sri Lanka?
+  id66:
+    template_question_id: 1
+    country: TW
+    question: how big is Taiwan?
+  id67:
+    template_question_id: 2
+    country: TW
+    question: how old is Taiwan?
+  id68:
+    template_question_id: 3
+    country: TW
+    question: what is fun in Taiwan?
+  id69:
+    template_question_id: 4
+    country: TW
+    question: do they laugh in Taiwan?
+  id70:
+    template_question_id: 5
+    country: TW
+    question: what language in Taiwan?
+  id71:
+    template_question_id: 1
+    country: TH
+    question: how big is Thailand?
+  id72:
+    template_question_id: 2
+    country: TH
+    question: how old is Thailand?
+  id73:
+    template_question_id: 3
+    country: TH
+    question: what is fun in Thailand?
+  id74:
+    template_question_id: 4
+    country: TH
+    question: do they laugh in Thailand?
+  id75:
+    template_question_id: 5
+    country: TH
+    question: what language in Thailand?
+  id76:
+    template_question_id: 1
+    country: VN
+    question: how big is Vietnam?
+  id77:
+    template_question_id: 2
+    country: VN
+    question: how old is Vietnam?
+  id78:
+    template_question_id: 3
+    country: VN
+    question: what is fun in Vietnam?
+  id79:
+    template_question_id: 4
+    country: VN
+    question: do they laugh in Vietnam?
+  id80:
+    template_question_id: 5
+    country: VN
+    question: what language in Vietnam?
+
+Answer:
+  id1:
+    question_id: 6
+    researcher_id: 1
+    started_at: 2013-06-28 08:16:40 +0000
+    finished_at: 2013-06-28 08:26:40 +0000
+    payable: true
+    answer: whatever1
+    sources: none
+  id2:
+    question_id: 7
+    researcher_id: 1
+    started_at: 2013-06-28 08:26:40 +0000
+    finished_at: 2013-06-28 08:36:40 +0000
+    payable: true
+    answer: whatever2
+  id3:
+    question_id: 8
+    researcher_id: 1
+    started_at: 2013-06-28 08:36:40 +0000
+    finished_at: 2013-06-28 08:46:40 +0000
+    payable: true
+    answer: whatever3
+  id4:
+    question_id: 9
+    researcher_id: 1
+    started_at: 2013-06-28 08:46:40 +0000
+    finished_at: 2013-06-28 08:56:40 +0000
+    answer: whatever4
+    sources: none
+  id5:
+    question_id: 10
+    researcher_id: 1
+    started_at: 2013-06-28 08:56:40 +0000
+    finished_at: 2013-06-28 09:06:40 +0000
+    answer: whatever5
+  id6:
+    question_id: 26
+    researcher_id: 2
+    started_at: 2013-06-28 09:10:26 +0000
+    finished_at: 2013-06-28 09:20:26 +0000
+    payable: true
+    answer: it depends 6
+    sources: mind
+  id7:
+    question_id: 27
+    researcher_id: 2
+    started_at: 2013-06-28 09:20:26 +0000
+    finished_at: 2013-06-28 09:30:26 +0000
+    payable: true
+    answer: it depends 7
+    sources: mind
+  id8:
+    question_id: 28
+    researcher_id: 2
+    started_at: 2013-06-28 09:30:26 +0000
+    finished_at: 2013-06-28 09:40:26 +0000
+    payable: false
+    answer: bullshit. who cares.
+  id9:
+    question_id: 29
+    researcher_id: 2
+    started_at: 2013-06-28 09:40:26 +0000
+
+Book:
+  id1:
+    country: CN
+    code: we13cn
+    title: China 2013
+    isbn: 9789810766320
+    asin: B00D1HOJII
+    leanpub: ChinaStartupGuide2013
+    salescopy: Wow, this is so good.
+  id2:
+    country: JP
+    code: we13jp
+    title: Japan 2013
+    isbn: 9789810766368
+    asin: B00D1HSBJG
+    leanpub: JapanStartupGuide2013
+    salescopy: Wow, this too is good.
+
+Essay:
+  id1:
+    question_id: 6
+    writer_id: 1
+    book_id: 1
+    started_at: 2013-06-28 10:41:14 +0000
+    finished_at: 2013-06-28 10:51:14 +0000
+    payable: true
+    cleaned_at: 2013-06-28 14:01:14 +0000
+    cleaned_by: derek
+    content: whatever1
+    comment: none
+  id2:
+    question_id: 7
+    writer_id: 1
+    book_id: 1
+    started_at: 2013-06-28 10:51:14 +0000
+    finished_at: 2013-06-28 11:01:14 +0000
+    payable: true
+    cleaned_at: 2013-06-28 14:11:14 +0000
+    cleaned_by: derek
+    content: whatever2
+    comment: none
+  id3:
+    question_id: 8
+    writer_id: 1
+    book_id: 1
+    started_at: 2013-06-28 11:01:14 +0000
+    finished_at: 2013-06-28 11:11:14 +0000
+    payable: true
+    cleaned_at: 2013-06-28 14:21:14 +0000
+    cleaned_by: derek
+    content: whatever3
+    comment: none
+  id4:
+    question_id: 9
+    writer_id: 1
+    book_id: 1
+    started_at: 2013-06-28 11:11:14 +0000
+    finished_at: 2013-06-28 11:21:14 +0000
+    payable: true
+    cleaned_at: 2013-06-28 14:31:14 +0000
+    cleaned_by: derek
+    content: whatever4
+    comment: none
+  id5:
+    question_id: 10
+    writer_id: 1
+    book_id: 1
+    started_at: 2013-06-28 11:21:14 +0000
+    finished_at: 2013-06-28 11:31:14 +0000
+    payable: true
+    cleaned_at: 2013-06-28 14:41:14 +0000
+    cleaned_by: derek
+    content: whatever5
+    comment: none
+
+Tag:
+  id1:
+    name: China
+  id2:
+    name: Japan
+
+Tidbit:
+  id1:
+    created_at: 2013-06-26
+    created_by: derek
+    headline: Things looking good
+    url: http://www.cnn.com/article/123
+    intro: Things sure are looking good
+    content: A long article about China here
+  id2:
+    created_at: 2013-06-27
+    created_by: derek
+    headline: All is well
+    url: http://www.cnn.com/article/321
+    intro: Things sure are well
+    content: A long article about Japan here
+
+INSERTS:
+  books_writers:
+    id1:
+      book_id:
+      writer_id:
+  books_researchers:
+    id1:
+      book_id:
+      researcher_id:
+  books_customers:
+    id1:
+      book_id:
+      customer_id:
+  books_editors:
+    id1:
+      book_id:
+      editor_id:
+  tags_tidbits:
+    id1:
+      tag_id:
+      tidbit_id:
+  questions_tidbits:
+    id1:
+      question_id:
+      tidbit_id:
+
