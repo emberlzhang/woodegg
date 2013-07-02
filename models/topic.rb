@@ -1,4 +1,4 @@
-class Topic < Sequel::Model(WoodEgg::DB)
+class Topic < Sequel::Model(:woodegg__topics)
   one_to_many :subtopics
   class << self
     def shuffle

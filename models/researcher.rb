@@ -1,4 +1,4 @@
-class Researcher < Sequel::Model(WoodEgg::DB)
+class Researcher < Sequel::Model(:woodegg__researchers)
   many_to_one :person
   one_to_many :answers
   many_to_many :books

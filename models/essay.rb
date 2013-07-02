@@ -1,5 +1,5 @@
 # encoding: utf-8
-class Essay < Sequel::Model(WoodEgg::DB)
+class Essay < Sequel::Model(:woodegg__essays)
   many_to_one :writer
   many_to_one :question
   many_to_one :book

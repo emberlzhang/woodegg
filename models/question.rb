@@ -1,4 +1,4 @@
-class Question < Sequel::Model(WoodEgg::DB)
+class Question < Sequel::Model(:woodegg__questions)
   many_to_one :template_question
   one_to_many :answers
   one_to_many :essays
@@ -17,7 +17,7 @@ class Question < Sequel::Model(WoodEgg::DB)
     end
 
     def completed_ids  # the usual group_and_count wasn't working for some reason  # HACK - SHOULD BE 2 NOT 3
-      WoodEgg::DB['SELECT question_id FROM answers WHERE payable IS TRUE GROUP BY question_id HAVING COUNT(*) > 3'].map(&:values).flatten
+      WoodEgg::DB['SELECT question_id FROM woodegg.answers WHERE payable IS TRUE GROUP BY question_id HAVING COUNT(*) > 3'].map(&:values).flatten
     end
 
     def dataset_for_subtopic_and_country(subtopic, country)
@@ -39,7 +39,7 @@ class Question < Sequel::Model(WoodEgg::DB)
     # returns hash where key = Question.id, value = {topic: "the topic", subtopic: "the subtopic"}
     def topichash(cc)
       h = {}
-      WoodEgg::DB["SELECT questions.id, topics.topic, subtopics.subtopic FROM questions JOIN template_questions ON questions.template_question_id=template_questions.id JOIN subtopics ON template_questions.subtopic_id=subtopics.id JOIN topics ON subtopics.topic_id=topics.id WHERE questions.country='#{cc.upcase}' ORDER BY topics.id ASC, subtopics.id ASC, questions.id ASC"].each {|x| h[x.delete(:id)] = x}
+      WoodEgg::DB["SELECT woodegg.questions.id, woodegg.topics.topic, woodegg.subtopics.subtopic FROM woodegg.questions JOIN woodegg.template_questions ON woodegg.questions.template_question_id=woodegg.template_questions.id JOIN woodegg.subtopics ON woodegg.template_questions.subtopic_id=woodegg.subtopics.id JOIN woodegg.topics ON woodegg.subtopics.topic_id=woodegg.topics.id WHERE woodegg.questions.country='#{cc.upcase}' ORDER BY woodegg.topics.id ASC, woodegg.subtopics.id ASC, woodegg.questions.id ASC"].each {|x| h[x.delete(:id)] = x}
       h
     end
 

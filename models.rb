@@ -1,8 +1,7 @@
-require 'peeps'
+require 'pop50'
 require 'yaml'
 
 class WoodEgg
-  @dbase = 'woodegg'
   @fbase = __FILE__
   @config = nil
   extend DatabaseInfo
@@ -74,10 +73,10 @@ class Userstat
   # array of hashes with symbol keys created_at, person_id, statkey, statvalue, name
   # TODO: probably a more elegant solution to this. put this + Countries.userstats* together?
   def self.newest_woodegg
-    query = "SELECT userstats.created_at, person_id, statkey, statvalue, name" +
-    " FROM userstats LEFT JOIN people ON userstats.person_id=people.id" +
-    " WHERE statkey LIKE 'woodegg%' ORDER BY userstats.id DESC LIMIT 100"
-    Sequel.postgres('peeps', user: 'peeps').fetch(query).all
+    query = "SELECT peeps.userstats.created_at, person_id, statkey, statvalue, name" +
+    " FROM peeps.userstats LEFT JOIN peeps.people ON peeps.userstats.person_id=peeps.people.id" +
+    " WHERE statkey LIKE 'woodegg%' ORDER BY peeps.userstats.id DESC LIMIT 100"
+    Sequel.postgres('pop50', user: 'pop50').fetch(query).all
   end
 end
 
@@ -119,12 +118,12 @@ class Countries
     # all WoodEgg userstats, per country
     def userstats
       statkeys = "'woodegg','" + Countries.hsh.keys.map {|x| "woodegg-#{x.downcase}"}.join("','") + "'"
-      query = "SELECT statkey, statvalue, COUNT(*) FROM userstats" +
+      query = "SELECT statkey, statvalue, COUNT(*) FROM peeps.userstats" +
 	" WHERE statkey IN (#{statkeys})" +
         " AND statvalue NOT IN ('clicked')" +
         " AND LENGTH(statvalue) > 2 AND LENGTH(statvalue) < 50" +
 	" GROUP BY statkey, statvalue ORDER BY statkey, statvalue"
-      Sequel.postgres('peeps', user: 'peeps').fetch(query).all
+      Sequel.postgres('pop50', user: 'pop50').fetch(query).all
     end
 
     # make a grid out of an array of {:statkey=>"x", :statvalue=>"y", :count=>9}

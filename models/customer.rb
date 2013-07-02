@@ -1,4 +1,4 @@
-class Customer < Sequel::Model(WoodEgg::DB)
+class Customer < Sequel::Model(:woodegg__customers)
   many_to_one :person
   many_to_many :books
   include Persony

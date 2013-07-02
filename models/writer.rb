@@ -1,4 +1,4 @@
-class Writer < Sequel::Model(WoodEgg::DB)
+class Writer < Sequel::Model(:woodegg__writers)
   many_to_one :person
   one_to_many :essays
   many_to_many :books

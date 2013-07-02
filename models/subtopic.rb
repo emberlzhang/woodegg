@@ -1,4 +1,4 @@
-class Subtopic < Sequel::Model(WoodEgg::DB)
+class Subtopic < Sequel::Model(:woodegg__subtopics)
   many_to_one :topic
   one_to_many :template_questions
 

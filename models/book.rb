@@ -1,4 +1,4 @@
-class Book < Sequel::Model(WoodEgg::DB)
+class Book < Sequel::Model(:woodegg__books)
   one_to_many :essays
   many_to_many :writers
   many_to_many :researchers
@@ -73,6 +73,6 @@ class Book < Sequel::Model(WoodEgg::DB)
   private
 
     def questions_missing_essays_dataset
-      WoodEgg::DB["SELECT questions.id FROM questions LEFT JOIN essays ON questions.id=essays.question_id WHERE questions.country='%s' AND essays.id IS NULL" % country]
+      WoodEgg::DB["SELECT woodegg.questions.id FROM woodegg.questions LEFT JOIN woodegg.essays ON woodegg.questions.id=woodegg.essays.question_id WHERE woodegg.questions.country='%s' AND woodegg.essays.id IS NULL" % country]
     end
 end
