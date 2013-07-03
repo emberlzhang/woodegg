@@ -1,7 +1,7 @@
 class Writer < Sequel::Model(WoodEgg::DB)
   many_to_one :person
-  one_to_many :essays
-  many_to_many :books
+  one_to_many :essays, :order => :id
+  many_to_many :books, :order => :id
   include Persony
 
   def countries

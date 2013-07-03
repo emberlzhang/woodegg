@@ -1,6 +1,6 @@
 class Customer < Sequel::Model(WoodEgg::DB)
   many_to_one :person
-  many_to_many :books
+  many_to_many :books, :order => :id
   include Persony
 
   def email_first(opts={})

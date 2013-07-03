@@ -1,8 +1,9 @@
 class Book < Sequel::Model(WoodEgg::DB)
-  one_to_many :essays
-  many_to_many :writers
-  many_to_many :researchers
-  many_to_many :customers
+  one_to_many :essays, :order => :id
+  many_to_many :writers, :order => :id
+  many_to_many :researchers, :order => :id
+  many_to_many :editors, :order => :id
+  many_to_many :customers, :order => :id
 
   class << self
     def available
@@ -34,7 +35,7 @@ class Book < Sequel::Model(WoodEgg::DB)
   def filename_hash
     h = {}
     %w(pdf epub mobi).each do |f|
-      h[f] = '%s.%s' % [short_title.gsub(' ', ''), f]
+      h[f] = '%s.%s' % [leanpub, f]
     end
     h
   end
@@ -68,6 +69,26 @@ class Book < Sequel::Model(WoodEgg::DB)
 
   def done?
     questions_missing_essays_count == 0 && essays_uncleaned.count == 0
+  end
+
+  # pseudo-associations: for now it's ".all", but some day might be limited
+  
+  def topics
+    Topic.order(:id).all
+  end
+
+  def subtopics
+    Subtopic.order(:id).all
+  end
+
+  def template_questions
+    TemplateQuestion.order(:id).all
+  end
+
+  def answers
+    a = []
+    questions.each {|q| a.concat(q.answers)}
+    a
   end
 
   private

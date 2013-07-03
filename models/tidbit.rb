@@ -1,4 +1,4 @@
 class Tidbit < Sequel::Model(WoodEgg::DB)
-  many_to_many :tags
-  many_to_many :questions
+  many_to_many :tags, :order => :name
+  many_to_many :questions, :order => :id
 end

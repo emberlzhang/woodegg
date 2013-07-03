@@ -1,14 +1,18 @@
 Researcher:
   gongli:
     person_id: 7
+    bio: Yes I am Gong Li
   yoko:
     person_id: 8
+    bio: Yes I am Yoko Ono
 
 Writer:
   veruca:
     person_id: 3
+    bio: Yes I am Veruca Salt
   charlie:
     person_id: 4
+    bio: Yes I am Charlie Bucket
 
 Customer:
   oompa:
@@ -449,7 +453,7 @@ Book:
   id1:
     country: CN
     code: we13cn
-    title: China 2013
+    title: "China 2013: How To"
     isbn: 9789810766320
     asin: B00D1HOJII
     leanpub: ChinaStartupGuide2013
@@ -457,7 +461,7 @@ Book:
   id2:
     country: JP
     code: we13jp
-    title: Japan 2013
+    title: "Japan 2013: How To"
     isbn: 9789810766368
     asin: B00D1HSBJG
     leanpub: JapanStartupGuide2013

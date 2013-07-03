@@ -1,5 +1,5 @@
 class Topic < Sequel::Model(WoodEgg::DB)
-  one_to_many :subtopics
+  one_to_many :subtopics, :order => :id
   class << self
     def shuffle
       all.shuffle

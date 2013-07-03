@@ -1,6 +1,6 @@
 class Subtopic < Sequel::Model(WoodEgg::DB)
   many_to_one :topic
-  one_to_many :template_questions
+  one_to_many :template_questions, :order => :id
 
   class << self
     ## four-level subquery!
