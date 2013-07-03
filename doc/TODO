@@ -1,5 +1,10 @@
 TO-DO:
 
+RESEARCHERS
+	Last year, it was done per-country.  Now, needs to be restricted to just this book.  Some ways to do this:
+		* - Insert blank answers as the TO-DO list. Change Researcher methods to just query these.
+		* - books_researchers + books_questions = access to those questions
+
 TESTS
 	first, change schema
 	fixtures for woodegg sample info, for unit testing
