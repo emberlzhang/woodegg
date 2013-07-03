@@ -388,7 +388,7 @@ Answer:
     started_at: 2013-06-28 08:16:40 +0000
     finished_at: 2013-06-28 08:26:40 +0000
     payable: true
-    answer: whatever1
+    answer: China whatever1
     sources: none
   id2:
     question_id: 7
@@ -396,34 +396,34 @@ Answer:
     started_at: 2013-06-28 08:26:40 +0000
     finished_at: 2013-06-28 08:36:40 +0000
     payable: true
-    answer: whatever2
+    answer: China whatever2
   id3:
     question_id: 8
     researcher_id: 1
     started_at: 2013-06-28 08:36:40 +0000
     finished_at: 2013-06-28 08:46:40 +0000
     payable: true
-    answer: whatever3
+    answer: China whatever3
   id4:
     question_id: 9
     researcher_id: 1
     started_at: 2013-06-28 08:46:40 +0000
     finished_at: 2013-06-28 08:56:40 +0000
-    answer: whatever4
+    answer: China whatever4
     sources: none
   id5:
     question_id: 10
     researcher_id: 1
     started_at: 2013-06-28 08:56:40 +0000
     finished_at: 2013-06-28 09:06:40 +0000
-    answer: whatever5
+    answer: China whatever5
   id6:
     question_id: 26
     researcher_id: 2
     started_at: 2013-06-28 09:10:26 +0000
     finished_at: 2013-06-28 09:20:26 +0000
     payable: true
-    answer: it depends 6
+    answer: Japan it depends 6
     sources: mind
   id7:
     question_id: 27
@@ -431,7 +431,7 @@ Answer:
     started_at: 2013-06-28 09:20:26 +0000
     finished_at: 2013-06-28 09:30:26 +0000
     payable: true
-    answer: it depends 7
+    answer: Japan it depends 7
     sources: mind
   id8:
     question_id: 28
@@ -439,7 +439,7 @@ Answer:
     started_at: 2013-06-28 09:30:26 +0000
     finished_at: 2013-06-28 09:40:26 +0000
     payable: false
-    answer: bullshit. who cares.
+    answer: Japan blah blah. Unacceptable answer here.
   id9:
     question_id: 29
     researcher_id: 2
@@ -453,7 +453,7 @@ Book:
     isbn: 9789810766320
     asin: B00D1HOJII
     leanpub: ChinaStartupGuide2013
-    salescopy: Wow, this is so good.
+    salescopy: THIS IS FOR SALE NOW
   id2:
     country: JP
     code: we13jp
@@ -461,7 +461,7 @@ Book:
     isbn: 9789810766368
     asin: B00D1HSBJG
     leanpub: JapanStartupGuide2013
-    salescopy: Wow, this too is good.
+    salescopy: COMING SOON
 
 Essay:
   id1:
@@ -473,7 +473,7 @@ Essay:
     payable: true
     cleaned_at: 2013-06-28 14:01:14 +0000
     cleaned_by: derek
-    content: whatever1
+    content: China whatever1
     comment: none
   id2:
     question_id: 7
@@ -484,7 +484,7 @@ Essay:
     payable: true
     cleaned_at: 2013-06-28 14:11:14 +0000
     cleaned_by: derek
-    content: whatever2
+    content: China whatever2
     comment: none
   id3:
     question_id: 8
@@ -495,7 +495,7 @@ Essay:
     payable: true
     cleaned_at: 2013-06-28 14:21:14 +0000
     cleaned_by: derek
-    content: whatever3
+    content: China whatever3
     comment: none
   id4:
     question_id: 9
@@ -506,7 +506,7 @@ Essay:
     payable: true
     cleaned_at: 2013-06-28 14:31:14 +0000
     cleaned_by: derek
-    content: whatever4
+    content: China whatever4
     comment: none
   id5:
     question_id: 10
@@ -517,7 +517,7 @@ Essay:
     payable: true
     cleaned_at: 2013-06-28 14:41:14 +0000
     cleaned_by: derek
-    content: whatever5
+    content: China whatever5
     comment: none
 
 Tag:
@@ -533,38 +533,62 @@ Tidbit:
     headline: Things looking good
     url: http://www.cnn.com/article/123
     intro: Things sure are looking good
-    content: A long article about China here
+    content: A long article about laughing and language in China here
   id2:
     created_at: 2013-06-27
     created_by: derek
     headline: All is well
     url: http://www.cnn.com/article/321
     intro: Things sure are well
-    content: A long article about Japan here
+    content: A long article about how big and old Japan is
 
 INSERTS:
   books_writers:
     id1:
-      book_id:
-      writer_id:
+      book_id: 1
+      writer_id: 1
+    id2:
+      book_id: 2
+      writer_id: 2
   books_researchers:
     id1:
-      book_id:
-      researcher_id:
+      book_id: 1
+      researcher_id: 1
+    id2:
+      book_id: 2
+      researcher_id: 2
   books_customers:
     id1:
-      book_id:
-      customer_id:
+      book_id: 1
+      customer_id: 1
+    id2:
+      book_id: 1
+      customer_id: 2
   books_editors:
     id1:
-      book_id:
-      editor_id:
+      book_id: 1
+      editor_id: 1
+    id2:
+      book_id: 2
+      editor_id: 2
   tags_tidbits:
     id1:
-      tag_id:
-      tidbit_id:
+      tag_id: 1
+      tidbit_id: 1
+    id2:
+      tag_id: 2
+      tidbit_id: 2
   questions_tidbits:
     id1:
-      question_id:
-      tidbit_id:
+      question_id: 9
+      tidbit_id: 1
+    id2:
+      question_id: 10
+      tidbit_id: 1
+    id3:
+      question_id: 26
+      tidbit_id: 2
+    id3:
+      question_id: 27
+      tidbit_id: 2
 
