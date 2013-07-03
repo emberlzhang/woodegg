@@ -116,6 +116,13 @@ class TestBook < Test::Unit::TestCase
     assert_equal [Customer[1], Customer[2]], x.customers
   end
 
+  def test_books
+    assert_equal [Book[1],Book[2]], Book.order(:id).all
+    assert_equal [Book[1]], Book.available
+    assert_equal [Book[1]], Book.done
+    assert_equal [Book[2]], Book.not_done
+  end
+
 end
 
 class TestEssay < Test::Unit::TestCase
