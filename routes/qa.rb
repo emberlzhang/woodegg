@@ -7,6 +7,7 @@ class WoodEggQA < Sinatra::Base
     # set root one level up, since this routes file is inside subdirectory
     set :root, File.dirname(File.dirname(File.realpath(__FILE__)))
     set :views, Proc.new { File.join(root, 'views/qa') }
+    set :public_folder, Proc.new { File.join(root, 'public-qa') }
   end
 
   use Rack::Auth::Basic, 'WoodEgg QA' do |username, password|
