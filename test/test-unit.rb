@@ -104,7 +104,7 @@ class TestBook < Test::Unit::TestCase
     assert_equal 'how big', x.subtopics[0].subtopic
     assert_equal 5, x.template_questions.size
     assert_equal 'how big is {COUNTRY}?', x.template_questions[0].question
-    assert_equal [6,7,8,9,10], x.questions.map(&:id)
+    assert_equal [1,2,3,4,5], x.questions.map(&:id)
     assert x.questions.map(&:question).all? {|q| q.include? 'China'}
     assert_equal [1,2,3,4,5], x.answers.map(&:id)
     assert x.answers.map(&:answer).all? {|q| q.include? 'China'}
