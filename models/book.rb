@@ -92,6 +92,6 @@ class Book < Sequel::Model(WoodEgg::DB)
   private
 
     def questions_missing_essays_dataset
-      WoodEgg::DB["SELECT questions.id FROM questions LEFT JOIN essays ON questions.id=essays.question_id WHERE questions.country='%s' AND essays.id IS NULL" % country]
+      WoodEgg::DB["SELECT questions.id FROM questions LEFT JOIN essays ON questions.id=essays.question_id WHERE questions.country='%s' AND essays.id IS NULL ORDER BY questions.id" % country]
     end
 end

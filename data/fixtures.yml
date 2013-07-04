@@ -242,6 +242,28 @@ Essay:
     cleaned_by: derek
     content: China whatever5
     comment: none
+  id6:
+    question_id: 6
+    writer_id: 2
+    book_id: 2
+    started_at: 2013-07-08 10:41:14 +0000
+    finished_at: 2013-07-08 10:51:14 +0000
+    payable: true
+    cleaned_at: 2013-07-09 14:41:14 +0000
+    cleaned_by: derek
+    content: Japan whatever1
+  id7:
+    question_id: 7
+    writer_id: 2
+    book_id: 2
+    started_at: 2013-07-08 11:41:14 +0000
+    finished_at: 2013-07-08 11:51:14 +0000
+    content: Japan whatever2
+  id8:
+    question_id: 8
+    writer_id: 2
+    book_id: 2
+    started_at: 2013-07-08 11:41:14 +0000
 
 Tag:
   id1:

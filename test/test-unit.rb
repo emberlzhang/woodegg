@@ -123,6 +123,16 @@ class TestBook < Test::Unit::TestCase
     assert_equal [Book[2]], Book.not_done
   end
 
+  def test_missing
+    assert_equal [], Book[1].questions_missing_essays
+    assert_equal 0, Book[1].questions_missing_essays_count
+    assert_equal [Question[9], Question[10]], Book[2].questions_missing_essays
+    assert_equal 2, Book[2].questions_missing_essays_count
+    assert_equal [], Book[1].essays_uncleaned.all
+    assert_equal 2, Book[2].essays_uncleaned.count
+    assert_equal [Essay[7], Essay[8]], Book[2].essays_uncleaned.all
+  end
+
 end
 
 class TestEssay < Test::Unit::TestCase
