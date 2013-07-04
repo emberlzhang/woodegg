@@ -12,10 +12,11 @@ use Rack::MethodOverride
 map(OTH_MAP) { run WoodEggA }
 map('/') { run WoodEggDotCom }
 
-# NOT NEEDED UNTIL NEXT RESEARCH BEGINS:
-#require './routes/qa.rb'
+require './routes/qa.rb'
+map('/qa') { run WoodEggQA }
+
+# NOT NEEDED UNTIL WRITERS BEGIN:
 #require './routes/writer.rb'
-#require './routes/cleaner.rb'
-#map('/qa') { run WoodEggQA }
 #map('/ed') { run WoodEggEditor }
+#require './routes/cleaner.rb'
 #map('/clean') { run WoodEggCleaner }
