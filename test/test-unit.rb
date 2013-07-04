@@ -139,8 +139,8 @@ class TestBook < Test::Unit::TestCase
     assert_equal [Question[9], Question[10]], Book[2].questions_missing_essays
     assert_equal 2, Book[2].questions_missing_essays_count
     assert_equal [], Book[1].essays_uncleaned.all
-    assert_equal 2, Book[2].essays_uncleaned.count
-    assert_equal [Essay[7], Essay[8]], Book[2].essays_uncleaned.all
+    assert_equal 1, Book[2].essays_uncleaned.count
+    assert_equal [Essay[7]], Book[2].essays_uncleaned.all
   end
 
 end

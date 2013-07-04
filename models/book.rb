@@ -62,7 +62,7 @@ class Book < Sequel::Model(WoodEgg::DB)
   end
 
   def essays_uncleaned
-    essays_dataset.filter(cleaned_at: nil).order(:id)
+    essays_dataset.exclude(finished_at: nil).filter(cleaned_at: nil)
   end
 
   def done?
