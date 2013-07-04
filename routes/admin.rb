@@ -62,6 +62,7 @@ end
 
 get '/books' do
   @pagetitle = 'books'
+  @books_not_done = Book.not_done
   @books_done = Book.done
   erb :books
 end

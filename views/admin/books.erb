@@ -1,4 +1,11 @@
-<h2>Books</h2>
+<h3>New Books</h3>
+<ul>
+<% @books_not_done.each do |b| %>
+	<li><a href="/book/<%= b.id %>"><%= b.short_title %></a></li>
+<% end %>
+</ul>
+
+<h3>Old Books</h3>
 <ul>
 <% @books_done.each do |b| %>
 	<li><a href="/book/<%= b.id %>"><%= b.short_title %></a></li>
