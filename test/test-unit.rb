@@ -36,6 +36,10 @@ class TestResearcher < Test::Unit::TestCase
     assert_equal [1,2,3,4,5], Researcher[1].questions_answered.map(&:id)
     assert_equal [6,7,8], Researcher[2].questions_answered.map(&:id)
     assert_equal [], Researcher[3].questions_answered
+    assert_equal Book[3].questions, Researcher[3].questions
+    assert_equal [], Researcher[1].questions_unanswered
+    assert_equal [Question[9],Question[10]], Researcher[2].questions_unanswered
+    assert_equal [1,2,3,4,5], Researcher[3].questions_unanswered.map(&:id)
   end
 end
 

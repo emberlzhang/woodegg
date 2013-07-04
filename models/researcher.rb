@@ -28,9 +28,19 @@ class Researcher < Sequel::Model(WoodEgg::DB)
   def topics_unfinished
     Topic.filter(id: Subtopic.filter(id: TemplateQuestion.filter(id: Question.filter(country: countries.pop.upcase).exclude(id: answers.map(&:question_id)).map(:template_question_id)).map(:subtopic_id)).map(:topic_id)).order(:id).all
   end
+  
+  def questions
+    q = []
+    books.each {|b| q.concat(b.questions)}
+    q
+  end
 
   def questions_answered
     Question.order(:id).filter(id: answers_dataset.select(:question_id).exclude(finished_at: nil)).all
+  end
+
+  def questions_unanswered
+    questions - questions_answered
   end
 
   def answers_finished_count
