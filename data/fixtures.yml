@@ -5,6 +5,9 @@ Researcher:
   yoko:
     person_id: 8
     bio: Yes I am Yoko Ono
+  oompa:
+    person_id: 5
+    bio: yes i am researching China
 
 Writer:
   veruca:
@@ -15,8 +18,6 @@ Writer:
     bio: Yes I am Charlie Bucket
 
 Customer:
-  oompa:
-    person_id: 5
   augustus:
     person_id: 6
 
@@ -306,13 +307,13 @@ INSERTS:
     id2:
       book_id: 2
       researcher_id: 2
+    id3:
+      book_id: 3
+      researcher_id: 3
   books_customers:
     id1:
       book_id: 1
       customer_id: 1
-    id2:
-      book_id: 1
-      customer_id: 2
   books_editors:
     id1:
       book_id: 1

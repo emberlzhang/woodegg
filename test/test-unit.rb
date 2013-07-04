@@ -12,6 +12,12 @@ class TestResearcher < Test::Unit::TestCase
     x = Researcher[2]
     assert_equal x.name, @fixtures['Person']['yoko']['name']
     assert_equal x.email, @fixtures['Person']['yoko']['email']
+    x = Researcher[3]
+    assert_equal x.name, @fixtures['Person']['oompa']['name']
+    assert_equal x.email, @fixtures['Person']['oompa']['email']
+    rap = Researcher.all_people
+    assert_equal 3, rap.count
+    assert_equal({:id=>2, :person_id=>8, :bio=>'Yes I am Yoko Ono', :name=>'Yoko Ono', :email=>'yoko@ono.com'}, rap[1].values)
   end
 end
 
@@ -33,9 +39,6 @@ class TestCustomer < Test::Unit::TestCase
 
   def test_customer
     x = Customer[1]
-    assert_equal x.name, @fixtures['Person']['oompa']['name']
-    assert_equal x.email, @fixtures['Person']['oompa']['email']
-    x = Customer[2]
     assert_equal x.name, @fixtures['Person']['augustus']['name']
     assert_equal x.email, @fixtures['Person']['augustus']['email']
   end
@@ -113,7 +116,7 @@ class TestBook < Test::Unit::TestCase
     assert_equal [Researcher[1]], x.researchers
     assert_equal [Writer[1]], x.writers
     assert_equal [Editor[1]], x.editors
-    assert_equal [Customer[1], Customer[2]], x.customers
+    assert_equal [Customer[1]], x.customers
   end
 
   def test_new_associations
