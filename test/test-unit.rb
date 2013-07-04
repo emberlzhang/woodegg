@@ -19,6 +19,24 @@ class TestResearcher < Test::Unit::TestCase
     assert_equal 3, rap.count
     assert_equal({:id=>2, :person_id=>8, :bio=>'Yes I am Yoko Ono', :name=>'Yoko Ono', :email=>'yoko@ono.com'}, rap[1].values)
   end
+
+  def test_researcher_assocations
+    assert_equal [6,7,8,9], Researcher[2].answers.map(&:id)
+    assert_equal [], Researcher[3].answers
+    assert_equal [Book[3]], Researcher[3].books
+    assert_equal [], Researcher[1].topics_unfinished
+    assert_equal [Topic[2]], Researcher[2].topics_unfinished
+    assert_equal [Topic[1],Topic[2]], Researcher[3].topics_unfinished
+    assert_equal 5, Researcher[1].answers_finished_count
+    assert_equal [5,4,3,2,1], Researcher[1].answers_finished.map(&:id)
+    assert_equal 3, Researcher[2].answers_finished_count
+    assert_equal [8,7,6], Researcher[2].answers_finished.map(&:id)
+    assert_equal 0, Researcher[3].answers_finished_count
+    assert_equal [], Researcher[3].answers_finished
+    assert_equal [1,2,3,4,5], Researcher[1].questions_answered.map(&:id)
+    assert_equal [6,7,8], Researcher[2].questions_answered.map(&:id)
+    assert_equal [], Researcher[3].questions_answered
+  end
 end
 
 class TestWriter < Test::Unit::TestCase
@@ -99,7 +117,7 @@ class TestBook < Test::Unit::TestCase
     assert_match /Signature=\S+\Z/, u
   end
 
-  def test_associations
+  def test_book_associations
     x = Book[1]
     assert_equal 2, x.topics.size
     assert_equal 'Country', x.topics[0].topic
@@ -117,9 +135,6 @@ class TestBook < Test::Unit::TestCase
     assert_equal [Writer[1]], x.writers
     assert_equal [Editor[1]], x.editors
     assert_equal [Customer[1]], x.customers
-  end
-
-  def test_new_associations
     x = Book[3]
     assert_equal [1,2,3,4,5], x.questions.map(&:id)
     assert_equal [1,2,3,4,5], x.answers.map(&:id)
@@ -136,7 +151,7 @@ class TestBook < Test::Unit::TestCase
     refute Book[3].done?
   end
 
-  def test_missing
+  def test_books_missing
     assert_equal [], Book[1].questions_missing_essays
     assert_equal 0, Book[1].questions_missing_essays_count
     assert_equal [Question[9], Question[10]], Book[2].questions_missing_essays

@@ -29,6 +29,10 @@ class Researcher < Sequel::Model(WoodEgg::DB)
     Topic.filter(id: Subtopic.filter(id: TemplateQuestion.filter(id: Question.filter(country: countries.pop.upcase).exclude(id: answers.map(&:question_id)).map(:template_question_id)).map(:subtopic_id)).map(:topic_id)).order(:id).all
   end
 
+  def questions_answered
+    Question.order(:id).filter(id: answers_dataset.select(:question_id).exclude(finished_at: nil)).all
+  end
+
   def answers_finished_count
     answers_dataset.exclude(finished_at: nil).count
   end
