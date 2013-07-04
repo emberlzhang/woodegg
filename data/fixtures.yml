@@ -185,6 +185,10 @@ Book:
     isbn: 9789810766368
     leanpub: JapanStartupGuide2013
     salescopy: COMING SOON
+  id3:
+    country: CN
+    code: we14cn
+    title: "China 2014: How To"
 
 Essay:
   id1:

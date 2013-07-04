@@ -116,11 +116,21 @@ class TestBook < Test::Unit::TestCase
     assert_equal [Customer[1], Customer[2]], x.customers
   end
 
+  def test_new_associations
+    x = Book[3]
+    assert_equal [1,2,3,4,5], x.questions.map(&:id)
+    assert_equal [1,2,3,4,5], x.answers.map(&:id)
+    assert_equal [], x.essays
+  end
+
   def test_books
-    assert_equal [Book[1],Book[2]], Book.order(:id).all
+    assert_equal [Book[1],Book[2],Book[3]], Book.order(:id).all
     assert_equal [Book[1]], Book.available
     assert_equal [Book[1]], Book.done
-    assert_equal [Book[2]], Book.not_done
+    assert_equal [Book[2],Book[3]], Book.not_done
+    assert Book[1].done?
+    refute Book[2].done?
+    refute Book[3].done?
   end
 
   def test_missing
