@@ -7,17 +7,15 @@ class Book < Sequel::Model(WoodEgg::DB)
 
   class << self
     def available
-      Book.where('id <= 16').order(:id).all
+      Book.exclude(asin: nil).order(:id).all.select {|b| b.done?}
     end
 
     def done
-      #Book.order(:title).all.select {|b| b.done?}
-      Book.where('id <= 16').order(:id).all
+      Book.order(:id).all.select {|b| b.done?}
     end
 
     def not_done
-      #Book.order(:title).all.reject {|b| b.done?}
-      Book.where('id > 16').order(:id).all
+      Book.order(:id).all.reject {|b| b.done?}
     end
   end
 

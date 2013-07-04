@@ -1,4 +1,5 @@
 -- DATABASE: woodegg
+SET client_min_messages TO ERROR;
 DROP SCHEMA IF EXISTS woodegg CASCADE;
 
 BEGIN;
