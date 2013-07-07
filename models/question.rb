@@ -12,28 +12,12 @@ class Question < Sequel::Model(WoodEgg::DB)
     # id => question hash
     def hash_for_country(country)
       h = {}
-      select(:id, :question).filter(country: 'ID').order(:id).map(&:values).each {|p| h[p[:id]] = p[:question]}
+      select(:id, :question).filter(country: country).order(:id).map(&:values).each {|p| h[p[:id]] = p[:question]}
       h
     end
 
-    def completed_ids  # the usual group_and_count wasn't working for some reason  # HACK - SHOULD BE 2 NOT 3
-      WoodEgg::DB['SELECT question_id FROM answers WHERE payable IS TRUE GROUP BY question_id HAVING COUNT(*) > 3'].map(&:values).flatten
-    end
-
-    def dataset_for_subtopic_and_country(subtopic, country)
-      filter(template_question_id: TemplateQuestion.filter(subtopic_id: subtopic).map(&:id)).filter(country: country).order(:id)
-    end
-
     def for_subtopic_and_country(subtopic, country)
-      dataset_for_subtopic_and_country(subtopic, country).all
-    end
-
-    def available_for_subtopic_and_country(subtopic, country)
-      dataset_for_subtopic_and_country(subtopic, country).exclude(id: completed_ids).all
-    end
-
-    def needing_essays_for_country(cc)
-      filter(country: cc.upcase).order(:id).exclude(id: Essay.for_country(cc).map(&:question_id)).all
+      filter(template_question_id: TemplateQuestion.filter(subtopic_id: subtopic).map(&:id)).filter(country: country).order(:id).all
     end
 
     # returns hash where key = Question.id, value = {topic: "the topic", subtopic: "the subtopic"}

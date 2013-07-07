@@ -34,7 +34,7 @@ class WoodEggWriter < Sinatra::Base
     @ccode = cc.upcase
     @cname = Countries.hsh[@ccode]
     @country_name = @cname.gsub(' ', '&nbsp;')
-    @questions = Question.needing_essays_for_country(@ccode)
+    #@questions = Question.needing_essays_for_country(@ccode) # TODO: new way of getting questions
     @topichash = Question.topichash(@ccode)
     @topicnest = Question.topicnest(@questions, @topichash)
     @pagetitle = @cname

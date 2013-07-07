@@ -160,8 +160,8 @@ class TestQuestion < Test::Unit::TestCase
   include Fixtures::Tools
 
   def test_question
-    # Question has: Books, Answers, Essays, TemplateQuestion, Subtopic, Topic, Researchers, Editor, Tidbits
     x = Question[1]
+    assert_equal 'how big is China?', x.question
     assert_equal [Book[1], Book[3]], x.books
     assert_equal [Answer[1]], x.answers
     assert_equal [Essay[1]], x.essays
@@ -173,6 +173,17 @@ class TestQuestion < Test::Unit::TestCase
     assert_equal [], x.tidbits
     x = Question[4]
     assert_equal [Tidbit[1]], x.tidbits
+  end
+
+  def test_question_class
+    assert_equal 5, Question.total_for_country('CN')
+    assert_equal 0, Question.total_for_country('ZZ')
+    assert_equal({1=>'how big is China?', 2=>'how old is China?', 3=>'what is fun in China?', 4=>'do they laugh in China?', 5=>'what language in China?'}, Question.hash_for_country('CN'))
+    assert_equal [Question[3],Question[4]], Question.for_subtopic_and_country(3, 'CN')
+    assert_equal({6=>{topic: 'Country', subtopic: 'how big'}, 7=>{topic: 'Country', subtopic: 'how old'}, 8=>{topic: 'Culture', subtopic: 'is it fun?'}, 9=>{topic: 'Culture', subtopic: 'is it fun?'}, 10=>{topic: 'Culture', subtopic: 'what language?'}}, Question.topichash('JP'))
+    th = Question.topicnest(Book[2].questions, Question.topichash('JP'))
+    assert_equal 2, th.size
+    assert_equal({'how big' => [Question[6]], 'how old' => [Question[7]]}, th['Country'])
   end
 end
 
