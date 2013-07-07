@@ -201,8 +201,8 @@ Essay:
     payable: true
     cleaned_at: 2013-06-28 14:01:14 +0000
     cleaned_by: derek
-    content: China whatever1
-    comment: none
+    content: China whatever1?
+    edited: China whatever1!
   id2:
     question_id: 2
     writer_id: 1
@@ -212,8 +212,8 @@ Essay:
     payable: true
     cleaned_at: 2013-06-28 14:11:14 +0000
     cleaned_by: derek
-    content: China whatever2
-    comment: none
+    content: China whatever2?
+    edited: China whatever2!
   id3:
     question_id: 3
     writer_id: 1
@@ -223,8 +223,8 @@ Essay:
     payable: true
     cleaned_at: 2013-06-28 14:21:14 +0000
     cleaned_by: derek
-    content: China whatever3
-    comment: none
+    content: China .whatever3.
+    edited: China whatever3
   id4:
     question_id: 4
     writer_id: 1
@@ -235,7 +235,7 @@ Essay:
     cleaned_at: 2013-06-28 14:31:14 +0000
     cleaned_by: derek
     content: China whatever4
-    comment: none
+    edited: China whatever4
   id5:
     question_id: 5
     writer_id: 1
@@ -245,8 +245,8 @@ Essay:
     payable: true
     cleaned_at: 2013-06-28 14:41:14 +0000
     cleaned_by: derek
-    content: China whatever5
-    comment: none
+    content: China? whatever5
+    edited: China! whatever5
   id6:
     question_id: 6
     writer_id: 2

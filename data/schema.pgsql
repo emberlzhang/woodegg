@@ -117,7 +117,7 @@ CREATE TABLE essays (
 	cleaned_at timestamp(0) with time zone,
 	cleaned_by varchar(24),
 	content text,
-	comment text
+	edited text
 );
 CREATE INDEX esqi ON essays(question_id);
 CREATE INDEX eswi ON essays(writer_id);

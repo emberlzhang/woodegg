@@ -1,10 +1,6 @@
--- 2013-07-03
--- Almost did this, but going to procrastinate until really needed:
--- CREATE TABLE books_questions (
-	-- book_id integer not null REFERENCES books(id),
-	-- question_id integer not null REFERENCES questions(id),
-	-- PRIMARY KEY (book_id, question_id)
--- );
+-- 2013-07-07
+ALTER TABLE essays RENAME COLUMN comment TO edited;
+UPDATE essays SET edited=content;
 
 -- 2013-06-26
 CREATE TABLE editors (

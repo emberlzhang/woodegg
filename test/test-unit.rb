@@ -40,6 +40,22 @@ class TestResearcher < Test::Unit::TestCase
     assert_equal [], Researcher[1].questions_unanswered
     assert_equal [Question[9],Question[10]], Researcher[2].questions_unanswered
     assert_equal [1,2,3,4,5], Researcher[3].questions_unanswered.map(&:id)
+    assert_equal [Answer[9]], Researcher[2].answers_unfinished
+    assert_equal [], Researcher[3].answers_unfinished
+    assert_equal [Answer[6],Answer[7]], Researcher[2].answers_unpaid
+    assert_equal [Answer[4],Answer[5]], Researcher[1].answers_unjudged
+    assert_equal [6,7,8,9], Researcher[2].question_ids_answered
+    assert_equal [], Researcher[3].question_ids_answered
+    assert_equal 0, Researcher[1].howmany_unassigned
+    assert_equal 1, Researcher[2].howmany_unassigned
+    assert_equal 5, Researcher[3].howmany_unassigned
+  end
+
+  def test_new_researcher
+    r = Researcher.create(person_id: 6)
+    r.add_book(Book[2])
+    assert_equal 5, r.howmany_unassigned
+    assert_equal [6,7,8,9,10], r.questions_unanswered.map(&:id)
   end
 end
 
