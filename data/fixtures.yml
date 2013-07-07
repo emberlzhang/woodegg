@@ -255,8 +255,9 @@ Essay:
     finished_at: 2013-07-08 10:51:14 +0000
     payable: true
     cleaned_at: 2013-07-09 14:41:14 +0000
-    cleaned_by: derek
+    cleaned_by: wonka
     content: Japan whatever1
+    edited: Japan. Whatever. One.
   id7:
     question_id: 7
     writer_id: 2

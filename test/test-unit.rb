@@ -93,6 +93,15 @@ class TestEditor < Test::Unit::TestCase
     assert_equal x.name, @fixtures['Person']['wonka']['name']
     assert_equal x.email, @fixtures['Person']['wonka']['email']
   end
+
+  def test_editor_essays
+    x = Editor[2]
+    assert_equal [Essay[6]], x.essays_edited
+    assert_equal [Essay[7]], x.essays_unedited
+    assert_equal [Question[6]], x.questions_edited
+    assert_equal [Question[7]], x.questions_unedited
+  end
+
 end
 
 class TestTopic < Test::Unit::TestCase
