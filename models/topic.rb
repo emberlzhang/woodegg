@@ -4,9 +4,18 @@ class Topic < Sequel::Model(WoodEgg::DB)
     def shuffle
       all.shuffle
     end
-
-    def available_for_country(country)
-      filter(id: Subtopic.available_for_country(country).map(&:topic_id).uniq).all
-    end
   end
+
+  def template_questions
+    qs = []
+    subtopics.each {|s| s.template_questions.each {|t| qs << t }}
+    qs
+  end
+
+  def questions
+    qs = []
+    subtopics.each {|s| s.questions.each {|q| qs << q }}
+    qs.sort_by(&:id)
+  end
+
 end

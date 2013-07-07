@@ -106,14 +106,54 @@ end
 
 class TestTopic < Test::Unit::TestCase
   include Fixtures::Tools
+
+  def test_topic
+    x = Topic[1]
+    assert_equal 'Country', x.topic
+    assert_equal [Subtopic[1], Subtopic[2]], x.subtopics
+  end
+
+  def test_topic_assocations
+    x = Topic[2]
+    assert_equal [TemplateQuestion[3], TemplateQuestion[4], TemplateQuestion[5]], x.template_questions
+    assert_equal [3,4,5,8,9,10], x.questions.map(&:id)
+  end
 end
 
 class TestSubtopic < Test::Unit::TestCase
   include Fixtures::Tools
+
+  def test_subtopic
+    x = Subtopic[3]
+    assert_equal 'is it fun?', x.subtopic
+    assert_equal Topic[2], x.topic
+    assert_equal [TemplateQuestion[3], TemplateQuestion[4]], x.template_questions
+  end
+
+  def test_subtopic_questions
+    x = Subtopic[3]
+    assert_equal [Question[3], Question[4], Question[8], Question[9]], x.questions
+    assert_equal [Question[3], Question[4]], x.questions_for_country('CN')
+  end
 end
 
 class TestTemplateQuestion < Test::Unit::TestCase
   include Fixtures::Tools
+
+  def test_template_question
+    x = TemplateQuestion[1]
+    assert_equal 'how big is {COUNTRY}?', x.question
+    assert_equal Subtopic[1], x.subtopic
+    assert_equal Topic[1], x.topic
+    assert_equal [Question[1], Question[6]], x.questions
+  end
+
+  def test_template_question_assocations
+    x = TemplateQuestion[3]
+    assert_equal [Answer[3], Answer[8]], x.answers
+    assert_equal [Essay[3]], x.essays
+  end
+
 end
 
 class TestQuestion < Test::Unit::TestCase
