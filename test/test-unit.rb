@@ -184,6 +184,8 @@ class TestQuestion < Test::Unit::TestCase
     th = Question.topicnest(Book[2].questions, Question.topichash('JP'))
     assert_equal 2, th.size
     assert_equal({'how big' => [Question[6]], 'how old' => [Question[7]]}, th['Country'])
+    assert_equal({1 => Question[1], 3=> Question[3]}, Question.for_these(Answer.where(id: [1,3]).all))
+    assert_equal({2 => Question[2], 4=> Question[4]}, Question.for_these(Essay.where(id: [2,4]).all))
   end
 end
 
