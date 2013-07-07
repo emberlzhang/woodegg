@@ -74,4 +74,28 @@ class Question < Sequel::Model(WoodEgg::DB)
     end
 
   end
+
+  def books
+    Book.where(country: country).order(:id).all
+  end
+
+  def subtopic
+    template_question.subtopic
+  end
+
+  def topic
+    template_question.subtopic.topic
+  end
+
+  def researchers
+    rs = []
+    answers.each {|a| rs << a.researcher unless rs.include? a.researcher}
+    rs
+  end
+
+  def editors
+    eds = []
+    books.each {|b| b.editors.each {|e| eds << e unless eds.include? e}}
+    eds
+  end
 end

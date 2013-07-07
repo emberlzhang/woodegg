@@ -158,6 +158,22 @@ end
 
 class TestQuestion < Test::Unit::TestCase
   include Fixtures::Tools
+
+  def test_question
+    # Question has: Books, Answers, Essays, TemplateQuestion, Subtopic, Topic, Researchers, Editor, Tidbits
+    x = Question[1]
+    assert_equal [Book[1], Book[3]], x.books
+    assert_equal [Answer[1]], x.answers
+    assert_equal [Essay[1]], x.essays
+    assert_equal TemplateQuestion[1], x.template_question
+    assert_equal Subtopic[1], x.subtopic
+    assert_equal Topic[1], x.topic
+    assert_equal [Researcher[1]], x.researchers
+    assert_equal [Editor[1]], x.editors
+    assert_equal [], x.tidbits
+    x = Question[4]
+    assert_equal [Tidbit[1]], x.tidbits
+  end
 end
 
 class TestAnswer < Test::Unit::TestCase
