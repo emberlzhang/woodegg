@@ -7,6 +7,9 @@
 <label for="content">content:</label>
 <textarea name="content" id="content"><%= @essay.content %></textarea>
 
+<label for="edited">edited:</label>
+<textarea name="edited" id="edited"><%= @essay.edited %></textarea>
+
 <div class="row">
 	<div class="small-3 columns">
 <label for="started_at">started_at:</label>
@@ -29,9 +32,6 @@
 <input type="text" name="cleaned_by" id="cleaned_by" value="<%= @essay.cleaned_by %>">
 	</div>
 </div>
-
-<label for="comment">comment:</label>
-<textarea name="comment" id="comment"><%= @essay.comment %></textarea>
 
 <input type="submit" name="submit" value="update">
 

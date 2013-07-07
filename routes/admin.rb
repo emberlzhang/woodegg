@@ -111,7 +111,7 @@ end
 
 put '/essay/:id' do
   e = Essay[params[:id]]
-  e.update(just(%w(started_at finished_at payable cleaned_at cleaned_by content comment)))
+  e.update(just(%w(started_at finished_at payable cleaned_at cleaned_by content edited)))
   redirect '/essay/%d' % e.id
 end
 
