@@ -101,7 +101,6 @@ class TestEditor < Test::Unit::TestCase
     assert_equal [Question[6]], x.questions_edited
     assert_equal [Question[7]], x.questions_unedited
   end
-
 end
 
 class TestTopic < Test::Unit::TestCase
@@ -153,7 +152,6 @@ class TestTemplateQuestion < Test::Unit::TestCase
     assert_equal [Answer[3], Answer[8]], x.answers
     assert_equal [Essay[3]], x.essays
   end
-
 end
 
 class TestQuestion < Test::Unit::TestCase
@@ -191,6 +189,24 @@ end
 
 class TestAnswer < Test::Unit::TestCase
   include Fixtures::Tools
+
+  def test_answer
+    x = Answer[7]
+    assert_equal Question[7], x.question
+    assert_equal Researcher[2], x.researcher
+    assert_equal [Essay[7]], x.essays
+    assert_equal [Book[2]], x.books
+    assert_equal Subtopic[2], x.subtopic
+    assert_equal Topic[1], x.topic
+    assert x.finished?
+    refute Answer[9].finished?
+  end
+
+  def test_answer_class
+    assert_equal [Answer[4], Answer[5]], Answer.unjudged
+    assert_equal [Answer[9]], Answer.unfinished
+    assert_equal({'CN' => 5, 'JP' => 4}, Answer.count_per_country_hash)
+  end
 end
 
 class TestBook < Test::Unit::TestCase

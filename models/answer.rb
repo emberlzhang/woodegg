@@ -18,7 +18,24 @@ class Answer < Sequel::Model(WoodEgg::DB)
     end
   end
 
+  def essays
+    question.essays
+  end
+
+  def subtopic
+    question.subtopic
+  end
+
+  def topic
+    question.topic
+  end
+
+  def books
+    question.books
+  end
+
   def finished?
     !finished_at.nil?
   end
+
 end
