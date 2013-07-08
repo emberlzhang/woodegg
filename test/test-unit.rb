@@ -279,6 +279,14 @@ end
 
 class TestEssay < Test::Unit::TestCase
   include Fixtures::Tools
+
+  #Essay has: Writer, Editor, Question, TemplateQuestion, Subtopic, Topic, Book
+  def test_essay
+  end
+
+  def test_essay_class
+  end
+
 end
 
 class TestTag < Test::Unit::TestCase
