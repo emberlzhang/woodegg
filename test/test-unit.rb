@@ -288,6 +288,8 @@ class TestEssay < Test::Unit::TestCase
     assert_equal Question[1], x.question
     assert_equal Subtopic[1], x.subtopic
     assert_equal Topic[1], x.topic
+    assert Essay[1].finished?
+    refute Essay[9].finished?
   end
 
   def test_essay_class
