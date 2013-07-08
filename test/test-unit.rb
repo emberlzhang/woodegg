@@ -97,9 +97,9 @@ class TestEditor < Test::Unit::TestCase
   def test_editor_essays
     x = Editor[2]
     assert_equal [Essay[6]], x.essays_edited
-    assert_equal [Essay[7]], x.essays_unedited
+    assert_equal [Essay[7],Essay[8]], x.essays_unedited
     assert_equal [Question[6]], x.questions_edited
-    assert_equal [Question[7]], x.questions_unedited
+    assert_equal [Question[7],Question[8]], x.questions_unedited
   end
 end
 
@@ -150,7 +150,7 @@ class TestTemplateQuestion < Test::Unit::TestCase
   def test_template_question_assocations
     x = TemplateQuestion[3]
     assert_equal [Answer[3], Answer[8]], x.answers
-    assert_equal [Essay[3]], x.essays
+    assert_equal [Essay[3],Essay[8]], x.essays
   end
 end
 
@@ -268,11 +268,11 @@ class TestBook < Test::Unit::TestCase
   def test_books_missing
     assert_equal [], Book[1].questions_missing_essays
     assert_equal 0, Book[1].questions_missing_essays_count
-    assert_equal [Question[9], Question[10]], Book[2].questions_missing_essays
-    assert_equal 2, Book[2].questions_missing_essays_count
+    assert_equal [Question[10]], Book[2].questions_missing_essays
+    assert_equal 1, Book[2].questions_missing_essays_count
     assert_equal [], Book[1].essays_uncleaned.all
-    assert_equal 1, Book[2].essays_uncleaned.count
-    assert_equal [Essay[7]], Book[2].essays_uncleaned.all
+    assert_equal 2, Book[2].essays_uncleaned.count
+    assert_equal [Essay[7],Essay[8]], Book[2].essays_uncleaned.all
   end
 
 end
@@ -280,11 +280,24 @@ end
 class TestEssay < Test::Unit::TestCase
   include Fixtures::Tools
 
-  #Essay has: Writer, Editor, Question, TemplateQuestion, Subtopic, Topic, Book
   def test_essay
+    x = Essay[1]
+    assert_equal Writer[1], x.writer
+    assert_equal [Editor[1]], x.editors
+    assert_equal Book[1], x.book
+    assert_equal Question[1], x.question
+    assert_equal Subtopic[1], x.subtopic
+    assert_equal Topic[1], x.topic
   end
 
   def test_essay_class
+    assert_equal [Essay[8]], Essay.unjudged
+    assert_equal [Essay[9]], Essay.unfinished
+    assert_equal [Essay[6],Essay[7],Essay[8],Essay[9]], Essay.for_country('JP')
+    assert_equal({'CN' => 5, 'JP' => 4}, Essay.country_howmany)
+    assert_equal 2, Essay.howmany_uncleaned
+    assert_equal Essay[7], Essay.next_uncleaned_for('wonka')
+    assert_equal Essay[8], Essay.next_uncleaned
   end
 
 end

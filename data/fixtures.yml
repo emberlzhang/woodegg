@@ -264,12 +264,24 @@ Essay:
     book_id: 2
     started_at: 2013-07-08 11:41:14 +0000
     finished_at: 2013-07-08 11:51:14 +0000
+    payable: true
+    cleaned_by: wonka
     content: Japan whatever2
+    edited: Editor still editing this one.
   id8:
     question_id: 8
     writer_id: 2
     book_id: 2
-    started_at: 2013-07-08 11:41:14 +0000
+    started_at: 2013-07-08 11:44:14 +0000
+    finished_at: 2013-07-08 11:49:14 +0000
+    content: Japan finished but unjudged
+  id9:
+    question_id: 9
+    writer_id: 2
+    book_id: 2
+    started_at: 2013-07-08 11:52:14 +0000
+    content: Japan unfinished
+
 
 Tag:
   id1:

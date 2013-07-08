@@ -25,7 +25,7 @@ class Essay < Sequel::Model(WoodEgg::DB)
     end
 
     def howmany_uncleaned
-      filter(cleaned_at: nil).count
+      filter(cleaned_at: nil).exclude(finished_at: nil).count
     end
 
     def next_uncleaned_for(email)
@@ -43,6 +43,18 @@ class Essay < Sequel::Model(WoodEgg::DB)
 
   def country
     question.country
+  end
+
+  def editors
+    book.editors
+  end
+
+  def subtopic
+    question.subtopic
+  end
+
+  def topic
+    question.topic
   end
 
 end
