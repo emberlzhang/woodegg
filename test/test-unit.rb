@@ -306,9 +306,24 @@ end
 
 class TestTag < Test::Unit::TestCase
   include Fixtures::Tools
+
+  def test_tag
+    x = Tag[1]
+    assert_equal 'China' x.name
+    assert_equal [Tidbit[1],Tidbit[2]], x.tidbits
+  end
 end
 
 class TestTidbit < Test::Unit::TestCase
   include Fixtures::Tools
+
+  def test_tidbit
+    x = Tidbit[1]
+    assert /China/ === x.content
+    x = Tidbit[2]
+    assert /Japan/ === x.content
+    assert_equal [Question[6],Question[7]], x.questions
+    assert_equal [Tag[2]], x.tags
+  end
 end
 
