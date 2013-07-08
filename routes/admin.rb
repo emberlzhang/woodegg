@@ -73,7 +73,7 @@ get '/book/:id' do
   @done = @book.done?
   unless @done
     @questions_missing_essays = @book.questions_missing_essays
-    @essays_uncleaned = @book.essays_uncleaned.all
+    @essays_unedited = @book.essays_unedited.all
   end
   @questions = @book.questions
   @essays = @book.essays
@@ -111,7 +111,7 @@ end
 
 put '/essay/:id' do
   e = Essay[params[:id]]
-  e.update(just(%w(started_at finished_at payable cleaned_at cleaned_by content edited)))
+  e.update(just(%w(editor_id started_at finished_at payable edited_at content edited)))
   redirect '/essay/%d' % e.id
 end
 

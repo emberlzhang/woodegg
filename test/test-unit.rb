@@ -270,9 +270,9 @@ class TestBook < Test::Unit::TestCase
     assert_equal 0, Book[1].questions_missing_essays_count
     assert_equal [Question[10]], Book[2].questions_missing_essays
     assert_equal 1, Book[2].questions_missing_essays_count
-    assert_equal [], Book[1].essays_uncleaned.all
-    assert_equal 2, Book[2].essays_uncleaned.count
-    assert_equal [Essay[7],Essay[8]], Book[2].essays_uncleaned.all
+    assert_equal [], Book[1].essays_unedited.all
+    assert_equal 2, Book[2].essays_unedited.count
+    assert_equal [Essay[7],Essay[8]], Book[2].essays_unedited.all
   end
 
 end
@@ -297,9 +297,9 @@ class TestEssay < Test::Unit::TestCase
     assert_equal [Essay[9]], Essay.unfinished
     assert_equal [Essay[6],Essay[7],Essay[8],Essay[9]], Essay.for_country('JP')
     assert_equal({'CN' => 5, 'JP' => 4}, Essay.country_howmany)
-    assert_equal 2, Essay.howmany_uncleaned
-    assert_equal Essay[7], Essay.next_uncleaned_for('wonka')
-    assert_equal Essay[8], Essay.next_uncleaned
+    assert_equal 2, Essay.howmany_unedited
+    assert_equal Essay[7], Essay.next_unedited_for(2)
+    assert_equal Essay[8], Essay.next_unedited
   end
 
 end

@@ -24,16 +24,16 @@ class Essay < Sequel::Model(WoodEgg::DB)
       return h
     end
 
-    def howmany_uncleaned
-      filter(cleaned_at: nil).exclude(finished_at: nil).count
+    def howmany_unedited
+      filter(edited_at: nil).exclude(finished_at: nil).count
     end
 
-    def next_uncleaned_for(email)
-      filter(cleaned_at: nil, cleaned_by: email).order(:question_id).first
+    def next_unedited_for(editor_id)
+      filter(edited_at: nil, editor_id: editor_id).order(:question_id).first
     end
 
-    def next_uncleaned
-      filter(cleaned_at: nil, cleaned_by: nil).exclude(finished_at: nil).order(:question_id).first
+    def next_unedited
+      filter(edited_at: nil, editor_id: nil).exclude(finished_at: nil).order(:question_id).first
     end
   end 
 

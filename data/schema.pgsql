@@ -111,20 +111,21 @@ CREATE TABLE essays (
 	question_id integer not null REFERENCES questions(id),
 	writer_id integer not null REFERENCES writers(id),
 	book_id integer not null REFERENCES books(id),
+	editor_id integer REFERENCES writers(id),
 	started_at timestamp(0) with time zone,
 	finished_at timestamp(0) with time zone,
-	payable boolean,
-	cleaned_at timestamp(0) with time zone,
-	cleaned_by varchar(24),
+	edited_at timestamp(0) with time zone,
 	content text,
-	edited text
+	edited text,
+	payable boolean
 );
 CREATE INDEX esqi ON essays(question_id);
 CREATE INDEX eswi ON essays(writer_id);
 CREATE INDEX essa ON essays(started_at);
 CREATE INDEX esfa ON essays(finished_at);
 CREATE INDEX espy ON essays(payable);
-CREATE INDEX esca ON essays(cleaned_at);
+CREATE INDEX esea ON essays(edited_at);
+
 
 CREATE TABLE tags (
 	id serial PRIMARY KEY,

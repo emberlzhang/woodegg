@@ -53,10 +53,10 @@
 		<% end %>
 		</ul>
 	<% end %>
-	<% if @essays_uncleaned.size < 10 %>
-		<h2>Clean these essays: <%= @essays_uncleaned.map {|e| '<a href="/essay/%d">%d</a>' % [e.id, e.id]}.join(',') %></h2>
+	<% if @essays_unedited.size < 10 %>
+		<h2>Clean these essays: <%= @essays_unedited.map {|e| '<a href="/essay/%d">%d</a>' % [e.id, e.id]}.join(',') %></h2>
 	<% else %>
-		<h2># essays uncleaned: <%= @essays_uncleaned.size %></h2>
+		<h2># essays unedited: <%= @essays_unedited.size %></h2>
 	<% end %>
 <% end %>
 </div>

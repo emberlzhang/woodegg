@@ -61,12 +61,12 @@ class Book < Sequel::Model(WoodEgg::DB)
     Question.filter(id: questions_missing_essays_dataset.map(:id)).order(:id).all
   end
 
-  def essays_uncleaned
-    essays_dataset.exclude(finished_at: nil).filter(cleaned_at: nil)
+  def essays_unedited
+    essays_dataset.exclude(finished_at: nil).filter(edited_at: nil)
   end
 
   def done?
-    questions_missing_essays_count == 0 && essays_uncleaned.count == 0
+    questions_missing_essays_count == 0 && essays_unedited.count == 0
   end
 
   # pseudo-associations: for now it's ".all", but some day might be limited

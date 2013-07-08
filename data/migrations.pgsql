@@ -1,3 +1,12 @@
+-- 2013-07-08
+DROP INDEX esca;
+ALTER TABLE essays RENAME COLUMN cleaned_at TO edited_at;
+CREATE INDEX esea ON essays(edited_at);
+ALTER TABLE essays DROP COLUMN cleaned_by;
+ALTER TABLE essays ADD COLUMN editor_id integer;
+UPDATE essays SET editor_id=1;
+ALTER TABLE essays ADD FOREIGN KEY (editor_id) REFERENCES editors(id);
+
 -- 2013-07-07
 ALTER TABLE essays RENAME COLUMN comment TO edited;
 UPDATE essays SET edited=content;

@@ -199,8 +199,8 @@ Essay:
     started_at: 2013-06-28 10:41:14 +0000
     finished_at: 2013-06-28 10:51:14 +0000
     payable: true
-    cleaned_at: 2013-06-28 14:01:14 +0000
-    cleaned_by: derek
+    edited_at: 2013-06-28 14:01:14 +0000
+    editor_id: 1
     content: China whatever1?
     edited: China whatever1!
   id2:
@@ -210,8 +210,8 @@ Essay:
     started_at: 2013-06-28 10:51:14 +0000
     finished_at: 2013-06-28 11:01:14 +0000
     payable: true
-    cleaned_at: 2013-06-28 14:11:14 +0000
-    cleaned_by: derek
+    edited_at: 2013-06-28 14:11:14 +0000
+    editor_id: 1
     content: China whatever2?
     edited: China whatever2!
   id3:
@@ -221,8 +221,8 @@ Essay:
     started_at: 2013-06-28 11:01:14 +0000
     finished_at: 2013-06-28 11:11:14 +0000
     payable: true
-    cleaned_at: 2013-06-28 14:21:14 +0000
-    cleaned_by: derek
+    edited_at: 2013-06-28 14:21:14 +0000
+    editor_id: 1
     content: China .whatever3.
     edited: China whatever3
   id4:
@@ -232,8 +232,8 @@ Essay:
     started_at: 2013-06-28 11:11:14 +0000
     finished_at: 2013-06-28 11:21:14 +0000
     payable: true
-    cleaned_at: 2013-06-28 14:31:14 +0000
-    cleaned_by: derek
+    edited_at: 2013-06-28 14:31:14 +0000
+    editor_id: 1
     content: China whatever4
     edited: China whatever4
   id5:
@@ -243,8 +243,8 @@ Essay:
     started_at: 2013-06-28 11:21:14 +0000
     finished_at: 2013-06-28 11:31:14 +0000
     payable: true
-    cleaned_at: 2013-06-28 14:41:14 +0000
-    cleaned_by: derek
+    edited_at: 2013-06-28 14:41:14 +0000
+    editor_id: 1
     content: China? whatever5
     edited: China! whatever5
   id6:
@@ -254,8 +254,8 @@ Essay:
     started_at: 2013-07-08 10:41:14 +0000
     finished_at: 2013-07-08 10:51:14 +0000
     payable: true
-    cleaned_at: 2013-07-09 14:41:14 +0000
-    cleaned_by: wonka
+    edited_at: 2013-07-09 14:41:14 +0000
+    editor_id: 2
     content: Japan whatever1
     edited: Japan. Whatever. One.
   id7:
@@ -265,7 +265,7 @@ Essay:
     started_at: 2013-07-08 11:41:14 +0000
     finished_at: 2013-07-08 11:51:14 +0000
     payable: true
-    cleaned_by: wonka
+    editor_id: 2
     content: Japan whatever2
     edited: Editor still editing this one.
   id8:
