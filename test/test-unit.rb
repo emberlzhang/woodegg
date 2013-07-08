@@ -309,8 +309,8 @@ class TestTag < Test::Unit::TestCase
 
   def test_tag
     x = Tag[1]
-    assert_equal 'China' x.name
-    assert_equal [Tidbit[1],Tidbit[2]], x.tidbits
+    assert_equal 'China', x.name
+    assert_equal [Tidbit[1]], x.tidbits
   end
 end
 
