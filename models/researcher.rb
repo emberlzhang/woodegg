@@ -10,7 +10,7 @@ class Researcher < Sequel::Model(WoodEgg::DB)
       " LEFT JOIN books_researchers ON researchers.id=books_researchers.researcher_id" +
       " WHERE books_researchers.book_id IS NULL"
       r_ids = WoodEgg::DB[sql].map {|x| x[:id]}
-      Researcher.where(id: r_ids).all
+      Researcher.where(id: r_ids).order(:id).all
     end
 
     # experiment to save SQL queries. maybe load this into Persony some day, if useful.

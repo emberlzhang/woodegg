@@ -4,6 +4,16 @@ class Writer < Sequel::Model(WoodEgg::DB)
   many_to_many :books, :order => :id
   include Persony
 
+  class << self
+    def without_books
+      sql = "SELECT writers.id FROM writers" +
+      " LEFT JOIN books_writers ON writers.id=books_writers.writer_id" +
+      " WHERE books_writers.book_id IS NULL"
+      r_ids = WoodEgg::DB[sql].map {|x| x[:id]}
+      Writer.where(id: r_ids).order(:id).all
+    end
+  end
+
   def countries
     books.map(&:country)
   end

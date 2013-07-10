@@ -1,23 +1,22 @@
 <h2><%= @pagetitle %></h2>
 
-<form action="/writers" method="post">
-	<label for="person_id">type person_id to add new writer:</label>
+<form action="/editors" method="post">
+	<label for="person_id">type person_id to add new editor:</label>
 	<input type="text" name="person_id" id="person_id" value="">
 	<input type="submit" name="submit" value="add">
 </form>
-
 
 <% if @without_books.size > 0 %>
 <h3>assign books to :</h3>
 <ul>
 <% @without_books.each do |x| %>
-	<li><a href="/writer/<%= x.id %>"><%=h x.name %></a></li>
+	<li><a href="/editor/<%= x.id %>"><%=h x.name %></a></li>
 <% end %>
 </ul>
 <% end %>
 
 <ul>
-<% @writers.each do |writer| %>
-	<li><a href="/writer/<%= writer.id %>"><%= writer.name %></a></li>
+<% @editors.each do |x| %>
+	<li><a href="/editor/<%= x.id %>"><%=h x.name %></a></li>
 <% end %>
 </ul>

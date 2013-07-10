@@ -1,0 +1,51 @@
+<h2><%= @pagetitle %></h2>
+
+<div class="row">
+<div class="small-4 columns">
+<img src="/images/300/editor-<%= @editor.id %>.jpg" width="300" height="300" alt="<%= @editor.name %>">
+</div>
+<div class="small-8 columns">
+<a href="<%= @person_url %>">Person page for <%= @editor.name %></a>
+</div>
+</div>
+
+<div class="row">
+<div class="small-4 columns">
+<% if @ok_to_delete %>
+<form action="/editor/<%= @editor.id %>" method="post"><input type="hidden" name="_method" value="delete">
+	<input type="submit" name="submit" value="delete">
+</form>
+<% else %>
+<h2>Essays:</h2>
+<table>
+<tr>
+	<td>Edited:</td>
+	<td><a href="/editor/<%= @editor.id %>/essays/edited"><%= @editor.essays_edited.count %></a></td>
+</tr>
+<tr>
+	<td>Unedited:</td>
+	<td><a href="/editor/<%= @editor.id %>/essays/unedited"><%= @editor.essays_unedited.count %></a></td>
+</tr>
+</table>
+<% end %>
+
+</div>
+<div class="small-8 columns">
+<h2>Books:</h2>
+<ul>
+<% @editor.books.each do |b| %>
+	<li><a href="/book/<%= b.id %>"><%= b.short_title %></a></li>
+<% end %>
+</ul>
+<h4>Assign this editor a book:</h4>
+<form action="/editor/<%= @editor.id %>/books" method="post">
+<select name="book_id">
+	<option value="0">... choose book ...</option>
+<% @books2add.each do |b| %>
+	<option value="<%= b.id %>"><%= b.short_title %></option>
+<% end %>
+</select>
+<input type="submit" name="submit" value="assign book">
+</form>
+</div>
+</div>

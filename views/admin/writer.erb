@@ -49,5 +49,15 @@
 	<li><a href="/book/<%= b.id %>"><%= b.short_title %></a></li>
 <% end %>
 </ul>
+<h4>Assign this writer a book:</h4>
+<form action="/writer/<%= @writer.id %>/books" method="post">
+<select name="book_id">
+	<option value="0">... choose book ...</option>
+<% @books2add.each do |b| %>
+	<option value="<%= b.id %>"><%= b.short_title %></option>
+<% end %>
+</select>
+<input type="submit" name="submit" value="assign book">
+</form>
 </div>
 </div>

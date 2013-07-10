@@ -59,7 +59,7 @@ class TestResearcher < Test::Unit::TestCase
   end
 
   def test_researcher_without_books
-    r = Researcher.create(person_id: 6)
+    Researcher.create(person_id: 6)
     assert_equal [Researcher[4]], Researcher.without_books
   end
 end
@@ -74,6 +74,11 @@ class TestWriter < Test::Unit::TestCase
     x = Writer[2]
     assert_equal x.name, @fixtures['Person']['charlie']['name']
     assert_equal x.email, @fixtures['Person']['charlie']['email']
+  end
+
+  def test_writer_without_books
+    Writer.create(person_id: 6)
+    assert_equal [Writer[3]], Writer.without_books
   end
 end
 
@@ -105,6 +110,11 @@ class TestEditor < Test::Unit::TestCase
     assert_equal [Essay[7],Essay[8]], x.essays_unedited
     assert_equal [Question[6]], x.questions_edited
     assert_equal [Question[7],Question[8]], x.questions_unedited
+  end
+
+  def test_editor_without_books
+    Editor.create(person_id: 6)
+    assert_equal [Editor[3]], Editor.without_books
   end
 end
 

@@ -139,6 +139,7 @@ get '/writer/:id' do
   @writer = Writer[params[:id]]
   @pagetitle = 'EDITOR: %s' % @writer.name
   @person_url = WoodEgg.config['woodegg_person_url'] % @writer.person_id
+  @books2add = Book.filter(asin: nil).order(:id).all - @writer.books
   erb :writer
 end
 
@@ -194,6 +195,7 @@ end
 get '/researchers' do
   @pagetitle = 'researchers'
   @researchers = Researcher.all_people.sort_by(&:name)
+  @without_books = Researcher.without_books
   erb :researchers
 end
 
@@ -212,12 +214,47 @@ end
 get '/writers' do
   @pagetitle = 'writers'
   @writers = Writer.order(:id).all
+  @without_books = Writer.without_books
   erb :writers
 end
 
 post '/writers' do
   x = Writer.create(person_id: params[:person_id].to_i)
   redirect '/writer/%d' % x.id
+end
+
+post '/writer/:id/books' do
+  x = Writer[params[:id]]
+  b = Book[params[:book_id]]
+  x.add_book(b) if b
+  redirect '/writer/%d' % x.id
+end
+
+get '/editors' do
+  @pagetitle = 'editors'
+  @editors = Editor.order(:id).all
+  @without_books = Editor.without_books
+  erb :editors
+end
+
+get '/editor/:id' do
+  @editor = Editor[params[:id]]
+  @pagetitle = 'EDITOR: %s' % @editor.name
+  @person_url = WoodEgg.config['woodegg_person_url'] % @editor.person_id
+  @books2add = Book.filter(asin: nil).order(:id).all - @editor.books
+  erb :editor
+end
+
+post '/editors' do
+  x = Editor.create(person_id: params[:person_id].to_i)
+  redirect '/editor/%d' % x.id
+end
+
+post '/editor/:id/books' do
+  x = Editor[params[:id]]
+  b = Book[params[:book_id]]
+  x.add_book(b) if b
+  redirect '/editor/%d' % x.id
 end
 
 get '/customers' do
