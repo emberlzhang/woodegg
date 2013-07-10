@@ -77,8 +77,9 @@ get '/book/:id' do
   end
   @questions = @book.questions
   @essays = @book.essays
-  @writers = @book.writers
   @researchers = @book.researchers
+  @writers = @book.writers
+  @editors = @book.editors
   erb :book
 end
 

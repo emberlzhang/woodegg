@@ -9,17 +9,24 @@
 <li><a href="/book/<%= @book.id %>/essays">essays</a></li>
 </ul>
 
-<h4>Editor:</h4>
+<h4>Researchers:</h4>
 <ul>
-<% @writers.each do |e| %>
-	<li><a href="/writer/<%= e.id %>"><%= e.name %></a></li>
+<% @researchers.each do |x| %>
+	<li><a href="/researcher/<%= x.id %>"><%= x.name %></a></li>
 <% end %>
 </ul>
 
-<h4>Researchers:</h4>
+<h4>Writers:</h4>
 <ul>
-<% @researchers.each do |r| %>
-	<li><a href="/researcher/<%= r.id %>"><%= r.name %></a></li>
+<% @writers.each do |x| %>
+	<li><a href="/writer/<%= x.id %>"><%= x.name %></a></li>
+<% end %>
+</ul>
+
+<h4>Editors:</h4>
+<ul>
+<% @editors.each do |x| %>
+	<li><a href="/editor/<%= x.id %>"><%= x.name %></a></li>
 <% end %>
 </ul>
 </div>
