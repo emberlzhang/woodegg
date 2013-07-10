@@ -57,6 +57,11 @@ class TestResearcher < Test::Unit::TestCase
     assert_equal 5, r.howmany_unassigned
     assert_equal [6,7,8,9,10], r.questions_unanswered.map(&:id)
   end
+
+  def test_researcher_without_books
+    r = Researcher.create(person_id: 6)
+    assert_equal [Researcher[4]], Researcher.without_books
+  end
 end
 
 class TestWriter < Test::Unit::TestCase

@@ -5,6 +5,14 @@ class Researcher < Sequel::Model(WoodEgg::DB)
   include Persony
 
   class << self
+    def without_books
+      sql = "SELECT researchers.id FROM researchers" +
+      " LEFT JOIN books_researchers ON researchers.id=books_researchers.researcher_id" +
+      " WHERE books_researchers.book_id IS NULL"
+      r_ids = WoodEgg::DB[sql].map {|x| x[:id]}
+      Researcher.where(id: r_ids).all
+    end
+
     # experiment to save SQL queries. maybe load this into Persony some day, if useful.
     # returns same as Researcher.all but with name & email pre-loaded
     def all_people
