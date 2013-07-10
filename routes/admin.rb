@@ -167,6 +167,7 @@ get '/researcher/:id' do
   @pagetitle = 'RESEARCHER: %s' % @researcher.name
   @person_url = WoodEgg.config['woodegg_person_url'] % @researcher.person_id
   @ok_to_delete = (@researcher.answers_dataset.count == 0) ? true : false
+  @books2add = Book.filter(asin: nil).order(:id).all - @researcher.books
   erb :researcher
 end
 
@@ -199,6 +200,13 @@ end
 post '/researchers' do
   x = Researcher.create(person_id: params[:person_id].to_i)
   redirect '/researcher/%d' % x.id
+end
+
+post '/researcher/:id/books' do
+  r = Researcher[params[:id]]
+  b = Book[params[:book_id]]
+  r.add_book(b) if b
+  redirect '/researcher/%d' % r.id
 end
 
 get '/writers' do
