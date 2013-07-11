@@ -92,8 +92,8 @@ get '/books' do
   erb :books
 end
 
-get '/book/:id' do
-  @book = Book[params[:id]]
+get %r{\A/book/([0-9]+)\Z} do |id|
+  @book = Book[id]
   @pagetitle = @book.short_title
   @done = @book.done?
   unless @done
@@ -108,21 +108,21 @@ get '/book/:id' do
   erb :book
 end
 
-put '/book/:id' do
-  b = Book[params[:id]]
+put %r{\A/book/([0-9]+)\Z} do |id|
+  b = Book[id]
   b.update(just(%w(title isbn asin leanpub intro salescopy)))
   redirect '/book/%d' % b.id
 end
 
-get '/book/:id/questions' do
-  @book = Book[params[:id]]
+get %r{\A/book/([0-9]+)/questions\Z} do |id|
+  @book = Book[id]
   @pagetitle = @book.short_title + ' questions'
   @topicnest = Question.topicnest(@book.questions, Question.topichash(@book.country))
   erb :questions
 end
 
-get '/book/:id/essays' do
-  @book = Book[params[:id]]
+get %r{\A/book/([0-9]+)/essays\Z} do |id|
+  @book = Book[id]
   @pagetitle = @book.short_title + ' essays'
   @essays = @book.essays
   @question_for_essay = Question.for_these(@essays)
@@ -132,34 +132,34 @@ end
 
 ################ ESSAYS, ANSWERS, QUESTIONS
 
-get '/essay/:id' do
-  @essay = Essay[params[:id]]
+get %r{\A/essay/([0-9]+)\Z} do |id|
+  @essay = Essay[id]
   @pagetitle = 'essay #%d' % @essay.id
   erb :essay
 end
 
-put '/essay/:id' do
-  e = Essay[params[:id]]
+put %r{\A/essay/([0-9]+)\Z} do |id|
+  e = Essay[id]
   e.update(just(%w(editor_id started_at finished_at payable edited_at content edited)))
   redirect '/essay/%d' % e.id
 end
 
-get '/question/:id' do
-  @question = Question[params[:id]]
+get %r{\A/question/([0-9]+)\Z} do |id|
+  @question = Question[id]
   @pagetitle = 'question #%d' % @question.id
   erb :question
 end
 
-get '/answer/:id' do
-  @answer = Answer[params[:id]]
+get %r{\A/answer/([0-9]+)\Z} do |id|
+  @answer = Answer[id]
   @pagetitle = 'answer #%d' % @answer.id
   @question = @answer.question
   @researcher = @answer.researcher
   erb :answer
 end
 
-put '/answer/:id' do
-  a = Answer[params[:id]]
+put %r{\A/answer/([0-9]+)\Z} do |id|
+  a = Answer[id]
   a.update(just(%w(started_at finished_at payable answer sources)))
   redirect '/answer/%d' % a.id
 end
@@ -189,8 +189,8 @@ get '/editors' do
   erb :editors
 end
 
-get '/researcher/:id' do
-  @researcher = Researcher[params[:id]]
+get %r{\A/researcher/([0-9]+)\Z} do |id|
+  @researcher = Researcher[id]
   @pagetitle = 'RESEARCHER: %s' % @researcher.name
   @person_url = WoodEgg.config['woodegg_person_url'] % @researcher.person_id
   @ok_to_delete = (@researcher.answers_dataset.count == 0) ? true : false
@@ -198,16 +198,16 @@ get '/researcher/:id' do
   erb :researcher
 end
 
-get '/writer/:id' do
-  @writer = Writer[params[:id]]
+get %r{\A/writer/([0-9]+)\Z} do |id|
+  @writer = Writer[id]
   @pagetitle = 'WRITER: %s' % @writer.name
   @person_url = WoodEgg.config['woodegg_person_url'] % @writer.person_id
   @books2add = Book.filter(asin: nil).order(:id).all - @writer.books
   erb :writer
 end
 
-get '/editor/:id' do
-  @editor = Editor[params[:id]]
+get %r{\A/editor/([0-9]+)\Z} do |id|
+  @editor = Editor[id]
   @pagetitle = 'EDITOR: %s' % @editor.name
   @person_url = WoodEgg.config['woodegg_person_url'] % @editor.person_id
   @books2add = Book.filter(asin: nil).order(:id).all - @editor.books
@@ -245,53 +245,53 @@ post '/editors' do
   redirect '/editor/%d' % x.id
 end
 
-put '/researcher/:id' do
-  r = Researcher[params[:id]]
+put %r{\A/researcher/([0-9]+)\Z} do |id|
+  r = Researcher[id]
   r.update(just(%w(bio)))
   redirect '/researcher/%d' % r.id
 end
 
-put '/writer/:id' do
-  x = Writer[params[:id]]
+put %r{\A/writer/([0-9]+)\Z} do |id|
+  x = Writer[id]
   x.update(just(%w(bio)))
   redirect '/writer/%d' % x.id
 end
 
-post '/researcher/:id/books' do
-  r = Researcher[params[:id]]
+post %r{\A/researcher/([0-9]+)/books\Z} do |id|
+  r = Researcher[id]
   b = Book[params[:book_id]]
   r.add_book(b) if b
   redirect '/researcher/%d' % r.id
 end
 
-post '/writer/:id/books' do
-  x = Writer[params[:id]]
+post %r{\A/writer/([0-9]+)/books\Z} do |id|
+  x = Writer[id]
   b = Book[params[:book_id]]
   x.add_book(b) if b
   redirect '/writer/%d' % x.id
 end
 
-post '/editor/:id/books' do
-  x = Editor[params[:id]]
+post %r{\A/editor/([0-9]+)/books\Z} do |id|
+  x = Editor[id]
   b = Book[params[:book_id]]
   x.add_book(b) if b
   redirect '/editor/%d' % x.id
 end
 
-post '/writer/:id/approval' do
-  x = Writer[params[:id]]
+post %r{\A/writer/([0-9]+)/approval\Z} do |id|
+  x = Writer[id]
   x.approve_finished_unjudged_essays
   redirect '/writer/%d' % x.id
 end
 
-delete '/researcher/:id' do
-  x = Researcher[params[:id]]
+delete %r{\A/researcher/([0-9]+)\Z} do |id|
+  x = Researcher[id]
   x.destroy
   redirect '/researchers'
 end
 
-delete '/writer/:id' do
-  x = Writer[params[:id]]
+delete %r{\A/writer/([0-9]+)\Z} do |id|
+  x = Writer[id]
   x.destroy
   redirect '/writers'
 end
@@ -311,15 +311,15 @@ post '/customers' do
   redirect '/customer/%d' % c.id
 end
 
-get '/book/:id/customers' do
-  @book = Book[params[:id]]
+get %r{\A/book/([0-9]+)/customers\Z} do |id|
+  @book = Book[id]
   @pagetitle = 'customers of ' + @book.short_title
   @customers = @book.customers
   erb :customers
 end
 
-get '/customer/:id' do
-  @customer = Customer[params[:id]]
+get %r{\A/customer/([0-9]+)\Z} do |id|
+  @customer = Customer[id]
   @pagetitle = 'customer: ' + @customer.name
   @books = @customer.books
   @books_to_add = Book.order(:title).all - @books
@@ -328,8 +328,8 @@ get '/customer/:id' do
   erb :customer
 end
 
-post '/customer/:id/books' do
-  c = Customer[params[:id]]
+post %r{\A/customer/([0-9]+)/books\Z} do |id|
+  c = Customer[id]
   has_books = c.books
   if params[:book_id] == 'all'
     Book.available.each do |b|
@@ -344,8 +344,8 @@ post '/customer/:id/books' do
   redirect '/customer/%d' % c.id
 end
 
-post '/customer/:id/email' do
-  c = Customer[params[:id]]
+post %r{\A/customer/([0-9]+)/email\Z} do |id|
+  c = Customer[id]
   opts = {}
   unless params[:subject].empty?
     opts[:subject] = params[:subject]
@@ -378,27 +378,27 @@ post '/tidbits' do
   redirect '/tidbit/%d' % t.id
 end
 
-get '/tidbit/:id' do
-  @tidbit = Tidbit[params[:id]]
+get %r{\A/tidbit/([0-9]+)\Z} do |id|
+  @tidbit = Tidbit[id]
   @pagetitle = 'tidbit # %d' % @tidbit.id
   @all_tags = Tag.order(:id).all - @tidbit.tags
   erb :tidbit
 end
 
-put '/tidbit/:id' do
-  t = Tidbit[params[:id]]
+put %r{\A/tidbit/([0-9]+)\Z} do |id|
+  t = Tidbit[id]
   t.update(just(%w(created_at created_by headline url intro content)))
   redirect '/tidbit/%d' % t.id
 end
 
-delete '/tidbit/:id' do
-  t = Tidbit[params[:id]]
+delete %r{\A/tidbit/([0-9]+)\Z} do |id|
+  t = Tidbit[id]
   t.destroy
   redirect '/tidbits'
 end
 
-post '/tidbit/:id/tags' do
-  t = Tidbit[params[:id]]
+post %r{\A/tidbit/([0-9]+)/tags\Z} do |id|
+  t = Tidbit[id]
   # can post either tag_name, to make new, or tag_id, to use existing
   tag = nil
   if params[:tag_name].empty? == false
@@ -410,21 +410,21 @@ post '/tidbit/:id/tags' do
   redirect '/tidbit/%d' % t.id
 end
 
-post '/tidbit/:id/questions' do
-  t = Tidbit[params[:id]]
+post %r{\A/tidbit/([0-9]+)/questions\Z} do |id|
+  t = Tidbit[id]
   t.add_question(Question[params[:question_id]])
   redirect '/tidbit/%d' % t.id
 end
 
-delete '/tidbit/:id/tag/:tag_id' do
-  t = Tidbit[params[:id]]
-  t.remove_tag(Tag[params[:tag_id]])
+delete %r{\A/tidbit/([0-9]+)/tag/([0-9]+)\Z} do |id, tag_id|
+  t = Tidbit[id]
+  t.remove_tag(Tag[tag_id])
   redirect '/tidbit/%d' % t.id
 end
 
-delete '/tidbit/:id/question/:question_id' do
-  t = Tidbit[params[:id]]
-  t.remove_question(Question[params[:question_id]])
+delete %r{\A/tidbit/([0-9]+)/question/([0-9]+)\Z} do |id, question_id|
+  t = Tidbit[id]
+  t.remove_question(Question[question_id])
   redirect '/tidbit/%d' % t.id
 end
 
