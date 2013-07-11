@@ -32,6 +32,7 @@ class TestResearcher < Test::Unit::TestCase
     assert_equal [Subtopic[3],Subtopic[4]], Researcher[2].subtopics_unfinished_in_topic(2)
     assert_equal [Subtopic[1],Subtopic[2]], Researcher[3].subtopics_unfinished_in_topic(1)
     assert_equal [Subtopic[3],Subtopic[4]], Researcher[3].subtopics_unfinished_in_topic(2)
+    assert_equal [Question[3],Question[4]], Researcher[3].questions_unfinished_in_subtopic(3)
     assert_equal 5, Researcher[1].answers_finished_count
     assert_equal [5,4,3,2,1], Researcher[1].answers_finished.map(&:id)
     assert_equal 3, Researcher[2].answers_finished_count

@@ -44,8 +44,11 @@ class WoodEggQA < Sinatra::Base
     @cname = Countries.hsh[@ccode]
     @country_name = @cname.gsub(' ', '&nbsp;')
     @topic = Topic[topic_id]
-    @subtopics = Subtopic.available_for_country_and_topic(@ccode, topic_id)
-    @questions_i_answered = @researcher.question_ids_answered
+    @subtopics = @researcher.subtopics_unfinished_in_topic(@topic.id)
+    @questions_for_subtopic = {}
+    @subtopics.each do |s|
+      @questions_for_subtopic[s.id] = @researcher.questions_unfinished_in_subtopic(s.id)
+    end
     erb :subtopics
   end
 

@@ -49,6 +49,10 @@ class Researcher < Sequel::Model(WoodEgg::DB)
     subtopics.select {|s| s.topic_id == topic_id}
   end
   
+  def questions_unfinished_in_subtopic(subtopic_id)
+    questions_unanswered.select {|q| q.subtopic.id == subtopic_id}
+  end
+  
   def questions
     q = []
     books.each {|b| q.concat(b.questions)}
