@@ -34,7 +34,19 @@ class Researcher < Sequel::Model(WoodEgg::DB)
   end
 
   def topics_unfinished
-    Topic.filter(id: Subtopic.filter(id: TemplateQuestion.filter(id: Question.filter(country: countries.pop.upcase).exclude(id: answers.map(&:question_id)).map(:template_question_id)).map(:subtopic_id)).map(:topic_id)).order(:id).all
+    topics = []
+    questions_unanswered.each do |q|
+      topics << q.topic unless topics.include? q.topic
+    end
+    topics
+  end
+
+  def subtopics_unfinished_in_topic(topic_id)
+    subtopics = []
+    questions_unanswered.each do |q|
+      subtopics << q.subtopic unless subtopics.include? q.subtopic
+    end
+    subtopics.select {|s| s.topic_id == topic_id}
   end
   
   def questions
