@@ -27,6 +27,9 @@ def just(keyz)
   params.select {|k, v| keyz.include? k}
 end
 
+
+##################  HOME, PURCHASE PROOF, STATS
+
 get '/' do
   @pagetitle = 'home'
   @userstats = Userstat.filter(:statkey.like 'proof%').all
@@ -59,6 +62,28 @@ post '/proof' do
     redirect '/'
   end
 end
+
+get '/stats' do
+  @pagetitle = 'stats'
+  @grid = Countries.userstats_grid
+  @person_url_d = WoodEgg.config['woodegg_person_url']
+  @newest = Userstat.newest_woodegg
+  erb :stats
+end
+
+get '/stats/:country/:val' do
+  @country_code = params[:country]
+  @country_name = Countries.hsh[@country_code] || 'Any Country'
+  @val = params[:val]
+  @pagetitle = @country_name + ' ' + @val
+  @people = Person.country_val(@country_code, @val)
+  @person_url_d = WoodEgg.config['woodegg_person_url']
+  erb :stats2
+end
+
+
+
+###################### BOOKS
 
 get '/books' do
   @pagetitle = 'books'
@@ -104,6 +129,9 @@ get '/book/:id/essays' do
   erb :essays
 end
 
+
+################ ESSAYS, ANSWERS, QUESTIONS
+
 get '/essay/:id' do
   @essay = Essay[params[:id]]
   @pagetitle = 'essay #%d' % @essay.id
@@ -136,32 +164,29 @@ put '/answer/:id' do
   redirect '/answer/%d' % a.id
 end
 
-get '/writer/:id' do
-  @writer = Writer[params[:id]]
-  @pagetitle = 'EDITOR: %s' % @writer.name
-  @person_url = WoodEgg.config['woodegg_person_url'] % @writer.person_id
-  @books2add = Book.filter(asin: nil).order(:id).all - @writer.books
-  erb :writer
+
+
+################## RESEARCHERS, WRITERS, EDITORS - each URL type together, since so similar
+
+get '/researchers' do
+  @pagetitle = 'researchers'
+  @researchers = Researcher.all_people.sort_by(&:name)
+  @without_books = Researcher.without_books
+  erb :researchers
 end
 
-get %r{/writer/([0-9]+)/essays/(finished|unfinished|unpaid|unjudged)} do |id,filtr|
-  @writer = Writer[id]
-  @pagetitle = "#{filtr} essays for #{@writer.name}"
-  @essays = @writer.send("essays_#{filtr}")
-  @question_for_essays = Question.for_these(@essays)
-  erb :writer_essays
+get '/writers' do
+  @pagetitle = 'writers'
+  @writers = Writer.order(:id).all
+  @without_books = Writer.without_books
+  erb :writers
 end
 
-put '/writer/:id' do
-  e = Writer[params[:id]]
-  e.update(just(%w(bio)))
-  redirect '/writer/%d' % e.id
-end
-
-post '/writer/:id/approval' do
-  e = Writer[params[:id]]
-  e.approve_finished_unjudged_essays
-  redirect '/writer/%d' % e.id
+get '/editors' do
+  @pagetitle = 'editors'
+  @editors = Editor.order(:id).all
+  @without_books = Editor.without_books
+  erb :editors
 end
 
 get '/researcher/:id' do
@@ -173,69 +198,12 @@ get '/researcher/:id' do
   erb :researcher
 end
 
-get %r{/researcher/([0-9]+)/answers/(finished|unfinished|unpaid|unjudged)} do |id,filtr|
-  @researcher = Researcher[id]
-  @pagetitle = "#{filtr} answers for #{@researcher.name}"
-  @answers = @researcher.send("answers_#{filtr}")
-  @question_for_answers = Question.for_these(@answers)
-  erb :researcher_answers
-end
-
-put '/researcher/:id' do
-  r = Researcher[params[:id]]
-  r.update(just(%w(bio)))
-  redirect '/researcher/%d' % r.id
-end
-
-delete '/researcher/:id' do
-  r = Researcher[params[:id]]
-  r.destroy
-  redirect '/researchers'
-end
-
-get '/researchers' do
-  @pagetitle = 'researchers'
-  @researchers = Researcher.all_people.sort_by(&:name)
-  @without_books = Researcher.without_books
-  erb :researchers
-end
-
-post '/researchers' do
-  x = Researcher.create(person_id: params[:person_id].to_i)
-  redirect '/researcher/%d' % x.id
-end
-
-post '/researcher/:id/books' do
-  r = Researcher[params[:id]]
-  b = Book[params[:book_id]]
-  r.add_book(b) if b
-  redirect '/researcher/%d' % r.id
-end
-
-get '/writers' do
-  @pagetitle = 'writers'
-  @writers = Writer.order(:id).all
-  @without_books = Writer.without_books
-  erb :writers
-end
-
-post '/writers' do
-  x = Writer.create(person_id: params[:person_id].to_i)
-  redirect '/writer/%d' % x.id
-end
-
-post '/writer/:id/books' do
-  x = Writer[params[:id]]
-  b = Book[params[:book_id]]
-  x.add_book(b) if b
-  redirect '/writer/%d' % x.id
-end
-
-get '/editors' do
-  @pagetitle = 'editors'
-  @editors = Editor.order(:id).all
-  @without_books = Editor.without_books
-  erb :editors
+get '/writer/:id' do
+  @writer = Writer[params[:id]]
+  @pagetitle = 'WRITER: %s' % @writer.name
+  @person_url = WoodEgg.config['woodegg_person_url'] % @writer.person_id
+  @books2add = Book.filter(asin: nil).order(:id).all - @writer.books
+  erb :writer
 end
 
 get '/editor/:id' do
@@ -246,9 +214,61 @@ get '/editor/:id' do
   erb :editor
 end
 
+get %r{/researcher/([0-9]+)/answers/(finished|unfinished|unpaid|unjudged)} do |id,filtr|
+  @researcher = Researcher[id]
+  @pagetitle = "#{filtr} answers for #{@researcher.name}"
+  @answers = @researcher.send("answers_#{filtr}")
+  @question_for_answers = Question.for_these(@answers)
+  erb :researcher_answers
+end
+
+get %r{/writer/([0-9]+)/essays/(finished|unfinished|unpaid|unjudged)} do |id,filtr|
+  @writer = Writer[id]
+  @pagetitle = "#{filtr} essays for #{@writer.name}"
+  @essays = @writer.send("essays_#{filtr}")
+  @question_for_essays = Question.for_these(@essays)
+  erb :writer_essays
+end
+
+post '/researchers' do
+  x = Researcher.create(person_id: params[:person_id].to_i)
+  redirect '/researcher/%d' % x.id
+end
+
+post '/writers' do
+  x = Writer.create(person_id: params[:person_id].to_i)
+  redirect '/writer/%d' % x.id
+end
+
 post '/editors' do
   x = Editor.create(person_id: params[:person_id].to_i)
   redirect '/editor/%d' % x.id
+end
+
+put '/researcher/:id' do
+  r = Researcher[params[:id]]
+  r.update(just(%w(bio)))
+  redirect '/researcher/%d' % r.id
+end
+
+put '/writer/:id' do
+  x = Writer[params[:id]]
+  x.update(just(%w(bio)))
+  redirect '/writer/%d' % x.id
+end
+
+post '/researcher/:id/books' do
+  r = Researcher[params[:id]]
+  b = Book[params[:book_id]]
+  r.add_book(b) if b
+  redirect '/researcher/%d' % r.id
+end
+
+post '/writer/:id/books' do
+  x = Writer[params[:id]]
+  b = Book[params[:book_id]]
+  x.add_book(b) if b
+  redirect '/writer/%d' % x.id
 end
 
 post '/editor/:id/books' do
@@ -257,6 +277,27 @@ post '/editor/:id/books' do
   x.add_book(b) if b
   redirect '/editor/%d' % x.id
 end
+
+post '/writer/:id/approval' do
+  x = Writer[params[:id]]
+  x.approve_finished_unjudged_essays
+  redirect '/writer/%d' % x.id
+end
+
+delete '/researcher/:id' do
+  x = Researcher[params[:id]]
+  x.destroy
+  redirect '/researchers'
+end
+
+delete '/writer/:id' do
+  x = Writer[params[:id]]
+  x.destroy
+  redirect '/writers'
+end
+
+
+######################## CUSTOMERS
 
 get '/customers' do
   @pagetitle = 'all customers'
@@ -316,23 +357,9 @@ post '/customer/:id/email' do
   redirect '/customer/%d?sent=sent' % c.id
 end
 
-get '/stats' do
-  @pagetitle = 'stats'
-  @grid = Countries.userstats_grid
-  @person_url_d = WoodEgg.config['woodegg_person_url']
-  @newest = Userstat.newest_woodegg
-  erb :stats
-end
 
-get '/stats/:country/:val' do
-  @country_code = params[:country]
-  @country_name = Countries.hsh[@country_code] || 'Any Country'
-  @val = params[:val]
-  @pagetitle = @country_name + ' ' + @val
-  @people = Person.country_val(@country_code, @val)
-  @person_url_d = WoodEgg.config['woodegg_person_url']
-  erb :stats2
-end
+
+############# TIDBITS AND TAGS
 
 get '/tidbits' do
   @pagetitle = 'tidbits'
