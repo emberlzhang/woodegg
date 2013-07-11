@@ -61,4 +61,19 @@
 <input type="submit" name="submit" value="assign book">
 </form>
 </div>
+
+<div class="small-12 columns">
+<h4>Create a new Answer for this Researcher. Choose question:</h4>
+<form action="/researcher/<%= @researcher.id %>/answers" method="post">
+	<select name="question_id">
+		<option value="0">... choose question ...</option>
+<% @researcher.questions.each do |q| %>
+		<option value="<%= q.id %>"><%=h q.question %></option>
+<% end %>
+	</select>
+	<input type="submit" name="submit" value="create answer">
+</form>
 </div>
+
+</div>
+

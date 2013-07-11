@@ -214,7 +214,7 @@ get %r{\A/editor/([0-9]+)\Z} do |id|
   erb :editor
 end
 
-get %r{/researcher/([0-9]+)/answers/(finished|unfinished|unpaid|unjudged)} do |id,filtr|
+get %r{\A/researcher/([0-9]+)/answers/(finished|unfinished|unpaid|unjudged)\Z} do |id,filtr|
   @researcher = Researcher[id]
   @pagetitle = "#{filtr} answers for #{@researcher.name}"
   @answers = @researcher.send("answers_#{filtr}")
@@ -222,7 +222,7 @@ get %r{/researcher/([0-9]+)/answers/(finished|unfinished|unpaid|unjudged)} do |i
   erb :researcher_answers
 end
 
-get %r{/writer/([0-9]+)/essays/(finished|unfinished|unpaid|unjudged)} do |id,filtr|
+get %r{\A/writer/([0-9]+)/essays/(finished|unfinished|unpaid|unjudged)\Z} do |id,filtr|
   @writer = Writer[id]
   @pagetitle = "#{filtr} essays for #{@writer.name}"
   @essays = @writer.send("essays_#{filtr}")
@@ -282,6 +282,16 @@ post %r{\A/writer/([0-9]+)/approval\Z} do |id|
   x = Writer[id]
   x.approve_finished_unjudged_essays
   redirect '/writer/%d' % x.id
+end
+
+post %r{\A/researcher/([0-9]+)/answers\Z} do |researcher_id|
+  redirect "/researcher/#{researcher_id}" unless params[:question_id].to_i > 0
+  a = Answer.create(question_id: params[:question_id],
+		    researcher_id: researcher_id,
+		    started_at: Time.now(),
+		    finished_at: Time.now(),
+		    payable: true)
+  redirect '/answer/%d' % a.id
 end
 
 delete %r{\A/researcher/([0-9]+)\Z} do |id|
