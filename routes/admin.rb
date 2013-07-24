@@ -356,14 +356,7 @@ end
 
 post %r{\A/customer/([0-9]+)/email\Z} do |id|
   c = Customer[id]
-  opts = {}
-  unless params[:subject].empty?
-    opts[:subject] = params[:subject]
-  end
-  unless params[:message].empty?
-    opts[:message] = params[:message]
-  end
-  c.email_first(opts)
+  c.email_first
   redirect '/customer/%d?sent=sent' % c.id
 end
 

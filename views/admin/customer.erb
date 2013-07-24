@@ -28,10 +28,6 @@
 <% else %>
 <h3>email their reset link</h3>
 <form action="/customer/<%= @customer.id %>/email" method="post">
-	<label for="subject">subject of email:</label>
-	<input type="text" name="subject" id="subject" value="your Wood Egg ebooks">
-	<label for="message">body of email:</label>
-	<textarea name="message" id="message">I just created you an account on woodegg.com with your free ebook available to download inside. Enjoy!</textarea>
 	<div class="small">(it automatically adds greeting and “Just click this link and make a password:” + unique URL)</div>
 	<input type="submit" name="submit" value="send email">
 </form>
