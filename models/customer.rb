@@ -11,7 +11,7 @@ class Customer < Sequel::Model(WoodEgg::DB)
   end
 
   def email_post_proof(book)
-    f = Formletter[WoodEgg.config['formletter_thanks_buying']]
+    f = Formletter[WoodEgg.config['formletter_thanks_buying'].to_i]
     p = self.person
     p.define_singleton_method(:booktitle) { book.short_title }
     h = {subject: 'Thank you for buying the ' + book.short_title, category: 'woodegg', profile: 'derek@sivers'}
