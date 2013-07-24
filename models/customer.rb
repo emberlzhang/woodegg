@@ -3,11 +3,11 @@ class Customer < Sequel::Model(WoodEgg::DB)
   many_to_many :books, :order => :id
   include Persony
 
-  def email_first(opts={})
-    opts[:baseurl] ||= 'https://woodegg.com/a/'
-    opts[:subject] ||= 'your Wood Egg ebook'
-    opts[:message] ||= 'I just created you an account on woodegg.com with your free ebook available to download inside. Enjoy!'
-    person.email_reset_message(opts)
+  def email_first
+    f = Formletter[WoodEgg.config['formletter_created_acct'].to_i]
+    p = self.person
+    h = {subject: 'your Wood Egg ebook', category: 'woodegg', profile: 'derek@sivers'}
+    f.send_to(p, h)
   end
 
   def email_post_proof(book)
