@@ -10,6 +10,8 @@ class WoodEgg
   def self.config
     if @config.nil?
       @config = YAML.load_file(File.dirname(@fbase) + '/config.yml')
+      @config['formletter_thanks_buying'] = 2
+      @config['formletter_created_acct'] = 3
     end
     @config
   end
