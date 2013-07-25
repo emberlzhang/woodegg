@@ -4,7 +4,6 @@ require 'sinatra'
 require 'kramdown'
 root = File.dirname(File.dirname(File.realpath(__FILE__)))
 require "#{root}/models.rb"
-require "#{root}/mailconfig.rb"
 
 configure do
   set :root, root

@@ -1,5 +1,4 @@
 require 'sinatra/base'
-require './mailconfig.rb'
 require './models.rb'
 
 OTH_MAP = '/a'
