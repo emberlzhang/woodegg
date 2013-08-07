@@ -1,23 +1,26 @@
 TO-DO:
 
-RESEARCHERS
-	Last year, it was done per-country.  Now, needs to be restricted to just this book.  Some ways to do this:
-		* - Insert blank answers as the TO-DO list. Change Researcher methods to just query these.
-		* - books_researchers + books_questions = access to those questions
-
-TESTS
-	first, change schema
-	fixtures for woodegg sample info, for unit testing
-
-QUIZ?
-	for hiring
+RESEARCHERS:
+	upload file
+	show interviewees  (see below)
 
 USER LOGIN AREA:
 	user_questions
 	answers_to_user_questions
 
 ADMIN AREA:
+	answer approver
+	essay approver
 	customer_questions
 	system for sending queries out to researchers
-	woodegg userstats: researchers for India (#), writers for China (#), editors for Any (#)
+
+INTERVIEWEES:
+	admin list of interviewees without bio
+	add userstat key:woodegg-bio val:{the bio}
+	add question_ids most appropriate for this person?
+
+	CONTACTING:
+		button for which questions to ask this person.
+		that will send email from we@woodegg.com to interviewee saying "Our researcher, {name}, working on the {bookTitle} would like to ask you a few questions. {name}'s email address is {email}, if you'd like to reply back directly. {questions}"
+		note that this person is already being contacted by someone.  add userstat to say so, so doesn't show on list anymore?  don't want two contacting.
 
