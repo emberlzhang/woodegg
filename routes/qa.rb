@@ -33,6 +33,7 @@ class WoodEggQA < Sinatra::Base
     @country_code = cc
     @ccode = cc.upcase
     @cname = Countries.hsh[@ccode]
+    @pagetitle = @cname
     @country_name = @cname.gsub(' ', '&nbsp;')
     @topics = @researcher.topics_unfinished
     erb :topics
@@ -44,6 +45,7 @@ class WoodEggQA < Sinatra::Base
     @cname = Countries.hsh[@ccode]
     @country_name = @cname.gsub(' ', '&nbsp;')
     @topic = Topic[topic_id]
+    @pagetitle = @topic.topic
     @subtopics = @researcher.subtopics_unfinished_in_topic(@topic.id)
     @questions_for_subtopic = {}
     @subtopics.each do |s|
@@ -69,6 +71,7 @@ class WoodEggQA < Sinatra::Base
     redirect('/qa/', 301) if @q.nil?
     @ccode = @q.country
     @cname = Countries.hsh[@ccode]
+    @pagetitle = @q.question
     erb :question
   end
 
@@ -84,6 +87,7 @@ class WoodEggQA < Sinatra::Base
     @answer = Answer[params[:id]]
     redirect '/' if @answer.nil?
     @question = @answer.question
+    @pagetitle = @question.question
     @cname = Countries.hsh[@question.country]
     @subtopic = @question.template_question.subtopic
     erb :answer
@@ -101,7 +105,21 @@ class WoodEggQA < Sinatra::Base
   end
 
   get '/help' do
+    @pagetitle = 'HELP'
     erb :help
+  end
+
+  get '/upload' do
+    @pagetitle = 'UPLOAD'
+    erb :upload
+  end
+
+  post '/upload' do
+    File.open('/tmp/' + params['myfile'][:filename], 'w') do |f|
+      f.write(params['myfile'][:tempfile].read)
+    end
+    @filename = params['myfile'][:filename]
+    erb :uploaded
   end
 
 end
