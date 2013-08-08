@@ -1,3 +1,6 @@
+-- 2013-08-08
+ALTER TABLE uploads ADD COLUMN uploaded char(1) NOT NULL DEFAULT 'n';
+
 -- 2013-08-07
 CREATE TABLE uploads (
 	id serial PRIMARY KEY,

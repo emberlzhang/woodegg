@@ -8,6 +8,7 @@ USER LOGIN AREA:
 	answers_to_user_questions
 
 ADMIN AREA:
+	access to uploads
 	answer approver
 	essay approver
 	customer_questions

@@ -162,6 +162,7 @@ CREATE TABLE uploads (
 	our_filename text not null,
 	mime_type varchar(32),
 	bytes integer,
+	uploaded char(1) NOT NULL DEFAULT 'n',
 	notes text,
 	transcription text
 );
