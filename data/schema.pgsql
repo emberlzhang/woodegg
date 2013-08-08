@@ -154,4 +154,16 @@ CREATE TABLE questions_tidbits (
 	PRIMARY KEY (question_id, tidbit_id)
 );
 
+CREATE TABLE uploads (
+	id serial PRIMARY KEY,
+	created_at date NOT NULL DEFAULT CURRENT_DATE,
+	researcher_id integer not null REFERENCES researchers(id),
+	their_filename text not null,
+	our_filename text not null,
+	mime_type varchar(32),
+	bytes integer,
+	notes text,
+	transcription text
+);
+
 COMMIT;

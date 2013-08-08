@@ -1,0 +1,9 @@
+<% if @researcher.uploads.count > 0 %>
+<h2>Your Uploads</h2>
+<dl>
+<% @researcher.uploads.each do |x| %>
+	<dt><%=h x.their_filename %></dt>
+	<dd><%=h x.notes %></dd>
+<% end %>
+</dl>
+<% end %>

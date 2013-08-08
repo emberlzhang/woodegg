@@ -1,11 +1,19 @@
 <h1>Upload File</h1>
 
 <form action="/qa/upload" method="post" enctype="multipart/form-data">
-	<input type="file" name="myfile">
-	<input type="submit" value="Upload!">
+	<label for="myfile">Choose file from your computer:</label>
+	<input type="file" name="myfile" id="myfile" value="">
+	<br>&nbsp;<br>
+	<label for="notes">Please write a description of what is in this file:</label>
+	<input type="text" name="notes" id="notes" value="">
+	<br>
+	<input type="submit" value="UPLOAD">
 </form>
 
 <p>
-It doesn’t have a fancy progress bar, but <a href="mailto:derek@sivers.org">let me know</a> if you have any trouble uploading.
+It doesn’t have a fancy progress bar, so after you click [UPLOAD], please just wait. It will tell you when finished.
+</p><p>
+If any trouble, please email me at <a href="mailto:derek@sivers.org">derek@sivers.org</a> and describe the errors.
 </p>
 
+<%= erb :uploads %>

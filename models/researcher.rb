@@ -2,6 +2,7 @@ class Researcher < Sequel::Model(WoodEgg::DB)
   many_to_one :person
   one_to_many :answers, :order => :id
   many_to_many :books, :order => :id
+  one_to_many :uploads, :order => :id
   include Persony
 
   class << self

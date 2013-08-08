@@ -348,3 +348,17 @@ class TestTidbit < Test::Unit::TestCase
   end
 end
 
+class TestUpload < Test::Unit::TestCase
+  include Fixtures::Tools
+
+  def test_upload
+    r = Researcher[3]
+    x = Upload[1]
+    assert_equal [x], r.uploads
+    assert_equal r, x.researcher
+  end
+
+  def test_our_filename
+  end
+end
+

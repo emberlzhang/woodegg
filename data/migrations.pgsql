@@ -1,3 +1,16 @@
+-- 2013-08-07
+CREATE TABLE uploads (
+	id serial PRIMARY KEY,
+	created_at date NOT NULL DEFAULT CURRENT_DATE,
+	researcher_id integer not null REFERENCES researchers(id),
+	their_filename text not null,
+	our_filename text not null,
+	mime_type varchar(32),
+	bytes integer,
+	notes text,
+	transcription text
+);
+
 -- 2013-07-08
 DROP INDEX esca;
 ALTER TABLE essays RENAME COLUMN cleaned_at TO edited_at;

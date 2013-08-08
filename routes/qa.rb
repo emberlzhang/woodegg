@@ -115,10 +115,7 @@ class WoodEggQA < Sinatra::Base
   end
 
   post '/upload' do
-    File.open('/tmp/' + params['myfile'][:filename], 'w') do |f|
-      f.write(params['myfile'][:tempfile].read)
-    end
-    @filename = params['myfile'][:filename]
+    @upload = Upload.post_from_researcher(@researcher.id, params['myfile'], params['notes'])
     erb :uploaded
   end
 
