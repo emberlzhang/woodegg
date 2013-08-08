@@ -20,7 +20,7 @@ class Upload < Sequel::Model(WoodEgg::DB)
     def our_filename_for(researcher_id, their_filename)
       'r%03d-%s-%s' % [
 	researcher_id,
-	Time.now.strftime('%Y%m%d%H%m'),
+	Time.now.strftime('%Y%m%d'),
 	their_filename.downcase.gsub(/[^a-z0-9._-]/, '')
       ]
     end
