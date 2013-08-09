@@ -28,6 +28,12 @@ class Researcher < Sequel::Model(WoodEgg::DB)
       end
       ol
     end
+
+    # TODO: researchers.active boolean flag?
+    def active
+      r_ids = WoodEgg::DB['SELECT DISTINCT researcher_id FROM books_researchers WHERE book_id > 16'].map(&:values).flatten
+      Researcher.where(id: r_ids).order(:id).all
+    end
   end
 
   def countries
