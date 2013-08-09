@@ -11,7 +11,7 @@
 <% @uploads.each do |u| %>
 	<tr>
 		<td><%= u.created_at %></td>
-		<td><%= @rnames[u.id] %></td>
+		<td><%= @rnames[u.researcher_id] %></td>
 		<td><a href="/upload/<%= u.id %>"><%= u.our_filename %></a></td>
 		<td><%= (u.missing_info?) ? 'MISSING INFO!' : 'ok' %></td>
 		<td><a href="<%= u.url %>">link</a></td>
