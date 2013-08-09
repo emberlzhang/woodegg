@@ -161,3 +161,12 @@ class Countries
   end
 end
 
+module Persony
+  def email_formletter_subject_profile(formletter_id, subject, profile)
+    f = Formletter[formletter_id]
+    p = self.person
+    h = {subject: subject, category: 'woodegg', profile: profile}
+    f.send_to(p, h)
+  end
+end
+
