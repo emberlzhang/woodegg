@@ -433,7 +433,7 @@ end
 ################ UPLOADS
 
 get '/uploads' do
-  @uploads = Upload.order(Sequel.desc(:id)).all
+  @uploads = Upload.order(Sequel.desc(:created_at), Sequel.desc(:researcher_id)).all
   @rnames = {}
   Researcher.all_people.each {|p| @rnames[p.id] = p.name}
   @pagetitle = 'UPLOADS'
