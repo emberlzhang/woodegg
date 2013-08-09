@@ -66,8 +66,8 @@ class WoodEggQA < Sinatra::Base
     erb :answers
   end
 
-  get '/question/:id' do
-    @q = Question[params[:id]]
+  get %r{\A/question/([0-9]+)\Z} do |id|
+    @q = Question[id]
     redirect('/qa/', 301) if @q.nil?
     @ccode = @q.country
     @cname = Countries.hsh[@ccode]
@@ -83,8 +83,8 @@ class WoodEggQA < Sinatra::Base
     redirect "/qa/answer/#{a.id}"
   end
 
-  get '/answer/:id' do
-    @answer = Answer[params[:id]]
+  get %r{\A/answer/([0-9]+)\Z} do |id|
+    @answer = Answer[id]
     redirect '/' if @answer.nil?
     @question = @answer.question
     @pagetitle = @question.question
@@ -93,8 +93,8 @@ class WoodEggQA < Sinatra::Base
     erb :answer
   end
 
-  post '/answer/:id' do
-    a = Answer[params[:id]]
+  post %r{\A/answer/([0-9]+)\Z} do |id|
+    a = Answer[id]
     if params[:submit] =~ /FINISH/
       a.update(answer: params[:answer], sources: params[:sources], finished_at: Time.now)
       redirect '/qa/answers/finished'
