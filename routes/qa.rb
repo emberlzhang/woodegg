@@ -109,9 +109,27 @@ class WoodEggQA < Sinatra::Base
     erb :help
   end
 
+  get %r{\A/upload/([0-9]+)\Z} do |id|
+    @upload = Upload[id]
+    redirect '/qa/upload' unless @upload.researcher == @researcher
+    @pagetitle = 'UPLOADED FILE: %s' % @upload.our_filename
+    @downlink = ''
+    if @upload.uploaded == 'y'
+      @downlink = ' (<a href="' + @upload.url + '">click here to download</a>)'
+    end
+    erb :upload
+  end
+
   get '/upload' do
-    @pagetitle = 'UPLOAD'
+    @pagetitle = 'UPLOAD A FILE'
     erb :upload_form
+  end
+
+  put %r{\A/upload/([0-9]+)\Z} do |id|
+    u = Upload[id]
+    redirect '/qa/upload' unless u.researcher == @researcher
+    u.update(notes: params[:notes], transcription: params[:transcription])
+    redirect "/qa/upload/#{id}"
   end
 
   post '/upload' do
