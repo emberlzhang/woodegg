@@ -3,6 +3,10 @@ class Upload < Sequel::Model(WoodEgg::DB)
   FILEDIR = '/srv/http/uploads/'
 
   class << self
+    def missing_info
+      filter(transcription: nil).or(transcription: '').or(notes: nil).or(notes: '').order(:id).all
+    end
+
     def post_from_researcher(researcher_id, filefield, notes)
       info = {researcher_id: researcher_id,
 	notes: notes,

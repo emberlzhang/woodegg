@@ -364,5 +364,9 @@ class TestUpload < Test::Unit::TestCase
     assert_match /uploading/, Upload[2].uploaded_status
     assert_match /not uploaded/, Upload[3].uploaded_status
   end
+
+  def test_missing_info
+    assert_equal [Upload[2], Upload[3]], Upload.missing_info
+  end
 end
 
