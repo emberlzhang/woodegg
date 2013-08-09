@@ -369,6 +369,9 @@ class TestUpload < Test::Unit::TestCase
     assert_equal [Upload[2], Upload[3]], Upload.missing_info.all
     r = Researcher[3]
     assert_equal [Upload[2], Upload[3]], Upload.missing_info_for(r.id)
+    refute Upload[1].missing_info?
+    assert Upload[2].missing_info?
+    assert Upload[3].missing_info?
   end
 end
 

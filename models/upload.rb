@@ -63,4 +63,8 @@ class Upload < Sequel::Model(WoodEgg::DB)
     end
   end
 
+  def missing_info?
+    (String(transcription) == '' || String(notes) == '')
+  end
+
 end
