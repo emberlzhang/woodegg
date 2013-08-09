@@ -111,7 +111,7 @@ class WoodEggQA < Sinatra::Base
 
   get '/upload' do
     @pagetitle = 'UPLOAD'
-    erb :upload
+    erb :upload_form
   end
 
   post '/upload' do
