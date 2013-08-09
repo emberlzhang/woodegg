@@ -21,8 +21,7 @@ class Upload < Sequel::Model(WoodEgg::DB)
       'r%03d-%s-%s' % [
 	researcher_id,
 	Time.now.strftime('%Y%m%d'),
-	their_filename.downcase.gsub(/[^a-z0-9._-]/, '')
-      ]
+	their_filename.downcase.gsub(/[^a-z0-9._-]/, '')]
     end
 
     def sync_next
@@ -40,6 +39,10 @@ class Upload < Sequel::Model(WoodEgg::DB)
 	{:access => :public_read, :content_type => u.mime_type})
       u.update(uploaded: 'y')
     end
+  end
+
+  def url
+    'http://woodegg.s3.amazonaws.com/' + our_filename
   end
 
 end
