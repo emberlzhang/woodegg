@@ -430,3 +430,29 @@ delete %r{\A/tidbit/([0-9]+)/question/([0-9]+)\Z} do |id, question_id|
   redirect '/tidbit/%d' % t.id
 end
 
+################ UPLOADS
+
+get '/uploads' do
+  @uploads = Upload.order(Sequel.desc(:id)).all
+  @rnames = {}
+  Researcher.all_people.each {|p| @rnames[p.id] = p.name}
+  @pagetitle = 'UPLOADS'
+  erb :uploads
+end
+
+get %r{\A/upload/([0-9]+)\Z} do |id|
+  @upload = Upload[id]
+  @downlink = ''
+  if @upload.uploaded == 'y'
+    @downlink = ' (<a href="' + @upload.url + '">click here to download</a>)'
+  end
+  @pagetitle = 'UPLOAD #%d' % id
+  erb :upload
+end
+
+put %r{\A/upload/([0-9]+)\Z} do |id|
+  u = Upload[id]
+  u.update(notes: params[:notes], transcription: params[:transcription])
+  redirect '/upload/%d' % id
+end
+
