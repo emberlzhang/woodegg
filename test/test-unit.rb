@@ -353,12 +353,16 @@ class TestUpload < Test::Unit::TestCase
 
   def test_upload
     r = Researcher[3]
-    x = Upload[1]
-    assert_equal [x], r.uploads
+    x = Upload[3]
+    assert_equal 3, r.uploads.count
+    assert_equal x, r.uploads.pop
     assert_equal r, x.researcher
   end
 
-  def test_our_filename
+  def test_uploaded_status
+    assert_equal 'uploaded', Upload[1].uploaded_status
+    assert_match /uploading/, Upload[2].uploaded_status
+    assert_match /not uploaded/, Upload[3].uploaded_status
   end
 end
 

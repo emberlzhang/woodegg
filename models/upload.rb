@@ -45,4 +45,12 @@ class Upload < Sequel::Model(WoodEgg::DB)
     'http://woodegg.s3.amazonaws.com/' + our_filename
   end
 
+  def uploaded_status
+    case uploaded
+    when 'n' then 'not uploaded (wait 10 minutes)'
+    when 'p' then 'currently uploading (wait 1 minute)'
+    when 'y' then 'uploaded'
+    end
+  end
+
 end

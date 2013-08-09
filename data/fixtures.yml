@@ -310,10 +310,29 @@ Upload:
     created_at: 2013-08-07
     researcher_id: 3
     their_filename: Some Interview.MP3
-    our_filename: r001-20130807-someinterview.mp3
+    our_filename: r003-20130807-someinterview.mp3
     mime_type: "audio/mp3"
     bytes: 1234567
+    uploaded: y
     notes: This is me interviewing someone.
+    transcription: This has a transcription.
+  id2:
+    created_at: 2013-08-07
+    researcher_id: 3
+    their_filename: Another Interview.MP3
+    our_filename: r003-20130807-anotherinterview.mp3
+    mime_type: "audio/mp3"
+    bytes: 54321
+    uploaded: p
+    notes: Currently uploading
+  id3:
+    created_at: 2013-08-08
+    researcher_id: 3
+    their_filename: Needs Notes.MP3
+    our_filename: r003-20130808-needsnotes.mp3
+    mime_type: "audio/mp3"
+    bytes: 654321
+    uploaded: n
 
 INSERTS:
   books_writers:
