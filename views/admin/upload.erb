@@ -5,6 +5,7 @@
 	<tr><td>upload status:</td><td><%= @upload.uploaded_status %><%= @downlink %></td></tr>
 	<tr><td>file type:</td><td><%= @upload.mime_type %></td></tr>
 	<tr><td>file size:</td><td><%= '%.1f Mb' % (@upload.bytes / 1000000) %></td></tr>
+	<tr><td>duration: (H:m:s)</td><td><%= @upload.duration %></td></tr>
 </table>
 
 <hr>

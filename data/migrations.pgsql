@@ -1,3 +1,6 @@
+-- 2013-08-10
+ALTER TABLE uploads ADD COLUMN duration varchar(7);
+
 -- 2013-08-08
 ALTER TABLE uploads ADD COLUMN uploaded char(1) NOT NULL DEFAULT 'n';
 

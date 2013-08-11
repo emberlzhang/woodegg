@@ -4,6 +4,7 @@
 	<tr><td>date:</td><td><%= @upload.created_at %></td></tr>
 	<tr><td>local filename:</td><td><%= @upload.our_filename %></td></tr>
 	<tr><td>remote filename:</td><td><%= @upload.their_filename %></td></tr>
+	<tr><td>duration: (H:m:s)</td><td><%= @upload.duration %></td></tr>
 	<tr><td>upload status:</td><td><%= @upload.uploaded_status %><%= @downlink %></td></tr>
 </table>
 

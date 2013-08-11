@@ -24,6 +24,10 @@ class Upload < Sequel::Model(WoodEgg::DB)
         f.write(filefield[:tempfile].read)
       end
       info[:bytes] = FileTest.size(fullpath)
+      m = /\s(\d:\d{2}:\d{2})\s/.match `exiftool #{fullpath} | grep ^Duration`
+      if m
+	info[:duration] = m[1]
+      end
       create(info)
     end
 
