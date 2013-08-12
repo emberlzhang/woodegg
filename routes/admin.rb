@@ -133,7 +133,7 @@ end
 
 get '/answers' do
   @pagetitle = 'ANSWERS - summary by status'
-  @unjudged_count = Answer.unjudged.count
+  @unjudged_count = Answer.unjudged_count
   @unfinished_count = Answer.unfinished.count
   erb :answers_summary
 end
@@ -148,6 +148,22 @@ get '/answers/unjudged' do
   @answers = Answer.unjudged
   @pagetitle = 'UNJUDGED ANSWERS'
   erb :answers_unjudged
+end
+
+get '/answer/unjudged' do
+  @unjudged_count = Answer.unjudged_count
+  redirect '/answers' if @unjudged_count == 0
+  @answer = Answer.unjudged_next
+  @question = @answer.question
+  @researcher = @answer.researcher
+  @pagetitle = 'unjudged answer'
+  erb :answer_unjudged
+end
+
+put %r{\A/answer/([0-9]+)/judge\Z} do |id|
+  a = Answer[id]
+  a.update(payable: (params[:payable] == 'yes'))
+  redirect '/answer/unjudged'
 end
 
 get %r{\A/essay/([0-9]+)\Z} do |id|

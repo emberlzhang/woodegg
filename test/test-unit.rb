@@ -228,6 +228,11 @@ class TestAnswer < Test::Unit::TestCase
     assert_equal [Answer[9]], Answer.unfinished
     assert_equal({'CN' => 5, 'JP' => 4}, Answer.count_per_country_hash)
   end
+
+  def test_answer_fj
+    assert_equal Answer[4], Answer.unjudged_next
+    assert_equal Answer[9], Answer.unfinished_next
+  end
 end
 
 class TestBook < Test::Unit::TestCase
