@@ -131,6 +131,25 @@ end
 
 ################ ESSAYS, ANSWERS, QUESTIONS
 
+get '/answers' do
+  @pagetitle = 'ANSWERS - summary by status'
+  @unjudged_count = Answer.unjudged.count
+  @unfinished_count = Answer.unfinished.count
+  erb :answers_summary
+end
+
+get '/answers/unfinished' do
+  @answers = Answer.unfinished
+  @pagetitle = 'UNFINISHED ANSWERS'
+  erb :answers_unfinished
+end
+
+get '/answers/unjudged' do
+  @answers = Answer.unjudged
+  @pagetitle = 'UNJUDGED ANSWERS'
+  erb :answers_unjudged
+end
+
 get %r{\A/essay/([0-9]+)\Z} do |id|
   @essay = Essay[id]
   @pagetitle = 'essay #%d' % @essay.id
@@ -331,7 +350,7 @@ get %r{\A/customer/([0-9]+)\Z} do |id|
   @customer = Customer[id]
   @pagetitle = 'customer: ' + @customer.name
   @books = @customer.books
-  @books_to_add = Book.order(:title).all - @books
+  @books_to_add = Book.where('id <= 16').order(:title).all - @books
   @person_url = WoodEgg.config['woodegg_person_url'] % @customer.person_id
   @sent = params[:sent]
   erb :customer
