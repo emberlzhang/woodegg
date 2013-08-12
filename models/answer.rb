@@ -3,12 +3,36 @@ class Answer < Sequel::Model(WoodEgg::DB)
   many_to_one :researcher
 
   class << self
+    def unjudged_dataset
+      filter(payable: nil).exclude(finished_at: nil).order(:id)
+    end
+
     def unjudged
-      filter(payable: nil).exclude(finished_at: nil).order(:id).all
+      unjudged_dataset.all
+    end
+
+    def unjudged_count
+      unjudged_dataset.count
+    end
+
+    def unjudged_next
+      unjudged_dataset.first
+    end
+
+    def unfinished_dataset
+      filter(finished_at: nil).order(:id)
     end
 
     def unfinished
-      filter(finished_at: nil).order(:id).all
+      unfinished_dataset.all
+    end
+
+    def unfinished_count
+      unfinished_dataset.count
+    end
+
+    def unfinished_next
+      unfinished_dataset.first
     end
 
     def count_per_country_hash
