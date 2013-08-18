@@ -1,3 +1,6 @@
+-- 2013-08-17
+ALTER TABLE researchers ADD COLUMN active boolean not null default TRUE;
+
 -- 2013-08-10
 ALTER TABLE uploads ADD COLUMN duration varchar(7);
 
