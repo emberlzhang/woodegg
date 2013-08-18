@@ -1,5 +1,8 @@
 -- 2013-08-17
 ALTER TABLE researchers ADD COLUMN active boolean not null default TRUE;
+UPDATE researchers SET active=FALSE WHERE id < 55;
+UPDATE researchers SET active=FALSE WHERE id IN (80, 87);
+DELETE FROM books_researchers WHERE researcher_id IN (80, 87);
 
 -- 2013-08-10
 ALTER TABLE uploads ADD COLUMN duration varchar(7);
