@@ -17,7 +17,7 @@ class TestResearcher < Test::Unit::TestCase
     assert_equal x.email, @fixtures['Person']['oompa']['email']
     rap = Researcher.all_people
     assert_equal 3, rap.count
-    assert_equal({:id=>2, :person_id=>8, :bio=>'Yes I am Yoko Ono', :name=>'Yoko Ono', :email=>'yoko@ono.com'}, rap[1].values)
+    assert_equal({:active => true, :id=>2, :person_id=>8, :bio=>'Yes I am Yoko Ono', :name=>'Yoko Ono', :email=>'yoko@ono.com'}, rap[1].values)
   end
 
   def test_researcher_assocations

@@ -10,6 +10,7 @@ SET search_path = woodegg;
 CREATE TABLE researchers (
 	id serial PRIMARY KEY,
 	person_id integer not null UNIQUE,
+	active boolean not null default TRUE,
 	bio text
 );
 CREATE TABLE writers (

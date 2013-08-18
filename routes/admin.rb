@@ -203,9 +203,17 @@ end
 ################## RESEARCHERS, WRITERS, EDITORS - each URL type together, since so similar
 
 get '/researchers' do
-  @pagetitle = 'researchers'
-  @researchers = Researcher.all_people.sort_by(&:name)
+  @active = []
+  @inactive = []
+  Researcher.all_people.sort_by(&:name).each do |r|
+    if r.active
+      @active << r
+    else
+      @inactive << r
+    end
+  end
   @without_books = Researcher.without_books
+  @pagetitle = 'researchers'
   erb :researchers
 end
 

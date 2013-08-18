@@ -9,7 +9,8 @@ class Researcher < Sequel::Model(WoodEgg::DB)
     def without_books
       sql = "SELECT researchers.id FROM researchers" +
       " LEFT JOIN books_researchers ON researchers.id=books_researchers.researcher_id" +
-      " WHERE books_researchers.book_id IS NULL"
+      " WHERE books_researchers.book_id IS NULL" +
+      " AND researchers.active IS TRUE"
       r_ids = WoodEgg::DB[sql].map {|x| x[:id]}
       Researcher.where(id: r_ids).order(:id).all
     end
@@ -29,11 +30,6 @@ class Researcher < Sequel::Model(WoodEgg::DB)
       ol
     end
 
-    # TODO: researchers.active boolean flag?
-    def active
-      r_ids = WoodEgg::DB['SELECT DISTINCT researcher_id FROM books_researchers WHERE book_id > 16'].map(&:values).flatten
-      Researcher.where(id: r_ids).order(:id).all
-    end
   end
 
   def countries

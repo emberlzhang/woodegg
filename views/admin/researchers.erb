@@ -1,11 +1,5 @@
 <h2><%= @pagetitle %></h2>
 
-<form action="/researchers" method="post">
-	<label for="person_id">type person_id to add new researcher:</label>
-	<input type="text" name="person_id" id="person_id" value="">
-	<input type="submit" name="submit" value="add">
-</form>
-
 <% if @without_books.size > 0 %>
 <h3>assign books to :</h3>
 <ul>
@@ -16,7 +10,21 @@
 <% end %>
 
 <ul>
-<% @researchers.each do |r| %>
+<% @active.each do |r| %>
 	<li><a href="/researcher/<%= r.id %>"><%=h r.name %></a></li>
 <% end %>
 </ul>
+
+<form action="/researchers" method="post">
+	<label for="person_id">type person_id to add new researcher:</label>
+	<input type="text" name="person_id" id="person_id" value="">
+	<input type="submit" name="submit" value="add">
+</form>
+
+<h2>Inactive:</h2>
+<ul>
+<% @inactive.each do |r| %>
+	<li><a href="/researcher/<%= r.id %>"><%=h r.name %></a></li>
+<% end %>
+</ul>
+
