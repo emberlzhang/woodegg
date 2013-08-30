@@ -15,4 +15,7 @@
 	<input type="submit" class="btn btn-primary" name="submit" value="SAVE" />
 	<input type="submit" class="btn btn-primary" name="submit" value="FINISH" />
 <% end %>
+
+<h2><a href="/question/<%= @prev_q %>">Go to Previous Question: <%= @prev_q.question %></a></h2>
+<h2><a href="/question/<%= @next_q %>">Go to Next Question: <%= @next_q.question %></a></h2>
 </form>

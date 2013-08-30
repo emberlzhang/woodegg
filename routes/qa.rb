@@ -72,6 +72,8 @@ class WoodEggQA < Sinatra::Base
     @ccode = @q.country
     @cname = Countries.hsh[@ccode]
     @pagetitle = @q.question
+    @next_q = Question[id+1]
+    @prev_q = Questions[id-1]
     erb :question
   end
 
